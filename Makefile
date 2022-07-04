@@ -6,7 +6,7 @@ INCL		= -I/usr/include -Imlx_linux -O3
 INCL_LINUX	= -lmlx -lXext -lX11 -lm -lz
 RM			= rm -f
 SRCD		= ./srcs/
-SRC			= functions.c
+SRC			= functions.c read_map.c map_error.c utils.c
 # Command to add the source folder prefix (instead of having it added manually to SRC)
 SRCF		= $(addprefix $(SRCD),$(SRC))
 OBJD		= ./objs/
