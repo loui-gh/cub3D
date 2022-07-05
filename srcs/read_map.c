@@ -2,9 +2,13 @@
 
 /* find start of map */
 /* DA RULEZ
-0 cannot be preceded or followed by space
+1st + last line only 1s
+lines start and end with 1
+0 cannot be preceded or followed by space (needs to b surrounded)
 arr[i][j]
 if char == 0, arr[i - 1][j] != ' ' && arr[i + 1][j]
+only valid characters (1, 0, (N,S,W or E), space)
+
 */
 
 // void	create_map_array(t_vars *vars, char *map_path)
