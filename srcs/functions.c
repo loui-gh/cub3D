@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   functions.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/05 19:27:35 by Loui :)           #+#    #+#             */
+/*   Updated: 2022/07/05 20:14:18 by Loui :)          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../incl/raycast.h"
 
 // int		done(void)
@@ -52,20 +64,13 @@ int	main(int argc, char **argv)
 	t_vars	vars;
 
 	if (argc != 2)
-		exit(EXIT_FAILURE);
-	check_file_ext(argv[1]);
-	//t_data	img;
-
-	//create_map_array(&vars, argv[1]);
-
+		exit_msg("enter cmd like this --> ./cub3D *.cub\n");
+	
+	//init_textures
+	//create map array
 	vars.mlx_ptr = mlx_init();
 	vars.mlx_win = mlx_new_window(vars.mlx_ptr, 720, 1080, "Hello world!");
-	//img.img = mlx_new_image(mlx, 1920, 1080);
-	//img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-	//draw_line(&img, 5, 5, 20, 0x00FF0000);
-	//mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
 	mlx_hook(vars.mlx_win, 2, 27, esc, &vars);
 	mlx_hook(vars.mlx_win, 17, (1L << 17), mouse_click, &vars);
 	mlx_loop(vars.mlx_ptr);
-	
 }
