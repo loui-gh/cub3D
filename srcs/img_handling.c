@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 19:06:47 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/05 14:36:57 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/05 15:17:52 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,40 @@
 @param 1: argv[1] of main, aka name of .cub file
 */
 
-void	init_textures(char *map)
+void	print_arr(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i])
+	{
+		printf("%s\n", arr[i]);
+		i++;
+	}
+}
+
+// error handling 2 instances here 
+t_map	*create_map_array(int fd)
+{
+	char	buff[10000];
+	t_map	*map;
+
+	map = (t_map *)malloc(sizeof(t_map));
+	if (!map)
+		return (NULL);
+	if (read(fd, buff, 10000) < 0)
+		return (NULL);
+	map->map_arr = ft_split(buff, '\n');
+	return (map);
+}
+
+t_textures	*init_textures(int fd)
 {
 	t_textures	*ptr;
-	int			fd;
 	int			i;
 	char		*holder;
 
 	ptr = (t_textures *)malloc(sizeof(t_textures));
-	check_file_ext(map);
-	fd = open(map, O_RDONLY);
-	if (fd < 0)
-		exit_msg("Cannot read from file\n");
 	i = 0;
 	while (i < 6)
 	{
@@ -50,7 +72,7 @@ void	init_textures(char *map)
 			exit_msg("Error: invalid texture input\n");
 		i++;
 	}
-	printf("NO: %sSO: %sEA: %sWE: %sF:%sC:%s", ptr->north, ptr->south, ptr->east, ptr->west, ptr->floor, ptr->ceiling);
+	return (ptr);
 }
 
 /*void	create_map_array(t_vars *vars, char *map_path)

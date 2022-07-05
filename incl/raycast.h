@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:50:24 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/05 14:29:01 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/05 15:19:31 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,19 +55,31 @@ typedef struct s_textures {
 
 typedef struct s_vars
 {
-	void	*mlx_ptr;
-	void	*mlx_win;
+	void		*mlx_ptr;
+	void		*mlx_win;
+	t_textures	*tex;
+	t_map		*map;
 }	t_vars;
 
 /*utils*/
-void	ft_putstr(char *s);
-int		ft_strlen(char *str);
-void	exit_msg(char *msg);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
-char	*get_next_line(int fd);
+void			ft_putstr(char *s);
+int				ft_strlen(char *str);
+void			exit_msg(char *msg);
+int				ft_strncmp(const char *s1, const char *s2, size_t n);
+char			*get_next_line(int fd);
+char			**ft_split(char const *s, char c);
 /*map_error*/
-void	check_file_ext(char *filename);
-void	init_textures(char *map);
+void			check_file_ext(char *filename);
+t_textures		*init_textures(int fd);
+t_map			*create_map_array(int fd);
+
+/*mlx stuff*/
+int				mouse_click(t_vars *vars);
+int				esc(int keycode, t_vars *vars);
+
+/*testing*/
+void			print_arr(char **arr);
+
 // void ver_line(t_data *data, int x, int y, int len, int color);
 // int		done(void);
 

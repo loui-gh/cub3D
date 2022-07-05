@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 19:27:35 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/05 14:28:41 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/05 15:07:32 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,4 @@ int	esc(int keycode, t_vars *vars)
 	return (0);
 }
 
-int	main(int argc, char **argv)
-{
-	t_vars		vars;
 
-	if (argc != 2)
-		exit_msg("enter cmd like this --> ./cub3D *.cub\n");
-	init_textures(argv[1]);
-	//init_textures
-	//create map array
-	vars.mlx_ptr = mlx_init();
-	vars.mlx_win = mlx_new_window(vars.mlx_ptr, 720, 1080, "Hello world!");
-	mlx_hook(vars.mlx_win, 2, 27, esc, &vars);
-	mlx_hook(vars.mlx_win, 17, (1L << 17), mouse_click, &vars);
-	mlx_loop(vars.mlx_ptr);
-}
