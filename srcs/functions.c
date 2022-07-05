@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 19:27:35 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/05 15:07:32 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/05 17:23:43 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,3 @@ int	esc(int keycode, t_vars *vars)
 	}
 	return (0);
 }
-
-

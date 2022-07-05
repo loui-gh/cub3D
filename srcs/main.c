@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 15:07:34 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/05 15:18:04 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/05 17:24:07 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ int	main(int argc, char **argv)
 	vars.tex = init_textures(fd);
 	vars.map = create_map_array(fd);
 	print_arr(vars.map->map_arr);
-	//init_textures
-	//create map array
 	vars.mlx_ptr = mlx_init();
 	vars.mlx_win = mlx_new_window(vars.mlx_ptr, 720, 1080, "Hello world!");
 	mlx_hook(vars.mlx_win, 2, 27, esc, &vars);

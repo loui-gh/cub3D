@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 19:06:47 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/05 15:17:52 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/05 17:23:03 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,25 @@ void	print_arr(char **arr)
 		printf("%s\n", arr[i]);
 		i++;
 	}
+}
+
+void	map_width_height(t_map *map)
+{
+	int	longest;
+	int	len;
+	int	i;
+
+	i = 0;
+	longest = 0;
+	while (map->map_arr[i])
+	{
+		len = ft_strlen(map->map_arr[i]);
+		if (len > longest)
+			longest = len;
+		i++;
+	}
+	map->width = len;
+	map->height = i;
 }
 
 // error handling 2 instances here 
