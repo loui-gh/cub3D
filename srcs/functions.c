@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 19:27:35 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/05 20:14:18 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/07/05 14:28:41 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,11 @@ int	esc(int keycode, t_vars *vars)
 
 int	main(int argc, char **argv)
 {
-	t_vars	vars;
+	t_vars		vars;
 
 	if (argc != 2)
 		exit_msg("enter cmd like this --> ./cub3D *.cub\n");
-	
+	init_textures(argv[1]);
 	//init_textures
 	//create map array
 	vars.mlx_ptr = mlx_init();

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:50:24 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/05 20:16:59 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/07/05 14:29:01 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
+
+#include <stdio.h>
 
 typedef struct s_colour {
 	int		bal;
@@ -65,6 +67,7 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*get_next_line(int fd);
 /*map_error*/
 void	check_file_ext(char *filename);
+void	init_textures(char *map);
 // void ver_line(t_data *data, int x, int y, int len, int color);
 // int		done(void);
 

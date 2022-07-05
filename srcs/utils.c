@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:38:56 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/05 20:31:08 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/07/05 13:01:44 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,25 +58,13 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
-size_t	ft_strlen(const char *str)
-{
-	size_t	i;
-
-	if (!str)
-		return (0);
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return (i);
-}
-
 /* DESCRIPTION: The strdup() function returns a pointer
 * to a new string which is a duplicate of the string s.
 * Memory for the new string is obtained with malloc(3),
 * and can be freed with free(3). 
 * RETURN VALUE: a pointer to the duplicated string,
 * or NULL if insufficient memory was available*/
-char	*ft_strdup(const char *s)
+char	*ft_strdup(char *s)
 {
 	char	*dst_ptr;
 	int		i;
