@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   img_handling.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 19:06:47 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/05 17:23:03 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/06 20:08:53 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	map_width_height(t_map *map)
 
 	i = 0;
 	longest = 0;
+	len = 0;
 	while (map->map_arr[i])
 	{
 		len = ft_strlen(map->map_arr[i]);
@@ -59,6 +60,8 @@ t_map	*create_map_array(int fd)
 	if (read(fd, buff, 10000) < 0)
 		return (NULL);
 	map->map_arr = ft_split(buff, '\n');
+
+	check_map(map->map_arr);
 	return (map);
 }
 

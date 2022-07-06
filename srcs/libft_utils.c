@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 17:26:33 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/05 17:27:17 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/06 20:23:26 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,15 @@ char	*ft_strdup(char *s)
 	}
 	dst_ptr[i] = '\0';
 	return (dst_ptr);
+}
+
+int	ft_is_token(int c)
+{
+	if (c != '1' && c != '0' && c != ' ' && c != 'N' \
+			&& c != 'S' && c != 'W' && c != 'E')
+		exit_msg("Invalid map token.\n");
+	if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
+		return (1);
+	else
+		return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:50:24 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/05 17:28:32 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/06 20:23:26 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,14 @@ void			exit_msg(char *msg);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 char			*get_next_line(int fd);
 char			**ft_split(char const *s, char c);
-
+char			*ft_strdup(char *s);
 /*map_error*/
 void			check_file_ext(char *filename);
 t_textures		*init_textures(int fd);
 t_map			*create_map_array(int fd);
-
+void			check_map(char **map);
+int				check_zeros(char **map, int i, int j);
+int				ft_is_token(int c);
 /*mlx stuff*/
 int				mouse_click(t_vars *vars);
 int				esc(int keycode, t_vars *vars);
