@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 17:26:33 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/06 14:51:25 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/06 17:56:53 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,23 +101,23 @@ t_player	*init_player(int i, int j, char token)
 	player->pos_x = i;
 	if (token == 'N')
 	{
-		player->dir_x = 0;
-		player->dir_y = -1;
+		player->dir_x = -1;
+		player->dir_y = 0;
 	}
 	if (token == 'S')
-	{
-		player->dir_x = 0;
-		player->dir_y = 1;
-	}
-	if (token == 'E')
 	{
 		player->dir_x = 1;
 		player->dir_y = 0;
 	}
+	if (token == 'E')
+	{
+		player->dir_x = 0;
+		player->dir_y = 1;
+	}
 		if (token == 'W')
 	{
-		player->dir_x = -1;
-		player->dir_y = 0;
+		player->dir_x = 0;
+		player->dir_y = -1;
 	}
 	return (player);
 }

@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:12:06 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/06 15:50:46 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/06 17:59:55 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,16 @@ void	put_pixel(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-// void draw_line(t_data *data, int x, int y, int len, int color)
-// {
-// 	int		i;
-// 	int		j;
-// 	int		limit;
-
-// 	i = 0;
-// 	while (i < len && (j = y + 1) < limit)
-// 	{
-// 		y = j;
-// 		put_pixel(data, x, y, color);
-// 		i++;
-// 	}
-// }
-
-void verLine(int x, int y1, int y2, int color)
+void verLine(int x, int y1, int y2, int color, t_data *data)
 {
-	
+	int	i;
+
+	i = y1;
+	while(i < y2)
+	{
+		put_pixel(data, x, i, color);
+		i++;
+	}
 }
 
 int	done(void)
@@ -47,20 +39,32 @@ int	done(void)
 
 int raycast(t_vars *vars)
 {
+	int		m;
 	float 	plane_x;
 	float 	plane_y;//the 2d raycaster version of camera plane
-	int		x;
-	int		w;
-	int		h;
+	float	x;
+	float	w;
+	float	h;
 	float	ray_dir_x;
 	float	ray_dir_y;
-	int		camera_x;
+	float	camera_x;
+	float 	sideDistX;
+	float 	sideDistY;
+	float 	deltaDistX;
+	float 	deltaDistY;
+	float 	perpWallDist;
 
+	t_data	data;
+
+	m = 0;
 	plane_x = 0;
 	plane_y = 0.66;
 	w = 640;
 	h = 480;
-	while(!done())
+	data.img = mlx_new_image(vars->mlx_ptr, w, h);
+	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.line_length, &data.endian);
+	int color = 0xFFFFFF;
+	while(m < 1)
 	{
 		x = 0;
 		while(x < w)
@@ -75,8 +79,8 @@ int raycast(t_vars *vars)
 			int mapY = vars->player->pos_y;
 
 		//length of ray from current position to next x or y-side
-			float sideDistX;
-			float sideDistY;
+			//float sideDistX;
+			//float sideDistY;
 
 		//length of ray from one x or y-side to next x or y-side
 		//these are derived as:
@@ -89,10 +93,10 @@ int raycast(t_vars *vars)
 		//stepping further below works. So the values can be computed as below.
 		// Division through zero is prevented, even though technically that's not
 		// needed in C++ with IEEE 754 floating point values.
-			float deltaDistX = sqrt(1 + (ray_dir_y * ray_dir_y) / (ray_dir_x * ray_dir_x));
-			float deltaDistY = sqrt(1 + (ray_dir_x * ray_dir_x) / (ray_dir_y * ray_dir_y));
+			deltaDistX = sqrt(1 + (ray_dir_y * ray_dir_y) / (ray_dir_x * ray_dir_x));
+			deltaDistY = sqrt(1 + (ray_dir_x * ray_dir_x) / (ray_dir_y * ray_dir_y));
 
-			float perpWallDist;
+			//float perpWallDist;
 
 		//what direction to step in x or y-direction (either +1 or -1)
 			int stepX;
@@ -130,15 +134,17 @@ int raycast(t_vars *vars)
 					sideDistX += deltaDistX;
 					mapX += stepX;
 					side = 0;
+					color = 0xFFFFFF;
 				}
 				else
 				{
 					sideDistY += deltaDistY;
 					mapY += stepY;
 					side = 1;
+					color = 0x00FF0000;
 				}
 				//Check if ray has hit a wall
-				if(vars->map->map_arr[mapX][mapY] > 0) hit = 1;
+				if(vars->map->map_arr[mapX][mapY] == '1') hit = 1;
 			}
 		//Calculate distance projected on camera direction. This is the shortest distance from the point where the wall is
 		//hit to the camera plane. Euclidean to center camera point would give fisheye effect!
@@ -150,17 +156,20 @@ int raycast(t_vars *vars)
 			else          perpWallDist = (sideDistY - deltaDistY);
 
 		//Calculate height of line to draw on screen
-			int lineHeight = (int)(h / perpWallDist);
+			int lineHeight = (h / perpWallDist);
 
 		//calculate lowest and highest pixel to fill in current stripe
 			int drawStart = -lineHeight / 2 + h / 2;
 			if(drawStart < 0) drawStart = 0;
 			int drawEnd = lineHeight / 2 + h / 2;
 			if(drawEnd >= h) drawEnd = h - 1;
-
+		
 		//draw the pixels of the stripe as a vertical line
-			verLine(x, drawStart, drawEnd, color);
+			verLine(x, drawStart, drawEnd, color, &data);
 			x++;
 		}
+		m++;
 	}
+	mlx_put_image_to_window(vars->mlx_ptr, vars->mlx_win, data.img, 0, 0);
+	return (0);
 }

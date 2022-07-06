@@ -1,6 +1,6 @@
 CC			= gcc 
 CFLAGS		= -Wall -Wextra -Werror -ggdb
-INCL		= -I/usr/include -Imlx_linux -O3
+INCL		= -I/usr/include -Imlx_linux -O0
 #lmlx -- how does that work??
 INCL_LINUX	= -lmlx -lXext -lX11 -lm -lz
 RM			= rm -f
