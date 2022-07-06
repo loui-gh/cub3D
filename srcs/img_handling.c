@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   img_handling.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 19:06:47 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/06 20:08:53 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/07/06 13:28:45 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ t_map	*create_map_array(int fd)
 	if (read(fd, buff, 10000) < 0)
 		return (NULL);
 	map->map_arr = ft_split(buff, '\n');
-
-	check_map(map->map_arr);
 	return (map);
 }
 
@@ -79,19 +77,24 @@ t_textures	*init_textures(int fd)
 		while (ft_strlen(holder) < 2)
 			holder = get_next_line(fd);
 		if (ft_strncmp("NO ./img", holder, 8) == 0)
-			ptr->north = &holder[3];
+			ptr->north = ft_strdup(&holder[3]);
 		else if (ft_strncmp("SO ./img", holder, 8) == 0)
-			ptr->south = &holder[3];
+			ptr->south = ft_strdup(&holder[3]);
 		else if (ft_strncmp("WE ./img", holder, 8) == 0)
-			ptr->west = &holder[3];
+			ptr->west = ft_strdup(&holder[3]);
 		else if (ft_strncmp("EA ./img", holder, 8) == 0)
-			ptr->east = &holder[3];
+			ptr->east = ft_strdup(&holder[3]);
 		else if (ft_strncmp("F ", holder, 2) == 0)
-			ptr->floor = &holder[2];
+			ptr->floor = ft_strdup(&holder[2]);
 		else if (ft_strncmp("C ", holder, 2) == 0)
-			ptr->ceiling = &holder[2];
+			ptr->ceiling = ft_strdup(&holder[2]);
 		else
+		{
+			free(holder);
+			free_tex(ptr);
 			exit_msg("Error: invalid texture input\n");
+		}
+		free(holder);
 		i++;
 	}
 	return (ptr);

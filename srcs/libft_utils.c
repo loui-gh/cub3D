@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 17:26:33 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/06 20:23:26 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/07/06 14:51:25 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,43 @@ char	*ft_strdup(char *s)
 	return (dst_ptr);
 }
 
-int	ft_is_token(int c)
+int	ft_is_token(int c, t_vars *vars)
 {
 	if (c != '1' && c != '0' && c != ' ' && c != 'N' \
 			&& c != 'S' && c != 'W' && c != 'E')
-		exit_msg("Invalid map token.\n");
+		free_vars_exit("Map config error.\n", vars);
 	if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
 		return (1);
 	else
 		return (0);
+}
+
+t_player	*init_player(int i, int j, char token)
+{
+	t_player	*player;
+
+	player = (t_player *)malloc(sizeof(t_player));
+	player->pos_y = j;
+	player->pos_x = i;
+	if (token == 'N')
+	{
+		player->dir_x = 0;
+		player->dir_y = -1;
+	}
+	if (token == 'S')
+	{
+		player->dir_x = 0;
+		player->dir_y = 1;
+	}
+	if (token == 'E')
+	{
+		player->dir_x = 1;
+		player->dir_y = 0;
+	}
+		if (token == 'W')
+	{
+		player->dir_x = -1;
+		player->dir_y = 0;
+	}
+	return (player);
 }
