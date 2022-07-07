@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 19:06:47 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/06 13:28:45 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/07 17:16:08 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,9 @@ t_textures	*init_textures(int fd)
 		else if (ft_strncmp("EA ./img", holder, 8) == 0)
 			ptr->east = ft_strdup(&holder[3]);
 		else if (ft_strncmp("F ", holder, 2) == 0)
-			ptr->floor = ft_strdup(&holder[2]);
+			ptr->floor = to_hex(&holder[2]);
 		else if (ft_strncmp("C ", holder, 2) == 0)
-			ptr->ceiling = ft_strdup(&holder[2]);
+			ptr->ceiling = to_hex(&holder[2]);
 		else
 		{
 			free(holder);

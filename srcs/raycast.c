@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:12:06 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/07 15:26:00 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/07 17:51:07 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,23 +50,25 @@ int raycast(t_vars *vars)
 	float 	deltaDistX;
 	float 	deltaDistY;
 	float 	perpWallDist;
-	t_data	data;
+	//t_data	data;
+	t_data *fl_c;
 
 	m = 0;
 	plane_x = 0.9 * vars->player->dir_y; //math?? direction vector needs to be perpendicular to camera plane always
 	plane_y = 0.9 * vars->player->dir_x; //field of view (1 == 90 degree)
 	w = 640;
 	h = 480;
-	data.img = mlx_new_image(vars->mlx_ptr, w, h);
-	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.line_length, &data.endian);
+	//data.img = mlx_new_image(vars->mlx_ptr, w, h);
+	//data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.line_length, &data.endian);
 	int color = 0xFFFFFF;
+	fl_c = floor_ceiling(vars);
+	//mlx_put_image_to_window(vars->mlx_ptr, vars->mlx_win, fl_c->img, 0, 0);
 	while(m < 1) // checking for movement
 	{
 		x = 0; // ray counter 
 		while(x < w) // calculate a single snapshot (frame)
 		{
 			float camera_x = 2 * x / (float)w - 1; //changed it back to float from no typecast
-			printf("camerax: %f\n", camera_x);
 		 //calculate ray position and direction
 		 //cameraX = 2 * x / (double)w - 1; //x-coordinate in camera space
 		 	float ray_dir_x = vars->player->dir_x + plane_x * camera_x;
@@ -133,7 +135,7 @@ int raycast(t_vars *vars)
 					sideDistX += deltaDistX;
 					mapX += stepX;
 					side = 0;
-					color = 0x0C0C0C0;
+					color = 0x0113d57;
 				}
 				else
 				{
@@ -171,11 +173,11 @@ int raycast(t_vars *vars)
 			if(drawEnd >= h) drawEnd = h - 1;
 		
 		//draw the pixels of the stripe as a vertical line
-			verLine(x, drawStart, drawEnd, color, &data);
+			verLine(x, drawStart, drawEnd, color, fl_c);
 			x++;
 		}
 		m++;
 	}
-	mlx_put_image_to_window(vars->mlx_ptr, vars->mlx_win, data.img, 0, 0);
+	mlx_put_image_to_window(vars->mlx_ptr, vars->mlx_win, fl_c->img, 0, 0);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:28:50 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/07 14:16:05 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/07 17:20:05 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ void	free_tex(t_textures *tex)
 		free(tex->east);
 	if (tex->west)
 		free(tex->west);
-	if (tex->ceiling)
-		free(tex->ceiling);
-	if (tex->floor)
-		free(tex->floor);
+	// if (tex->ceiling)
+	// 	free(tex->ceiling);
+	// if (tex->floor)
+	// 	free(tex->floor);
 	free(tex);
 }
 
@@ -115,7 +115,6 @@ void	check_map(char **map, t_vars *vars)
 	i = 0;
 	token = 0;
 	flag = 0;
-	printf("beepboop");
 	while (map[i])
 	{
 		j = 0;
@@ -135,5 +134,4 @@ void	check_map(char **map, t_vars *vars)
 	}
 	if (token != 1)
 		free_vars_exit("Invalid player input.\n", vars);
-	printf("player x: %i y: %i, dirx: %i, diry: %i", vars->player->pos_x, vars->player->pos_y, vars->player->dir_x, vars->player->dir_y);
 }

@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:50:24 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/06 15:23:31 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/07 17:42:27 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ typedef struct s_textures {
 	char	*south;
 	char	*west;
 	char	*east;
-	char	*floor;
-	char	*ceiling;
+	int		floor;
+	int		ceiling;
 }	t_textures;
 
 typedef struct s_player
@@ -75,6 +75,10 @@ char			**ft_split(char const *s, char c);
 char			*ft_strdup(char *s);
 void			free_tex(t_textures *tex);
 void			free_vars_exit(char *msg, t_vars *vars);
+int				ft_atoi(const char *str);
+int				create_trgb(int t, int r, int g, int b);
+int				to_hex(char *str);
+
 /*map_error*/
 void			check_file_ext(char *filename);
 t_textures		*init_textures(int fd);
@@ -87,6 +91,8 @@ t_player		*init_player(int i, int j, char token);
 int				mouse_click(t_vars *vars);
 int				esc(int keycode, t_vars *vars);
 int 			raycast(t_vars *vars);
+void 			verLine(int x, int y1, int y2, int color, t_data *data);
+t_data			*floor_ceiling(t_vars *vars);
 
 /*testing*/
 void			print_arr(char **arr);
