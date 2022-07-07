@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 17:26:33 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/07 13:38:25 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/07 20:41:24 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,6 @@ void	ft_putstr(char *s)
 	{
 		i = write(2, &s[i], 1) + i;
 	}
-}
-
-void	exit_msg(char *msg)
-{
-	ft_putstr(msg);
-	exit(EXIT_FAILURE);
 }
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
@@ -81,43 +75,30 @@ char	*ft_strdup(char *s)
 	return (dst_ptr);
 }
 
-int	ft_is_token(int c, t_vars *vars)
+int	ft_atoi(const char *str)
 {
-	if (c != '1' && c != '0' && c != ' ' && c != 'N' \
-			&& c != 'S' && c != 'W' && c != 'E')
-		free_vars_exit("Map config error.\n", vars);
-	if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
-		return (1);
-	else
-		return (0);
-}
+	int	val;
+	int	x;
+	int	neg;
 
-t_player	*init_player(int i, int j, char token)
-{
-	t_player	*player;
-
-	player = (t_player *)malloc(sizeof(t_player));
-	player->pos_y = i;
-	player->pos_x = j;
-    if (token == 'N') //direction x and y are where your head is pointing
-    {
-        player->dir_x = 0;
-        player->dir_y = -1;
-    }
-    if (token == 'S')
-    {
-        player->dir_x = 0;
-        player->dir_y = 1;
-    }
-    if (token == 'E')
-    {
-        player->dir_x = 1;
-        player->dir_y = 0;
-    }
-        if (token == 'W')
-    {
-        player->dir_x = -1;
-        player->dir_y = 0;
-    }
-	return (player);
+	val = 0;
+	x = 0;
+	neg = 1;
+	while ((str[x] >= 9 && str[x] <= 13) || str[x] == 32)
+	{
+		x++;
+	}
+	if (str[x] == '-')
+	{
+		neg = -1;
+		x++;
+	}
+	else if (str[x] == '+')
+		x++;
+	while (str[x] >= '0' && str[x] <= '9')
+	{
+		val = val * 10 + str[x] - 48;
+		x++;
+	}
+	return (val * neg);
 }

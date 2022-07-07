@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:28:50 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/07 17:20:05 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/07 20:49:37 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,46 +22,6 @@ if char == 0, arr[i - 1][j] != ' ' && arr[i + 1][j]
 only valid characters (1, 0, (N,S,W or E), space)
 */
 
-void	free_tex(t_textures *tex)
-{
-	if (tex->north)
-		free(tex->north);
-	if (tex->south)
-		free(tex->south);
-	if (tex->east)
-		free(tex->east);
-	if (tex->west)
-		free(tex->west);
-	// if (tex->ceiling)
-	// 	free(tex->ceiling);
-	// if (tex->floor)
-	// 	free(tex->floor);
-	free(tex);
-}
-
-void	free_map(t_map *map)
-{
-	int	i;
-
-	i = 0;
-	while(map->map_arr[i])
-	{
-		free(map->map_arr[i]);
-		i++;
-	}
-	free(map->map_arr);
-	free(map);
-}
-
-void	free_vars_exit(char *msg, t_vars *vars)
-{
-	if (vars->tex)
-		free_tex(vars->tex);
-	if (vars->map)
-		free_map(vars->map);
-	exit_msg(msg);
-}
-
 void	check_file_ext(char *filename)
 {
 	int		i;
@@ -74,6 +34,17 @@ void	check_file_ext(char *filename)
 	i++;
 	if (ft_strncmp("cub", &filename[i], 4) != 0)
 		exit_msg("Wrong file extension, mate!\n");
+}
+
+int	ft_is_token(int c, t_vars *vars)
+{
+	if (c != '1' && c != '0' && c != ' ' && c != 'N' \
+			&& c != 'S' && c != 'W' && c != 'E')
+		free_vars_exit("Map config error.\n", vars);
+	if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
+		return (1);
+	else
+		return (0);
 }
 
 int	check_zeros(char **map, int i, int j, t_vars *vars)

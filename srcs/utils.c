@@ -6,11 +6,17 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:38:56 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/05 17:27:00 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/07 20:41:16 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/raycast.h"
+
+void	exit_msg(char *msg)
+{
+	ft_putstr(msg);
+	exit(EXIT_FAILURE);
+}
 
 char	*get_next_line(int fd)
 {

@@ -6,61 +6,37 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 19:06:47 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/07 17:16:08 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/07 20:38:51 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/raycast.h"
 
-/* identify and save all filepaths for textures in a struct 
-@param 1: argv[1] of main, aka name of .cub file
-*/
-
-void	print_arr(char **arr)
+int	create_trgb(int t, int r, int g, int b)
 {
-	int	i;
-
-	i = 0;
-	while (arr[i])
-	{
-		printf("%s\n", arr[i]);
-		i++;
-	}
+	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-void	map_width_height(t_map *map)
+int	to_hex(char *str) //major error handling needed here 
 {
-	int	longest;
-	int	len;
 	int	i;
-
+	int	r;
+	int	g;
+	int	b;
+	
 	i = 0;
-	longest = 0;
-	len = 0;
-	while (map->map_arr[i])
-	{
-		len = ft_strlen(map->map_arr[i]);
-		if (len > longest)
-			longest = len;
+	r = ft_atoi(str);
+	while(str[i] && str[i] != ',')
 		i++;
-	}
-	map->width = len;
-	map->height = i;
-}
-
-// error handling 2 instances here 
-t_map	*create_map_array(int fd)
-{
-	char	buff[10000];
-	t_map	*map;
-
-	map = (t_map *)malloc(sizeof(t_map));
-	if (!map)
-		return (NULL);
-	if (read(fd, buff, 10000) < 0)
-		return (NULL);
-	map->map_arr = ft_split(buff, '\n');
-	return (map);
+	i++;
+	g = ft_atoi(&str[i]);
+	while(str[i] && str[i] != ',')
+		i++;
+	i++;
+	b = ft_atoi(&str[i]);
+	if (r < 0 || g < 0 || b < 0)
+		exit_msg("add free here");
+	return (create_trgb(0x0, r, g, b));
 }
 
 t_textures	*init_textures(int fd)
@@ -99,23 +75,3 @@ t_textures	*init_textures(int fd)
 	}
 	return (ptr);
 }
-
-/*void	create_map_array(t_vars *vars, char *map_path)
-{
-	ssize_t		rc;
-	int			fd;
-
-	vars->buf = ft_calloc(sizeof(char), 1000);
-	fd = open(map_path, O_RDONLY);
-	//if (fd == -1) print error msg
-	rc = read(fd, vars->buf, 1000);
-	if (rc < 1)
-	{
-		ft_free(vars);
-		close(fd);
-		exit(EXIT_FAILURE);
-	}
-	vars->map->ptr_map = ft_split(vars->buf, '\n');
-	if (vars->map->ptr_map == NULL)
-
-}*/

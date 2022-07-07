@@ -6,16 +6,12 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:50:24 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/07 17:42:27 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/07 20:51:03 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RAYCAST_H
 # define RAYCAST_H
-
-# define RGB_RED = 0x00FF0000;
-# define RGB_GREEN = 0x0000FF00;
-# define RGB_BLUE = 0x000000FF;
 
 # include <math.h>
 # include <mlx.h>
@@ -73,30 +69,29 @@ int				ft_strncmp(const char *s1, const char *s2, size_t n);
 char			*get_next_line(int fd);
 char			**ft_split(char const *s, char c);
 char			*ft_strdup(char *s);
+int				ft_atoi(const char *str);
+
+/*memory*/
 void			free_tex(t_textures *tex);
 void			free_vars_exit(char *msg, t_vars *vars);
-int				ft_atoi(const char *str);
-int				create_trgb(int t, int r, int g, int b);
-int				to_hex(char *str);
 
-/*map_error*/
+/*map build*/
 void			check_file_ext(char *filename);
 t_textures		*init_textures(int fd);
 t_map			*create_map_array(int fd);
 void			check_map(char **map, t_vars *vars);
-int				check_zeros(char **map, int i, int j, t_vars *vars);
-int				ft_is_token(int c, t_vars *vars);
 t_player		*init_player(int i, int j, char token);
+
 /*mlx stuff*/
 int				mouse_click(t_vars *vars);
 int				esc(int keycode, t_vars *vars);
 int 			raycast(t_vars *vars);
 void 			verLine(int x, int y1, int y2, int color, t_data *data);
 t_data			*floor_ceiling(t_vars *vars);
+int				create_trgb(int t, int r, int g, int b);
+int				to_hex(char *str);
 
 /*testing*/
 void			print_arr(char **arr);
-
-// void ver_line(t_data *data, int x, int y, int len, int color);
 
 #endif

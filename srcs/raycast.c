@@ -6,31 +6,11 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:12:06 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/07 17:51:07 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/07 20:31:35 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/raycast.h"
-
-void	put_pixel(t_data *data, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
-}
-
-void verLine(int x, int y1, int y2, int color, t_data *data)
-{
-	int	i;
-
-	i = y1;
-	while(i < y2)
-	{
-		put_pixel(data, x, i, color);
-		i++;
-	}
-}
 
 int	done(void)
 {

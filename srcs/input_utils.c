@@ -1,44 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   functions.c                                        :+:      :+:    :+:   */
+/*   input_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/05 19:27:35 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/05 17:23:43 by jpfannku         ###   ########.fr       */
+/*   Created: 2022/07/07 20:51:36 by jpfannku          #+#    #+#             */
+/*   Updated: 2022/07/07 20:51:39 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/raycast.h"
-
-// int		done(void)
-// {
-// 	return (0);
-// }
-
-// void	put_pixel(t_data *data, int x, int y, int color)
-// {
-// 	char	*dst;
-
-// 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-// 	*(unsigned int*)dst = color;
-// }
-
-// void draw_line(t_data *data, int x, int y, int len, int color)
-// {
-// 	int		i;
-// 	int		j;
-// 	int		limit;
-
-// 	i = 0;
-// 	while (i < len && (j = y + 1) < limit)
-// 	{
-// 		y = j;
-// 		put_pixel(data, x, y, color);
-// 		i++;
-// 	}
-// }
 
 int	mouse_click(t_vars *vars)
 {
