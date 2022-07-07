@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:12:06 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/06 17:59:55 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/07 11:51:32 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int raycast(t_vars *vars)
 	float 	deltaDistX;
 	float 	deltaDistY;
 	float 	perpWallDist;
-
 	t_data	data;
 
 	m = 0;
@@ -152,8 +151,14 @@ int raycast(t_vars *vars)
 		//for size == 1, but can be simplified to the code below thanks to how sideDist and deltaDist are computed:
 		//because they were left scaled to |rayDir|. sideDist is the entire length of the ray above after the multiple
 		//steps, but we subtract deltaDist once because one step more into the wall was taken above.
-			if(side == 0) perpWallDist = (sideDistX - deltaDistX);
-			else          perpWallDist = (sideDistY - deltaDistY);
+			// if	(side == 0)
+			// 	perpWallDist = (sideDistX - deltaDistX);
+			// else          
+			// 	perpWallDist = (sideDistY - deltaDistY);
+			if	(side == 0)
+				perpWallDist = (mapX - vars->player->pos_x + (1 - stepX) / 2) / ray_dir_x;
+			else
+				perpWallDist = (mapY - vars->player->pos_y + (1 - stepY) / 2) / ray_dir_y;
 
 		//Calculate height of line to draw on screen
 			int lineHeight = (h / perpWallDist);
