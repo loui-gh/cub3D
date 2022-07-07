@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 15:07:34 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/06 16:49:41 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/07 12:26:31 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,11 @@ int	main(int argc, char **argv)
 	vars.map = create_map_array(fd);
 	//print_arr(vars.map->map_arr);
 	check_map(vars.map->map_arr, &vars);
-	
 	vars.mlx_ptr = mlx_init();
 	vars.mlx_win = mlx_new_window(vars.mlx_ptr, 640, 480, "Hello world!");
+	//floor + ceiling
 	raycast(&vars);
 	mlx_hook(vars.mlx_win, 2, 27, esc, &vars);
-	mlx_hook(vars.mlx_win, 17, (1L << 17), mouse_click, &vars);
+	mlx_hook(vars.mlx_win, 17, (1L << 17), mouse_click, &vars); //free inside function
 	mlx_loop(vars.mlx_ptr);
-	free_vars_exit("yep", &vars);
 }

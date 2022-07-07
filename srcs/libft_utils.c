@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 17:26:33 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/06 17:56:53 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/07 13:38:25 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,27 +97,27 @@ t_player	*init_player(int i, int j, char token)
 	t_player	*player;
 
 	player = (t_player *)malloc(sizeof(t_player));
-	player->pos_y = j;
-	player->pos_x = i;
-	if (token == 'N')
-	{
-		player->dir_x = -1;
-		player->dir_y = 0;
-	}
-	if (token == 'S')
-	{
-		player->dir_x = 1;
-		player->dir_y = 0;
-	}
-	if (token == 'E')
-	{
-		player->dir_x = 0;
-		player->dir_y = 1;
-	}
-		if (token == 'W')
-	{
-		player->dir_x = 0;
-		player->dir_y = -1;
-	}
+	player->pos_y = i;
+	player->pos_x = j;
+    if (token == 'N') //direction x and y are where your head is pointing
+    {
+        player->dir_x = 0;
+        player->dir_y = -1;
+    }
+    if (token == 'S')
+    {
+        player->dir_x = 0;
+        player->dir_y = 1;
+    }
+    if (token == 'E')
+    {
+        player->dir_x = 1;
+        player->dir_y = 0;
+    }
+        if (token == 'W')
+    {
+        player->dir_x = -1;
+        player->dir_y = 0;
+    }
 	return (player);
 }

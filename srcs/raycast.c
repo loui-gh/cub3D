@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:12:06 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/07 11:51:32 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/07 15:26:00 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,6 @@ int raycast(t_vars *vars)
 	float	x;
 	float	w;
 	float	h;
-	float	ray_dir_x;
-	float	ray_dir_y;
-	float	camera_x;
 	float 	sideDistX;
 	float 	sideDistY;
 	float 	deltaDistX;
@@ -56,28 +53,31 @@ int raycast(t_vars *vars)
 	t_data	data;
 
 	m = 0;
-	plane_x = 0;
-	plane_y = 0.66;
+	plane_x = 0.9 * vars->player->dir_y; //math?? direction vector needs to be perpendicular to camera plane always
+	plane_y = 0.9 * vars->player->dir_x; //field of view (1 == 90 degree)
 	w = 640;
 	h = 480;
 	data.img = mlx_new_image(vars->mlx_ptr, w, h);
 	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.line_length, &data.endian);
 	int color = 0xFFFFFF;
-	while(m < 1)
+	while(m < 1) // checking for movement
 	{
-		x = 0;
-		while(x < w)
+		x = 0; // ray counter 
+		while(x < w) // calculate a single snapshot (frame)
 		{
-			camera_x = 2 * x / w - 1; 
-		//calculate ray position and direction
+			float camera_x = 2 * x / (float)w - 1; //changed it back to float from no typecast
+			printf("camerax: %f\n", camera_x);
+		 //calculate ray position and direction
 		 //cameraX = 2 * x / (double)w - 1; //x-coordinate in camera space
-		 	ray_dir_x = vars->player->dir_x + plane_x * camera_x;
-			ray_dir_y = vars->player->dir_y + plane_y * camera_x;
-		//which box of the map we're in
+		 	float ray_dir_x = vars->player->dir_x + plane_x * camera_x;
+			float ray_dir_y = vars->player->dir_y + plane_y * camera_x;
+			//printf("dirx: %f, diry: %f\n", ray_dir_x, ray_dir_y);
+		 //coordinates of the ray visual (clarify)?????
 			int mapX = vars->player->pos_x;
 			int mapY = vars->player->pos_y;
 
 		//length of ray from current position to next x or y-side
+		// Ray position?
 			//float sideDistX;
 			//float sideDistY;
 
@@ -133,18 +133,18 @@ int raycast(t_vars *vars)
 					sideDistX += deltaDistX;
 					mapX += stepX;
 					side = 0;
-					color = 0xFFFFFF;
+					color = 0x0C0C0C0;
 				}
 				else
 				{
 					sideDistY += deltaDistY;
 					mapY += stepY;
 					side = 1;
-					color = 0x00FF0000;
+					color = 0x086479A;
 				}
 				//Check if ray has hit a wall
-				if(vars->map->map_arr[mapX][mapY] == '1') hit = 1;
-			}
+				if(vars->map->map_arr[mapY][mapX] == '1') hit = 1; //switched Y and X 
+			}	
 		//Calculate distance projected on camera direction. This is the shortest distance from the point where the wall is
 		//hit to the camera plane. Euclidean to center camera point would give fisheye effect!
 		//This can be computed as (mapX - posX + (1 - stepX) / 2) / ray_dir_x for side == 0, or same formula with Y
@@ -159,6 +159,7 @@ int raycast(t_vars *vars)
 				perpWallDist = (mapX - vars->player->pos_x + (1 - stepX) / 2) / ray_dir_x;
 			else
 				perpWallDist = (mapY - vars->player->pos_y + (1 - stepY) / 2) / ray_dir_y;
+			//printf("wall dist: %f\n", perpWallDist);
 
 		//Calculate height of line to draw on screen
 			int lineHeight = (h / perpWallDist);
