@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:50:24 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/07 20:51:03 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/19 11:37:13 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ typedef struct s_data {
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		width;
+	int		height;
 }				t_data;
 
 typedef struct s_map {
@@ -36,10 +38,10 @@ typedef struct s_map {
 }	t_map;
 
 typedef struct s_textures {
-	char	*north;
-	char	*south;
-	char	*west;
-	char	*east;
+	t_data	*north;
+	t_data	*south;
+	t_data	*west;
+	t_data	*east;
 	int		floor;
 	int		ceiling;
 }	t_textures;
@@ -59,26 +61,29 @@ typedef struct s_vars
 	t_textures	*tex;
 	t_map		*map;
 	t_player	*player;
+	t_data		*img;
 }	t_vars;
 
 /*utils*/
 void			ft_putstr(char *s);
 int				ft_strlen(char *str);
-void			exit_msg(char *msg);
+void			exit_msg(char *msg, int exit_code);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 char			*get_next_line(int fd);
 char			**ft_split(char const *s, char c);
 char			*ft_strdup(char *s);
 int				ft_atoi(const char *str);
+void			*ft_calloc(size_t n, size_t size);
 
 /*memory*/
-void			free_tex(t_textures *tex);
-void			free_vars_exit(char *msg, t_vars *vars);
+void			free_tex(t_textures *tex, t_vars *vars);
+void			free_vars_exit(char *msg, t_vars *vars, int exit_code);
+t_data			*assign_tex(t_vars *vars, char *file);
 
 /*map build*/
 void			check_file_ext(char *filename);
-t_textures		*init_textures(int fd);
-t_map			*create_map_array(int fd);
+void			init_textures(int fd, t_vars *vars);
+void			create_map_array(int fd, t_vars *vars);
 void			check_map(char **map, t_vars *vars);
 t_player		*init_player(int i, int j, char token);
 
@@ -90,6 +95,8 @@ void 			verLine(int x, int y1, int y2, int color, t_data *data);
 t_data			*floor_ceiling(t_vars *vars);
 int				create_trgb(int t, int r, int g, int b);
 int				to_hex(char *str);
+int 			raycast_tex(t_vars *vars);
+void			put_pixel(t_data *data, int x, int y, int color);
 
 /*testing*/
 void			print_arr(char **arr);

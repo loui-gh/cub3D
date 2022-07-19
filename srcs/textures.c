@@ -1,38 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/04 23:38:56 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/19 10:40:30 by jpfannku         ###   ########.fr       */
+/*   Created: 2022/07/18 11:12:18 by jpfannku          #+#    #+#             */
+/*   Updated: 2022/07/19 11:42:46 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/raycast.h"
 
-void	exit_msg(char *msg, int exit_code)
+t_data	*assign_tex(t_vars *vars, char *file)
 {
-	ft_putstr(msg);
-	exit(exit_code);
-}
+	t_data	*tex;
 
-char	*get_next_line(int fd)
-{
-	char	line[10000];
-	char	*buf;
-	int		test;
-
-	buf = line;
-	test = 0;
-	while (read(fd, buf, 1) > 0 && *buf++ != '\n')
-		test++;
-	if (buf > line)
-	{
-		*buf = 0;
-		return (ft_strdup(line));
-	}
-	else
-		return (NULL);
+	tex = (t_data *)ft_calloc(sizeof(t_data), 1);
+	if (!tex)
+		free_vars_exit("Malloc error\n", vars, EXIT_FAILURE);
+	tex->img = mlx_xpm_file_to_image(vars->mlx_ptr, file, &tex->width, &tex->height);
+	return(tex);
 }

@@ -6,25 +6,25 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 20:33:43 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/07 20:37:19 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/19 20:54:32 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/raycast.h"
 
-// error handling x2 here 
-t_map	*create_map_array(int fd)
+void	create_map_array(int fd, t_vars *vars)
 {
 	char	buff[10000];
 	t_map	*map;
 
 	map = (t_map *)malloc(sizeof(t_map));
+	vars->map = map;
 	if (!map)
-		return (NULL);
+		free_vars_exit("Malloc error\n", vars, EXIT_FAILURE);
 	if (read(fd, buff, 10000) < 0)
-		return (NULL);
+		free_vars_exit("Error readind map\n", vars, EXIT_FAILURE);
 	map->map_arr = ft_split(buff, '\n');
-	return (map);
+	check_map(map->map_arr, vars);
 }
 
 void	map_width_height(t_map *map)
@@ -51,7 +51,7 @@ t_player	*init_player(int i, int j, char token)
 {
 	t_player	*player;
 
-	player = (t_player *)malloc(sizeof(t_player));
+	player = (t_player *)ft_calloc(sizeof(t_player), 1);
 	player->pos_y = i;
 	player->pos_x = j;
     if (token == 'N') //direction x and y are where your head is pointing

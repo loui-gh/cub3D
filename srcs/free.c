@@ -6,26 +6,29 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 20:42:16 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/07 20:43:03 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/19 20:57:30 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/raycast.h"
 
-void	free_tex(t_textures *tex)
+void	destroy_free_img(t_data *img, t_vars *vars)
+{
+	if (img->img != 0x0)
+		mlx_destroy_image(vars->mlx_ptr, img->img);
+	free(img);
+}
+
+void	free_tex(t_textures *tex, t_vars *vars)
 {
 	if (tex->north)
-		free(tex->north);
+		destroy_free_img(tex->north, vars);
 	if (tex->south)
-		free(tex->south);
+		destroy_free_img(tex->south, vars);
 	if (tex->east)
-		free(tex->east);
+		destroy_free_img(tex->east, vars);
 	if (tex->west)
-		free(tex->west);
-	// if (tex->ceiling)
-	// 	free(tex->ceiling);
-	// if (tex->floor)
-	// 	free(tex->floor);
+		destroy_free_img(tex->west, vars);
 	free(tex);
 }
 
@@ -43,11 +46,17 @@ void	free_map(t_map *map)
 	free(map);
 }
 
-void	free_vars_exit(char *msg, t_vars *vars)
+void	free_vars_exit(char *msg, t_vars *vars, int exit_code)
 {
 	if (vars->tex)
-		free_tex(vars->tex);
+		free_tex(vars->tex, vars);
 	if (vars->map)
 		free_map(vars->map);
-	exit_msg(msg);
+	if (vars->player)
+		free(vars->player);
+	if (vars->img)
+		destroy_free_img(vars->img, vars); //this is a placeholder anyway 
+	free(vars->mlx_ptr);
+	free(vars);
+	exit_msg(msg, exit_code);
 }

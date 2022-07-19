@@ -6,11 +6,28 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 17:26:33 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/07 20:41:24 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/19 11:27:31 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/raycast.h"
+
+void	*ft_calloc(size_t n, size_t size)
+{
+	size_t	i;
+	char	*str;
+
+	i = 0;
+	str = malloc(n * size);
+	if (!str)
+		return (NULL);
+	while (i < n * size)
+	{
+		str[i] = 0;
+		i++;
+	}
+	return (str);
+}
 
 int	ft_strlen(char *str)
 {
@@ -66,7 +83,7 @@ char	*ft_strdup(char *s)
 	dst_ptr = (char *)malloc(ft_strlen(s) + 1);
 	if (dst_ptr == NULL)
 		return (NULL);
-	while (s[i] != '\0')
+	while (s[i] != '\0' && s[i] != '\n') //i added this we should prob remove 
 	{
 		dst_ptr[i] = s[i];
 		i++;

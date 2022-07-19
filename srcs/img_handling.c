@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 19:06:47 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/07 20:38:51 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/19 11:41:42 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,31 +35,41 @@ int	to_hex(char *str) //major error handling needed here
 	i++;
 	b = ft_atoi(&str[i]);
 	if (r < 0 || g < 0 || b < 0)
-		exit_msg("add free here");
+		return (-1);
 	return (create_trgb(0x0, r, g, b));
 }
 
-t_textures	*init_textures(int fd)
+void	check_textures(t_vars *vars)
+{
+	if (!vars->tex->north->img || !vars->tex->south->img \
+		|| !vars->tex->east->img || !vars->tex->west->img)
+		free_vars_exit("Error: Invalid texture\n", vars, EXIT_FAILURE);
+	if (vars->tex->floor < 0 || vars->tex->ceiling < 0)
+		free_vars_exit("Error: Invalid rgb colour\n", vars, EXIT_FAILURE);
+}
+
+void	init_textures(int fd, t_vars *vars)
 {
 	t_textures	*ptr;
 	int			i;
 	char		*holder;
 
-	ptr = (t_textures *)malloc(sizeof(t_textures));
+	ptr = (t_textures *)ft_calloc(sizeof(t_textures), 1);
+	vars->tex = ptr;
 	i = 0;
 	while (i < 6)
 	{
 		holder = get_next_line(fd);
 		while (ft_strlen(holder) < 2)
 			holder = get_next_line(fd);
-		if (ft_strncmp("NO ./img", holder, 8) == 0)
-			ptr->north = ft_strdup(&holder[3]);
-		else if (ft_strncmp("SO ./img", holder, 8) == 0)
-			ptr->south = ft_strdup(&holder[3]);
-		else if (ft_strncmp("WE ./img", holder, 8) == 0)
-			ptr->west = ft_strdup(&holder[3]);
-		else if (ft_strncmp("EA ./img", holder, 8) == 0)
-			ptr->east = ft_strdup(&holder[3]);
+		if (ft_strncmp("NO ", holder, 3) == 0)
+			ptr->north = assign_tex(vars, &holder[3]);
+		else if (ft_strncmp("SO ", holder, 3) == 0)
+			ptr->south = assign_tex(vars, &holder[3]);
+		else if (ft_strncmp("WE ", holder, 3) == 0)
+			ptr->west = assign_tex(vars, &holder[3]);
+		else if (ft_strncmp("EA ", holder, 3) == 0)
+			ptr->east = assign_tex(vars, &holder[3]);
 		else if (ft_strncmp("F ", holder, 2) == 0)
 			ptr->floor = to_hex(&holder[2]);
 		else if (ft_strncmp("C ", holder, 2) == 0)
@@ -67,11 +77,10 @@ t_textures	*init_textures(int fd)
 		else
 		{
 			free(holder);
-			free_tex(ptr);
-			exit_msg("Error: invalid texture input\n");
+			free_vars_exit("Error: Invalid texture\n", vars, EXIT_FAILURE);
 		}
 		free(holder);
 		i++;
 	}
-	return (ptr);
+	check_textures(vars);
 }
