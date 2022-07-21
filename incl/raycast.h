@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:50:24 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/19 11:37:13 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/21 14:27:10 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 # include <fcntl.h>
 
 # include <stdio.h>
+
+#define WIDTH 1200
+#define HEIGHT 900
 
 typedef struct s_data {
 	void	*img;
@@ -52,6 +55,7 @@ typedef struct s_player
 	int	pos_y;
 	int	dir_x;
 	int	dir_y;
+	char token;
 }	t_player;
 
 typedef struct s_vars
@@ -97,6 +101,8 @@ int				create_trgb(int t, int r, int g, int b);
 int				to_hex(char *str);
 int 			raycast_tex(t_vars *vars);
 void			put_pixel(t_data *data, int x, int y, int color);
+int				player_move(int keycode, t_vars *vars);
+int				go_forward(t_vars *vars);
 
 /*testing*/
 void			print_arr(char **arr);

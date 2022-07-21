@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:12:06 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/19 11:19:59 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/21 12:09:01 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	raycast_tex(t_vars *vars)
 	int		m;
 	float 	plane_x;
 	float 	plane_y;//the 2d raycaster version of camera plane
-	float	x;
+	int	x;
 	float	w;
 	float	h;
 	float 	sideDistX;
@@ -36,12 +36,13 @@ int	raycast_tex(t_vars *vars)
 	int 	texY;
 	//t_data	data;
 	t_data *fl_c;
+	int buffer[HEIGHT][WIDTH];
 
 	m = 0;
 	plane_x = 0.9 * vars->player->dir_y; //math?? direction vector needs to be perpendicular to camera plane always
 	plane_y = 0.9 * vars->player->dir_x; //field of view (1 == 90 degree)
-	w = 640;
-	h = 480;
+	w = WIDTH;
+	h = HEIGHT;
 	//data.img = mlx_new_image(vars->mlx_ptr, w, h);
 	//data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.line_length, &data.endian);
 	//int color = 0xFFFFFF;
@@ -149,14 +150,13 @@ int	raycast_tex(t_vars *vars)
 
 		//Calculate height of line to draw on screen
 			int lineHeight = (h / perpWallDist);
-
-				//NEW
       //calculate lowest and highest pixel to fill in current stripe
 			int drawStart = -lineHeight / 2 + h / 2;
 			if(drawStart < 0) drawStart = 0;
 			int drawEnd = lineHeight / 2 + h / 2;
 			if(drawEnd >= h) drawEnd = h - 1;
 
+					//NEW
 			//calculate value of wallX
 			double wallX; //where exactly the wall was hit
 			if(side == 0) wallX = vars->player->pos_x + perpWallDist * ray_dir_y;
@@ -164,20 +164,20 @@ int	raycast_tex(t_vars *vars)
 			wallX -= floor(wallX);
 			
 			//x coordinate on the texture
-			int texX = wallX * 64;
-			if(side == 0 && ray_dir_x < 0) texX = 64 - texX - 1;
-			if(side == 1 && ray_dir_y > 0) texX = 64 - texX - 1;
+			int texX = wallX * vars->tex->north->height;
+			if(side == 0 && ray_dir_x < 0) texX = vars->tex->north->height - texX - 1;
+			if(side == 1 && ray_dir_y > 0) texX = vars->tex->north->height - texX - 1;
 
 			// How much to increase the texture coordinate per screen pixel
-			double step = 1.0 * 64 / lineHeight;
+			double step = 1.0 * vars->tex->north->height / lineHeight;
 			// Starting texture coordinate
-			double texPos = (drawStart - h / 2 + lineHeight / 2) * step;
+			double texPos = (drawStart - h / 2 + lineHeight / 2) * step; //
 			for(int y = drawStart; y < drawEnd; y++)
 			{
 				// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
 				texY = (int)texPos;
 				texPos += step;
-				put_pixel(fl_c, x, y, get_pix_colour(vars->tex->north, texX, texY));
+				buffer[y][x] = get_pix_colour(vars->tex->north, texX, texY);
 			}
 			x++;
 			if (x == 31)
@@ -185,7 +185,21 @@ int	raycast_tex(t_vars *vars)
 		}
 		m++;
 	}
+	x = 0;
+	int y = 0;
+	while (y < HEIGHT)
+	{
+		while (x < WIDTH)
+		{
+			if (buffer[y][x] !=  0)
+				put_pixel(fl_c, x, y, buffer[y][x]);
+			x++;
+		}
+		x = 0;
+		y++;
+	}
 	mlx_put_image_to_window(vars->mlx_ptr, vars->mlx_win, fl_c->img, 0, 0);
 	vars->img = fl_c;
 	return (0);
 }
+//put_pixel(fl_c, x, y, get_pix_colour(vars->tex->north, texX, texY));

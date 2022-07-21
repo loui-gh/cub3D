@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 15:07:34 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/19 21:02:54 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/21 14:31:56 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,10 @@ int	main(int argc, char **argv)
 	if (fd < 0)
 		exit_msg("Cannot read from file\n", EXIT_FAILURE);
 	vars = init_game(fd);
-	vars->mlx_win = mlx_new_window(vars->mlx_ptr, 640, 480, "Hello world!");
+	vars->mlx_win = mlx_new_window(vars->mlx_ptr, WIDTH, HEIGHT, "Hello world!");
 	//raycast(&vars);
 	raycast_tex(vars);
+	mlx_key_hook(vars->mlx_win, player_move, &vars);
 	mlx_hook(vars->mlx_win, 2, 27, esc, vars);
 	mlx_hook(vars->mlx_win, 17, (1L << 17), mouse_click, vars);
 	mlx_loop(vars->mlx_ptr);

@@ -1,12 +1,13 @@
 CC			= gcc 
 CFLAGS		= -Wall -Wextra -Werror -ggdb
-INCL		= -I/usr/include -Imlx_linux -O3
+INCL		= -I/usr/include -Imlx_linux -O0
 #lmlx -- how does that work??
 INCL_LINUX	= -lmlx -lXext -lX11 -lm -lz
 RM			= rm -f
 SRCD		= ./srcs/
 SRC			= 	input_utils.c libft_utils.c map_error.c utils.c img_handling.c ft_split.c \
-				main.c raycast.c draw_utils.c free.c testing.c map_init.c textures.c raycast_tex.c
+				main.c raycast.c draw_utils.c free.c testing.c map_init.c textures.c raycast_tex.c \
+				movement.c
 # Command to add the source folder prefix (instead of having it added manually to SRC)
 SRCF		= $(addprefix $(SRCD),$(SRC))
 OBJD		= ./objs/

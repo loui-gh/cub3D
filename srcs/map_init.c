@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 20:33:43 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/19 20:54:32 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/21 14:24:10 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ t_player	*init_player(int i, int j, char token)
 	player = (t_player *)ft_calloc(sizeof(t_player), 1);
 	player->pos_y = i;
 	player->pos_x = j;
+	player->token = token;
     if (token == 'N') //direction x and y are where your head is pointing
     {
         player->dir_x = 0;

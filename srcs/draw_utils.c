@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 20:30:31 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/07 20:32:10 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/21 11:05:27 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ t_data	*floor_ceiling(t_vars *vars)
 	int		h;
 	t_data	*img;
 	
-	w = 640;
-	h = 480;
+	w = WIDTH;
+	h = HEIGHT;
 	img = (t_data *)malloc(sizeof(t_data));
 	img->img = mlx_new_image(vars->mlx_ptr, w, h);
 	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel, &img->line_length, &img->endian);
