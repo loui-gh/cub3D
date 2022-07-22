@@ -6,7 +6,7 @@
 /*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:12:06 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/22 23:51:07 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/07/23 00:08:22 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 /*
 plane_x, y== 0.9
 */
+
+
+
 int	raycast_tex(t_vars *vars)
 {
 	int		m;
@@ -119,25 +122,21 @@ int	raycast_tex(t_vars *vars)
 		}
 		m++;
 	}
-	print_buffer(buffer, fl_c);
-	mlx_put_image_to_window(vars->mlx_ptr, vars->mlx_win, fl_c->img, 0, 0);
-	vars->img = fl_c;
-	return (0);
-}
-
-void	print_buffer(int buffer, t_data *ptr)
-{
-	int	x = 0;
+	x = 0;
 	int	y = 0;
 	while (y < HEIGHT)
 	{
 		while (x < WIDTH)
 		{
-			if (buffer[y][x] !=  0)
-				put_pixel(ptr, x, y, buffer[y][x]);
+			if (buffer[y][x] !=  0)//segfault
+				put_pixel(fl_c, x, y, buffer[y][x]);
 			x++;
 		}
 		x = 0;
 		y++;
 	}
+	mlx_put_image_to_window(vars->mlx_ptr, vars->mlx_win, fl_c->img, 0, 0);
+	vars->img = fl_c;
+	return (0);
 }
+
