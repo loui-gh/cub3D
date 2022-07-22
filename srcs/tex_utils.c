@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 19:06:47 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/22 11:46:29 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/22 12:32:23 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,25 @@ char	*skip_spaces(char *line)
 	return (&line[x]);
 }
 
-/*converts rgb char string to hex for use with mlx functions*/
+int	check_rgb_string(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if ((str[i] < '0' || str[i] > '9') && str[i] != ' ' \
+		&& str[i] != ',' && str[i] != '	')
+			return (-1);
+		i++;
+	}
+	return (0);
+}
+
+/*converts rgb char string to hex for use with mlx functions
+ -spaces
+ -errors or invalid
+*/
 int	to_hex(char *str)
 {
 	int	i;
@@ -35,6 +53,9 @@ int	to_hex(char *str)
 	int	g;
 	int	b;
 
+	if (check_rgb_string(str) < 0)
+		return (-1);
+	str = skip_spaces(str);
 	i = 0;
 	r = ft_atoi(str);
 	while (str[i] && str[i] != ',')
@@ -45,7 +66,7 @@ int	to_hex(char *str)
 		i++;
 	i++;
 	b = ft_atoi(&str[i]);
-	if (r < 0 || g < 0 || b < 0)
+	if (r < 0 || g < 0 || b < 0 || r > 255 || g > 255 || b > 255)
 		return (-1);
 	return (create_trgb(0x0, r, g, b));
 }
