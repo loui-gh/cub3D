@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_error.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:28:50 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/22 10:55:33 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/22 22:13:01 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,29 @@ int	ft_is_token(int c, t_vars *vars)
 		return (0);
 }
 
-int	check_zeros(char **map, int i, int j, t_vars *vars)
+/* There can be no space next to a zero in the map,
+otherwise there is a 'hole' in the game. This function
+checks for that.*/
+void	check_zeros_normi(char **map, int i, int j, t_vars *vars)
+{
+	if (i != 0 && map[i - 1][j])
+	{
+		if (map[i - 1][j] == ' ')
+			free_vars_exit("Map config error.\n", vars, EXIT_FAILURE);
+	}
+	else
+		free_vars_exit("Map config error.\n", vars, EXIT_FAILURE);
+}
+
+void	check_zeros(char **map, int i, int j, t_vars *vars)
 {
 	if (map[i][j + 1])
 	{
-		if (map[i][j + 1] == ' ')
+		if (map[i][j + 1] == ' ' || map[i][j + 1] == '\n')
 			free_vars_exit("Map config error.\n", vars, EXIT_FAILURE);
 	}
+	else
+		free_vars_exit("Holy wall.\n", vars, EXIT_FAILURE);
 	if (map[i][j - 1])
 	{
 		if (map[i][j - 1] == ' ')
@@ -56,43 +72,35 @@ int	check_zeros(char **map, int i, int j, t_vars *vars)
 	}
 	else
 		free_vars_exit("Map config error.\n", vars, EXIT_FAILURE);
-	if (i != 0 && map[i - 1][j])
-	{
-		if (map[i - 1][j] == ' ')
-			free_vars_exit("Map config error.\n", vars, EXIT_FAILURE);
-	}
-	else
-		free_vars_exit("Map config error.\n", vars, EXIT_FAILURE);
-	return (0);
+
+	check_zeros_normi(map, i, j, vars);
 }
 
+/* check map for invalid tokens (i.e. not 0, etc.)
+also check walls
+*/
 void	check_map(char **map, t_vars *vars)
 {
 	int	i;
 	int	j;
-	int	token;
-	int	flag;
+	int	player;
 
 	i = 0;
-	token = 0;
-	flag = 0;
+	player = 0;
 	while (map[i])
 	{
 		j = 0;
 		while (map[i][j] != '\0')
 		{
-			token += ft_is_token(map[i][j], vars);
-			if (token == 1 && flag == 0)
-			{
-				flag = 1;
+			player += ft_is_token(map[i][j], vars);
+			if (player == 1 && !vars->player)
 				vars->player = init_player(i, j, map[i][j]);
-			}
 			if (map[i][j] == '0')
 				check_zeros(map, i, j, vars);
 			j++;
 		}
 		i++;
 	}
-	if (token != 1)
+	if (player != 1)
 		free_vars_exit("Invalid player input.\n", vars, EXIT_FAILURE);
 }
