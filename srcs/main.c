@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 15:07:34 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/21 14:31:56 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/22 10:38:29 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	main(int argc, char **argv)
 	vars->mlx_win = mlx_new_window(vars->mlx_ptr, WIDTH, HEIGHT, "Hello world!");
 	//raycast(&vars);
 	raycast_tex(vars);
-	mlx_key_hook(vars->mlx_win, player_move, &vars);
+	//mlx_key_hook(vars->mlx_win, player_move, vars);
 	mlx_hook(vars->mlx_win, 2, 27, esc, vars);
 	mlx_hook(vars->mlx_win, 17, (1L << 17), mouse_click, vars);
 	mlx_loop(vars->mlx_ptr);

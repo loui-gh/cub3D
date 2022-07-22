@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 13:50:21 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/21 14:43:05 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/22 10:30:14 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,15 @@ int	player_move(int keycode, t_vars *vars)
 
 int	go_forward(t_vars *vars)
 {
-	// if (vars->player->pos_x + vars->player->dir_x >= vars->map->width || vars->player->pos_y + vars->player->dir_x >= vars->map->height)
-	// {
-	// 	printf("edge of the map u silly bean\n");
-	// 	return (-1);
-	// }
-	printf("hello");
-	vars++;
-	//printf("%i\n", vars->player->pos_x);
-	// vars->map->map_arr[vars->player->pos_y][vars->player->pos_x] = 0;
-	// vars->player->pos_x += vars->player->dir_x;
-	// vars->player->pos_y += vars->player->dir_y;
-	// vars->map->map_arr[vars->player->pos_y][vars->player->pos_x] = vars->player->token;
+	if (vars->player->pos_x + vars->player->dir_x >= vars->map->width || vars->player->pos_y + vars->player->dir_x >= vars->map->height)
+	{
+		printf("edge of the map u silly bean\n");
+		return (-1);
+	}
+	printf("%i\n", vars->player->pos_x);
+	vars->map->map_arr[vars->player->pos_y][vars->player->pos_x] = 0;
+	vars->player->pos_x += vars->player->dir_x;
+	vars->player->pos_y += vars->player->dir_y;
+	vars->map->map_arr[vars->player->pos_y][vars->player->pos_x] = vars->player->token;
 	return (0);
 }
