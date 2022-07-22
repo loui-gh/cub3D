@@ -6,21 +6,11 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:28:50 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/19 10:44:26 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/22 10:55:33 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/raycast.h"
-
-/* find start of map */
-/* DA RULEZ
-1st + last line only 1s
-lines start and end with 1
-0 cannot be preceded or followed by space (needs to b surrounded)
-arr[i][j]
-if char == 0, arr[i - 1][j] != ' ' && arr[i + 1][j]
-only valid characters (1, 0, (N,S,W or E), space)
-*/
 
 void	check_file_ext(char *filename)
 {
@@ -92,7 +82,7 @@ void	check_map(char **map, t_vars *vars)
 		while (map[i][j] != '\0')
 		{
 			token += ft_is_token(map[i][j], vars);
-			if ( token == 1 && flag == 0)
+			if (token == 1 && flag == 0)
 			{
 				flag = 1;
 				vars->player = init_player(i, j, map[i][j]);

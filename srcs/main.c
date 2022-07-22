@@ -6,22 +6,33 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 15:07:34 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/22 10:38:29 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/22 11:01:49 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/raycast.h"
 
+/*Assigns the main variable struct, which contains the mlx pointers and 
+pointers to all other structs. Also calls init functions for the 
+map and textures.*/
 t_vars	*init_game(int fd)
 {
 	t_vars	*vars;
 
 	vars = (t_vars *)ft_calloc(sizeof(t_vars), 1);
-	vars->mlx_ptr = mlx_init(); //this causes a huge memory leak??
+	if (!vars)
+	{
+		close(fd);
+		exit_msg("Error: Malloc error\n", EXIT_FAILURE);
+	}
+	vars->mlx_ptr = mlx_init();
 	if (vars->mlx_ptr == NULL)
+	{
+		close(fd);
 		exit_msg("Error: Failed to init MLX\n", EXIT_FAILURE);
+	}
 	init_textures(fd, vars);
-	create_map_array(fd, vars); //found a problem when removing a single wall from the right side of the map.
+	create_map_array(fd, vars);
 	return (vars);
 }
 
@@ -37,8 +48,7 @@ int	main(int argc, char **argv)
 	if (fd < 0)
 		exit_msg("Cannot read from file\n", EXIT_FAILURE);
 	vars = init_game(fd);
-	vars->mlx_win = mlx_new_window(vars->mlx_ptr, WIDTH, HEIGHT, "Hello world!");
-	//raycast(&vars);
+	vars->mlx_win = mlx_new_window(vars->mlx_ptr, WIDTH, HEIGHT, "Cub3D");
 	raycast_tex(vars);
 	//mlx_key_hook(vars->mlx_win, player_move, vars);
 	mlx_hook(vars->mlx_win, 2, 27, esc, vars);

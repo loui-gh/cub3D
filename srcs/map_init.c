@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 20:33:43 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/21 14:24:10 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/22 10:59:57 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,17 @@ void	create_map_array(int fd, t_vars *vars)
 	map = (t_map *)malloc(sizeof(t_map));
 	vars->map = map;
 	if (!map)
+	{
+		close(fd);
 		free_vars_exit("Malloc error\n", vars, EXIT_FAILURE);
+	}
 	if (read(fd, buff, 10000) < 0)
+	{
+		close(fd);
 		free_vars_exit("Error readind map\n", vars, EXIT_FAILURE);
+	}	
 	map->map_arr = ft_split(buff, '\n');
+	close(fd);
 	check_map(map->map_arr, vars);
 }
 

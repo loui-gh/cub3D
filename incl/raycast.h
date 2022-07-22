@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:50:24 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/21 14:27:10 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/22 10:49:32 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 
 # include <stdio.h>
 
-#define WIDTH 1200
-#define HEIGHT 900
+# define WIDTH 1200
+# define HEIGHT 900
 
 typedef struct s_data {
 	void	*img;
@@ -51,11 +51,11 @@ typedef struct s_textures {
 
 typedef struct s_player
 {
-	int	pos_x;
-	int	pos_y;
-	int	dir_x;
-	int	dir_y;
-	char token;
+	int		pos_x;
+	int		pos_y;
+	int		dir_x;
+	int		dir_y;
+	char	token;
 }	t_player;
 
 typedef struct s_vars
