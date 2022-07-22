@@ -6,7 +6,7 @@
 /*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:12:06 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/22 23:28:42 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/07/22 23:51:07 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,10 @@ int	raycast_tex(t_vars *vars)
 	int		x;
 	float	ray_dir_x;
 	float	ray_dir_y;
-	float 	sideDistX;
-	float 	sideDistY;
-	float 	perpWallDist;
-	int 	texY;
-	t_data *fl_c;
+	float	sideDistX;
+	float	sideDistY;
+	float	perpWallDist;
+	t_data	*fl_c;
 	int buffer[HEIGHT][WIDTH];
 
 	m = 0;
@@ -39,9 +38,7 @@ int	raycast_tex(t_vars *vars)
 			ray_dir_y = vars->player->dir_y + 0.9 * vars->player->dir_x * (2 * x / (float)WIDTH - 1);
 			int stepX;
 			int stepY;
-
 			
-			int side;
 			if(ray_dir_x < 0)
 			{
 				stepX = -1;
@@ -65,6 +62,7 @@ int	raycast_tex(t_vars *vars)
 			int mapX = vars->player->pos_x;
 			int mapY = vars->player->pos_y;
 			int hit = 0;
+			int side;
 			while(hit == 0)
 			{
 				if(sideDistX < sideDistY)
@@ -107,6 +105,7 @@ int	raycast_tex(t_vars *vars)
 			double step = 1.0 * vars->tex->north->height / (HEIGHT/ perpWallDist);
 			double texPos = (drawStart - HEIGHT/ 2 + (HEIGHT/ perpWallDist) / 2) * step; //
 			int y = drawStart;
+			int 	texY;
 			while( y < drawEnd)
 			{
 				texY = (int)texPos;
@@ -120,20 +119,25 @@ int	raycast_tex(t_vars *vars)
 		}
 		m++;
 	}
-	x = 0;
-	int y = 0;
+	print_buffer(buffer, fl_c);
+	mlx_put_image_to_window(vars->mlx_ptr, vars->mlx_win, fl_c->img, 0, 0);
+	vars->img = fl_c;
+	return (0);
+}
+
+void	print_buffer(int buffer, t_data *ptr)
+{
+	int	x = 0;
+	int	y = 0;
 	while (y < HEIGHT)
 	{
 		while (x < WIDTH)
 		{
 			if (buffer[y][x] !=  0)
-				put_pixel(fl_c, x, y, buffer[y][x]);
+				put_pixel(ptr, x, y, buffer[y][x]);
 			x++;
 		}
 		x = 0;
 		y++;
 	}
-	mlx_put_image_to_window(vars->mlx_ptr, vars->mlx_win, fl_c->img, 0, 0);
-	vars->img = fl_c;
-	return (0);
 }
