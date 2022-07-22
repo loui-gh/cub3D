@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:38:56 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/22 10:54:37 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/22 12:17:24 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ char	*get_next_line(int fd)
 {
 	char	line[10000];
 	char	*buf;
+	char	*trimmed;
 	int		test;
 
 	buf = line;
@@ -31,7 +32,8 @@ char	*get_next_line(int fd)
 	if (buf > line)
 	{
 		*buf = 0;
-		return (ft_strdup(line));
+		trimmed = ft_strtrim(line, " 	");
+		return (trimmed);
 	}
 	else
 		return (NULL);

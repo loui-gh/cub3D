@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 17:26:33 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/19 11:27:31 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/22 12:20:46 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,39 +83,11 @@ char	*ft_strdup(char *s)
 	dst_ptr = (char *)malloc(ft_strlen(s) + 1);
 	if (dst_ptr == NULL)
 		return (NULL);
-	while (s[i] != '\0' && s[i] != '\n') //i added this we should prob remove 
+	while (s[i] != '\0')
 	{
 		dst_ptr[i] = s[i];
 		i++;
 	}
 	dst_ptr[i] = '\0';
 	return (dst_ptr);
-}
-
-int	ft_atoi(const char *str)
-{
-	int	val;
-	int	x;
-	int	neg;
-
-	val = 0;
-	x = 0;
-	neg = 1;
-	while ((str[x] >= 9 && str[x] <= 13) || str[x] == 32)
-	{
-		x++;
-	}
-	if (str[x] == '-')
-	{
-		neg = -1;
-		x++;
-	}
-	else if (str[x] == '+')
-		x++;
-	while (str[x] >= '0' && str[x] <= '9')
-	{
-		val = val * 10 + str[x] - 48;
-		x++;
-	}
-	return (val * neg);
 }
