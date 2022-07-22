@@ -6,7 +6,7 @@
 /*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:50:24 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/22 21:36:19 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/07/22 22:19:34 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,12 +101,16 @@ void			verLine(int x, int y1, int y2, int color, t_data *data);
 t_data			*floor_ceiling(t_vars *vars);
 int				create_trgb(int t, int r, int g, int b);
 int				to_hex(char *str);
-int				raycast_tex(t_vars *vars);
 void			put_pixel(t_data *data, int x, int y, int color);
 int				player_move(int keycode, t_vars *vars);
 int				go_forward(t_vars *vars);
 
 /*testing*/
 void			print_arr(char **arr);
+
+/*raycasting*/
+int	get_pix_colour(t_data *tex, int x, int y);
+int				raycast_tex(t_vars *vars);
+
 
 #endif
