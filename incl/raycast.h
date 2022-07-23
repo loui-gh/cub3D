@@ -6,7 +6,7 @@
 /*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:50:24 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/22 22:19:34 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/07/23 19:57:10 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@
 
 # define WIDTH 1200
 # define HEIGHT 900
+
+typedef struct s_raycast
+{
+	
+} t_raycast;
 
 typedef struct s_data {
 	void	*img;
@@ -62,6 +67,7 @@ typedef struct s_vars
 {
 	void		*mlx_ptr;
 	void		*mlx_win;
+	int			**big_buff;
 	t_textures	*tex;
 	t_map		*map;
 	t_player	*player;
@@ -109,8 +115,10 @@ int				go_forward(t_vars *vars);
 void			print_arr(char **arr);
 
 /*raycasting*/
-int	get_pix_colour(t_data *tex, int x, int y);
+int				get_pix_colour(t_data *tex, int x, int y);
 int				raycast_tex(t_vars *vars);
+void			initarray(t_vars *ptr);
+void			scrub_array(char c, t_vars *ptr);
 
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:12:06 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/23 00:08:22 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/07/23 19:57:37 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 /*
 plane_x, y== 0.9
 */
+
+//void	write_buffer(int drawStart, int texPos, int step, t_vars *ptr)
 
 
 
@@ -29,6 +31,8 @@ int	raycast_tex(t_vars *vars)
 	float	perpWallDist;
 	t_data	*fl_c;
 	int buffer[HEIGHT][WIDTH];
+	int stepX;
+	int stepY;
 
 	m = 0;
 	fl_c = floor_ceiling(vars);
@@ -39,8 +43,7 @@ int	raycast_tex(t_vars *vars)
 		{
 		 	ray_dir_x = vars->player->dir_x + 0.9 * vars->player->dir_y * (2 * x / (float)WIDTH - 1);
 			ray_dir_y = vars->player->dir_y + 0.9 * vars->player->dir_x * (2 * x / (float)WIDTH - 1);
-			int stepX;
-			int stepY;
+			
 			
 			if(ray_dir_x < 0)
 			{
@@ -105,8 +108,13 @@ int	raycast_tex(t_vars *vars)
 				texX = vars->tex->north->height - texX - 1;
 			if(side == 1 && ray_dir_y > 0)
 				texX = vars->tex->north->height - texX - 1;
+			
+			//draw buffer
+			//set to zero ft
+			scrub_array(-1, vars);
 			double step = 1.0 * vars->tex->north->height / (HEIGHT/ perpWallDist);
 			double texPos = (drawStart - HEIGHT/ 2 + (HEIGHT/ perpWallDist) / 2) * step; //
+			
 			int y = drawStart;
 			int 	texY;
 			while( y < drawEnd)

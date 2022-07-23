@@ -3,14 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 15:07:34 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/22 11:01:49 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/23 19:58:39 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/raycast.h"
+
+/* initialises a dbl-ptr int array using vars struct */
+
+void	initarray(t_vars *ptr)
+{
+	int	i;
+
+	i = 0;
+	ptr->big_buff = (int **)malloc(sizeof(int *) * HEIGHT);
+	if (!ptr->big_buff)
+		free_vars_exit("failed to allocate memory for drawing buffer", ptr, EXIT_FAILURE);
+	while (i < HEIGHT)
+	{
+		ptr->big_buff[i] = (int *)malloc(WIDTH * sizeof(int));
+		if (!ptr->big_buff[i])
+			free_vars_exit("failed to allocate memory for drawing buffer", ptr, EXIT_FAILURE);
+		i++;
+	}
+}
+
+void	scrub_array(char c, t_vars *ptr)
+{
+	int x, y;
+	x = 0;
+	y = 0;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			ptr->big_buff[y][x] = c;
+			x++;
+		}
+		y++;
+	}
+}
 
 /*Assigns the main variable struct, which contains the mlx pointers and 
 pointers to all other structs. Also calls init functions for the 
@@ -33,6 +69,7 @@ t_vars	*init_game(int fd)
 	}
 	init_textures(fd, vars);
 	create_map_array(fd, vars);
+	initarray(vars);
 	return (vars);
 }
 
