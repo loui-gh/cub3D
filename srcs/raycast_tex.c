@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_tex.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:12:06 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/23 19:57:37 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/07/23 12:20:01 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,49 @@
 plane_x, y== 0.9
 */
 
-//void	write_buffer(int drawStart, int texPos, int step, t_vars *ptr)
+void	write_buffer(int x, t_raycast *ray, t_vars *ptr)
+{
+	int	y; //need?
+	int	tex_y;
 
+	y = ray->draw_start;
+	while (y < ray->draw_end)
+	{
+		tex_y = (int)ray->tex_pos;
+		ray->tex_pos += ray->step;
+		ptr->big_buff[y][x] = get_pix_colour(ptr->tex->north, ray->tex_x, tex_y);
+		y++;
+	}
+}
 
+void	draw_buffer(t_data *img, int **buffer)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	x = 0;
+	while (y < HEIGHT)
+	{
+		while (x < WIDTH)
+		{
+			if (buffer[y][x] != -1)
+				put_pixel(img, x, y, buffer[y][x]);
+			x++;
+		}
+		x = 0;
+		y++;
+	}
+}
 
 int	raycast_tex(t_vars *vars)
 {
-	int		m;
-	int		x;
-	float	ray_dir_x;
-	float	ray_dir_y;
-	float	sideDistX;
-	float	sideDistY;
-	float	perpWallDist;
-	t_data	*fl_c;
-	int buffer[HEIGHT][WIDTH];
-	int stepX;
-	int stepY;
+	int			m;
+	int			x;
+	t_raycast	ray;
 
+
+	t_data	*fl_c;
 	m = 0;
 	fl_c = floor_ceiling(vars);
 	while(m < 1)
@@ -43,108 +68,80 @@ int	raycast_tex(t_vars *vars)
 		{
 		 	ray_dir_x = vars->player->dir_x + 0.9 * vars->player->dir_y * (2 * x / (float)WIDTH - 1);
 			ray_dir_y = vars->player->dir_y + 0.9 * vars->player->dir_x * (2 * x / (float)WIDTH - 1);
-			
-			
 			if(ray_dir_x < 0)
 			{
-				stepX = -1;
-				sideDistX = 0;
+				step_x = -1;
+				side_dist_x = 0;
 			}
 			else
 			{
-				stepX = 1;
-				sideDistX = (float)(sqrt(1 + (ray_dir_y * ray_dir_y) / (ray_dir_x * ray_dir_x)));
+				step_x = 1;
+				side_dist_x = (float)(sqrt(1 + (ray_dir_y * ray_dir_y) / (ray_dir_x * ray_dir_x)));
 			}
 			if(ray_dir_y < 0)
 			{
-				stepY = -1;
-				sideDistY = 0;
+				step_y = -1;
+				side_dist_y = 0;
 			}
 			else
 			{
-				stepY = 1;
-				sideDistY = (float)(sqrt(1 + (ray_dir_x * ray_dir_x) / (ray_dir_y * ray_dir_y)));
+				step_y = 1;
+				side_dist_y = (float)(sqrt(1 + (ray_dir_x * ray_dir_x) / (ray_dir_y * ray_dir_y)));
 			}
-			int mapX = vars->player->pos_x;
-			int mapY = vars->player->pos_y;
-			int hit = 0;
-			int side;
+			map_x = vars->player->pos_x;
+			map_y = vars->player->pos_y;
+			hit = 0;
 			while(hit == 0)
 			{
-				if(sideDistX < sideDistY)
+				if(side_dist_x < side_dist_y)
 				{
-					sideDistX += sqrt(1 + (ray_dir_y * ray_dir_y) / (ray_dir_x * ray_dir_x));
-					mapX += stepX;
+					side_dist_x += sqrt(1 + (ray_dir_y * ray_dir_y) / (ray_dir_x * ray_dir_x));
+					map_x += step_x;
 					side = 0;
 				}
 				else
 				{
-					sideDistY += sqrt(1 + (ray_dir_x * ray_dir_x) / (ray_dir_y * ray_dir_y));
-					mapY += stepY;
+					side_dist_y += sqrt(1 + (ray_dir_x * ray_dir_x) / (ray_dir_y * ray_dir_y));
+					map_y += step_y;
 					side = 1;
 				}
-				if(vars->map->map_arr[mapY][mapX] == '1') hit = 1;
+				if(vars->map->map_arr[map_y][map_x] == '1') hit = 1;
 			}	
 			if	(side == 0)
-				perpWallDist = (mapX - vars->player->pos_x + (1 - stepX) / 2) / ray_dir_x;
+				perp_wall_dist = (map_x - vars->player->pos_x + (1 - step_x) / 2) / ray_dir_x;
 			else
-				perpWallDist = (mapY - vars->player->pos_y + (1 - stepY) / 2) / ray_dir_y;
+				perp_wall_dist = (map_y - vars->player->pos_y + (1 - step_y) / 2) / ray_dir_y;
 	
-			int drawStart = -(HEIGHT/ perpWallDist) / 2 + HEIGHT/ 2;
-			if(drawStart < 0) 
-				drawStart = 0;
-			int drawEnd = (HEIGHT/ perpWallDist) / 2 + HEIGHT/ 2;
-			if(drawEnd >= HEIGHT)
-				drawEnd = HEIGHT- 1;
-
-			double wallX;
+			draw_start = -(HEIGHT/ perp_wall_dist) / 2 + HEIGHT/ 2;
+			if(draw_start < 0) 
+				draw_start = 0;
+			draw_end = (HEIGHT/ perp_wall_dist) / 2 + HEIGHT/ 2;
+			if(draw_end >= HEIGHT)
+				draw_end = HEIGHT- 1;
 			if(side == 0)
-				wallX = vars->player->pos_x + perpWallDist * ray_dir_y;
+				wall_x = vars->player->pos_x + perp_wall_dist * ray_dir_y;
 			else
-				wallX = vars->player->pos_y + perpWallDist * ray_dir_x;
-			wallX -= floor(wallX);
-			int texX = wallX * vars->tex->north->height;
+				wall_x = vars->player->pos_y + perp_wall_dist * ray_dir_x;
+			wall_x -= floor(wall_x);
+			tex_x = wall_x * vars->tex->north->height;
 			if(side == 0 && ray_dir_x < 0)
-				texX = vars->tex->north->height - texX - 1;
+				tex_x = vars->tex->north->height - tex_x - 1;
 			if(side == 1 && ray_dir_y > 0)
-				texX = vars->tex->north->height - texX - 1;
+				tex_x = vars->tex->north->height - tex_x - 1;
 			
 			//draw buffer
 			//set to zero ft
-			scrub_array(-1, vars);
-			double step = 1.0 * vars->tex->north->height / (HEIGHT/ perpWallDist);
-			double texPos = (drawStart - HEIGHT/ 2 + (HEIGHT/ perpWallDist) / 2) * step; //
-			
-			int y = drawStart;
-			int 	texY;
-			while( y < drawEnd)
-			{
-				texY = (int)texPos;
-				texPos += step;
-				buffer[y][x] = get_pix_colour(vars->tex->north, texX, texY);
-				y++;
-			}
+			step = 1.0 * vars->tex->north->height / (HEIGHT/ perp_wall_dist);
+			tex_pos = (draw_start - HEIGHT/ 2 + (HEIGHT/ perp_wall_dist) / 2) * step; //
 			x++;
 			if (x == 31)
 				printf("beep");
 		}
 		m++;
 	}
-	x = 0;
-	int	y = 0;
-	while (y < HEIGHT)
-	{
-		while (x < WIDTH)
-		{
-			if (buffer[y][x] !=  0)//segfault
-				put_pixel(fl_c, x, y, buffer[y][x]);
-			x++;
-		}
-		x = 0;
-		y++;
-	}
+	draw_buffer(fl_c, vars->big_buff);
 	mlx_put_image_to_window(vars->mlx_ptr, vars->mlx_win, fl_c->img, 0, 0);
 	vars->img = fl_c;
+	scrub_array(-1, vars);
 	return (0);
 }
-

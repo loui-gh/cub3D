@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 15:07:34 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/23 19:58:39 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/07/23 12:03:55 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,22 @@ void	initarray(t_vars *ptr)
 	i = 0;
 	ptr->big_buff = (int **)malloc(sizeof(int *) * HEIGHT);
 	if (!ptr->big_buff)
-		free_vars_exit("failed to allocate memory for drawing buffer", ptr, EXIT_FAILURE);
+		free_vars_exit("Malloc fail", ptr, EXIT_FAILURE);
 	while (i < HEIGHT)
 	{
 		ptr->big_buff[i] = (int *)malloc(WIDTH * sizeof(int));
 		if (!ptr->big_buff[i])
-			free_vars_exit("failed to allocate memory for drawing buffer", ptr, EXIT_FAILURE);
+			free_vars_exit("Malloc fail", ptr, EXIT_FAILURE);
 		i++;
 	}
+	scrub_array(-1, ptr);
 }
 
 void	scrub_array(char c, t_vars *ptr)
 {
-	int x, y;
+	int	x;
+	int	y;
+
 	x = 0;
 	y = 0;
 	while (y < HEIGHT)
