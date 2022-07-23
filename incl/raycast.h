@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:50:24 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/23 12:15:29 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/23 22:03:49 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,8 @@ int				get_pix_colour(t_data *tex, int x, int y);
 int				raycast_tex(t_vars *vars);
 void			initarray(t_vars *ptr);
 void			scrub_array(char c, t_vars *ptr);
+void			write_buffer_to_img(t_data *img, int **buffer);
+void			fill_buffer(int x, t_raycast *ray, t_vars *ptr);
 
 
 #endif
