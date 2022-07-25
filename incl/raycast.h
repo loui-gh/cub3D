@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:50:24 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/25 16:00:10 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/07/25 12:02:02 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void			free_vars_exit(char *msg, t_vars *vars, int exit_code);
 t_data			*assign_tex(t_vars *vars, char *file);
 
 /*map build*/
-void			check_file_ext(char *filename);
+int				check_file_ext(char *filename, char *file_ext);
 void			init_textures(int fd, t_vars *vars);
 void			create_map_array(int fd, t_vars *vars);
 void			check_map(char **map, t_vars *vars);

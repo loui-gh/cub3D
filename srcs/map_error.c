@@ -3,27 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   map_error.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:28:50 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/25 16:01:40 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/07/25 12:01:39 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/raycast.h"
 
-void	check_file_ext(char *filename)
+int	check_file_ext(char *filename, char *file_ext)
 {
-	int		i;
-
-	i = 0;
-	while (filename[i] && filename[i] != '.')
-		i++;
-	if (i == ft_strlen(filename))
-		exit_msg("Wrong file extension, mate!\n", EXIT_FAILURE);
-	i++;
-	if (ft_strncmp("cub", &filename[i], 4) != 0)
-		exit_msg("Wrong file extension, mate!\n", EXIT_FAILURE);
+	if (ft_strncmp(file_ext, &filename[ft_strlen(filename) \
+		- ft_strlen(file_ext)], ft_strlen(file_ext)) != 0)
+		return (-1);
+	return (0);
 }
 
 int	ft_is_token(int c, t_vars *vars)

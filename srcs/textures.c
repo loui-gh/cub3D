@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 11:12:18 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/22 11:57:47 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/25 12:03:10 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,16 @@ t_data	*assign_tex(t_vars *vars, char *file)
 {
 	t_data	*tex;
 
+	if (check_file_ext(file, ".xpm") < 0)
+		free_vars_exit("xpm file expected\n", vars, EXIT_FAILURE);
 	tex = (t_data *)ft_calloc(sizeof(t_data), 1);
 	if (!tex)
 		free_vars_exit("Malloc error\n", vars, EXIT_FAILURE);
 	file = skip_spaces(file);
 	tex->img = mlx_xpm_file_to_image(vars->mlx_ptr, file, &tex->width, \
 		&tex->height);
+	if (tex->width != 64 || tex->height != 64)
+		free_vars_exit("xpm size of 64x64 expected\n", vars, EXIT_FAILURE);
 	return (tex);
 }
 

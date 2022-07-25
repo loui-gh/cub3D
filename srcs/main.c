@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 15:07:34 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/25 10:17:25 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/25 12:03:53 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,8 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		exit_msg("enter cmd like this --> ./cub3D *.cub\n", EXIT_FAILURE);
-	check_file_ext(argv[1]);
+	if (check_file_ext(argv[1], ".cub") < 0)
+		exit_msg("Wrong file extention mate ;) \n", EXIT_FAILURE);
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 		exit_msg("Cannot read from file\n", EXIT_FAILURE);
