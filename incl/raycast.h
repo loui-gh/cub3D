@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:50:24 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/25 23:13:17 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/07/25 18:05:56 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,4 +140,8 @@ void			fill_buffer(int x, t_raycast *ray, t_vars *ptr);
 
 /*map*/
 void			map_width_height(t_map *map);
+void			never_eat_soggy_weetbix(t_player *player, char token);
+int				look_left(t_vars *vars);
+int				look_right(t_vars *vars);
+
 #endif
