@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_tex.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:12:06 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/23 22:03:10 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/07/25 10:17:09 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,6 @@ void	actual_raycasting_bit(t_raycast *ray, t_vars *vars)
 		ray->tex_pos = (ray->draw_start - HEIGHT / 2 + \
 				(HEIGHT / ray->perp_wall_dist) / 2) * ray->step;
 		x++;
-		if (x == 31)
-			printf("beep");
 	}
 }
 
