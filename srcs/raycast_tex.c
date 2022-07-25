@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:12:06 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/25 10:17:09 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/25 12:18:07 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	actual_raycasting_bit(t_raycast *ray, t_vars *vars)
 	while (x < WIDTH)
 	{
 		ray->ray_dir_x = vars->player->dir_x + \
-			0.9 * vars->player->dir_y * (2 * x / (float)WIDTH - 1);
+			0.9 * vars->player->dir_y * (2 * x / (float)WIDTH - 1) * -1;
 		ray->ray_dir_y = vars->player->dir_y + \
 			0.9 * vars->player->dir_x * (2 * x / (float)WIDTH - 1);
 		set_vectors(ray);
