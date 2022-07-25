@@ -6,7 +6,7 @@
 /*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 20:30:31 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/23 22:55:46 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/07/25 15:59:44 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,33 +17,29 @@ void	put_pixel(t_data *data, int x, int y, int color)
 	char	*dst;
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	*(unsigned int *)dst = color;
 }
 
-void verLine(int x, int y1, int y2, int color, t_data *data)
-{
-	int	i;
-
-	i = y1;
-	while(i < y2)
-	{
-		put_pixel(data, x, i, color);
-		i++;
-	}
-}
+/* "verLine" ft put into draw_ceiling, draw_floor
+** norminette restriction on no. vars necessitated
+** two sep fts to draw floor and ceiling.
+** nested while loop draws vertical lines
+*/
 
 void	draw_ceiling(t_vars *vars, int y1, int y2, int x)
 {
 	int	i;
+	int	j;
 
 	i = 0;
 	while (i < x)
 	{
-		while(y1 < y2)
-	{
-		put_pixel(vars->img, x, y1, vars->tex->ceiling);
-		y1++;
-	}
+		j = y1;
+		while (j < y2)
+		{
+			put_pixel(vars->img, i, j, vars->tex->ceiling);
+			j++;
+		}
 		i++;
 	}
 }
@@ -51,11 +47,17 @@ void	draw_ceiling(t_vars *vars, int y1, int y2, int x)
 void	draw_floor(t_vars *vars, int y1, int y2, int x)
 {
 	int	i;
+	int	j;
 
 	i = 0;
 	while (i < x)
 	{
-		verLine(i, y1, y2, vars->tex->floor, vars->img);
+		j = y1;
+		while (j < y2)
+		{
+			put_pixel(vars->img, i, j, vars->tex->floor);
+			j++;
+		}
 		i++;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 15:07:34 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/23 12:03:55 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/25 16:01:31 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ int	main(int argc, char **argv)
 	vars = init_game(fd);
 	vars->mlx_win = mlx_new_window(vars->mlx_ptr, WIDTH, HEIGHT, "Cub3D");
 	raycast_tex(vars);
-	//mlx_key_hook(vars->mlx_win, player_move, vars);
 	mlx_hook(vars->mlx_win, 2, 27, esc, vars);
 	mlx_hook(vars->mlx_win, 17, (1L << 17), mouse_click, vars);
 	mlx_loop(vars->mlx_ptr);

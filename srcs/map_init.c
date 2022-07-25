@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 20:33:43 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/22 10:59:57 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/25 16:06:15 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,30 @@ void	map_width_height(t_map *map)
 	map->height = i;
 }
 
+void	never_eat_soggy_weetbix(t_player *player, char token)
+{
+	if (token == 'N')
+	{
+		player->dir_x = 0;
+		player->dir_y = -1;
+	}
+	if (token == 'S')
+	{
+		player->dir_x = 0;
+		player->dir_y = 1;
+	}
+	if (token == 'E')
+	{
+		player->dir_x = 1;
+		player->dir_y = 0;
+	}
+	if (token == 'W')
+	{
+		player->dir_x = -1;
+		player->dir_y = 0;
+	}
+}
+
 t_player	*init_player(int i, int j, char token)
 {
 	t_player	*player;
@@ -62,26 +86,6 @@ t_player	*init_player(int i, int j, char token)
 	player->pos_y = i;
 	player->pos_x = j;
 	player->token = token;
-    if (token == 'N') //direction x and y are where your head is pointing
-    {
-        player->dir_x = 0;
-        player->dir_y = -1;
-    }
-    if (token == 'S')
-    {
-        player->dir_x = 0;
-        player->dir_y = 1;
-    }
-    if (token == 'E')
-    {
-        player->dir_x = 1;
-        player->dir_y = 0;
-    }
-        if (token == 'W')
-    {
-        player->dir_x = -1;
-        player->dir_y = 0;
-    }
+	never_eat_soggy_weetbix(player, token);
 	return (player);
 }
-

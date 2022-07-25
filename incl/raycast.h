@@ -6,7 +6,7 @@
 /*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:50:24 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/23 22:03:49 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/07/25 16:00:10 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,6 @@ t_player		*init_player(int i, int j, char token);
 int				mouse_click(t_vars *vars);
 int				esc(int keycode, t_vars *vars);
 int				raycast(t_vars *vars);
-void			verLine(int x, int y1, int y2, int color, t_data *data);
 t_data			*floor_ceiling(t_vars *vars);
 int				create_trgb(int t, int r, int g, int b);
 int				to_hex(char *str);
@@ -137,6 +136,5 @@ void			initarray(t_vars *ptr);
 void			scrub_array(char c, t_vars *ptr);
 void			write_buffer_to_img(t_data *img, int **buffer);
 void			fill_buffer(int x, t_raycast *ray, t_vars *ptr);
-
 
 #endif

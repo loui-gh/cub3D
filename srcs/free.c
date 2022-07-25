@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 20:42:16 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/19 20:57:30 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/25 16:00:43 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	free_map(t_map *map)
 	int	i;
 
 	i = 0;
-	while(map->map_arr[i])
+	while (map->map_arr[i])
 	{
 		free(map->map_arr[i]);
 		i++;
@@ -55,7 +55,7 @@ void	free_vars_exit(char *msg, t_vars *vars, int exit_code)
 	if (vars->player)
 		free(vars->player);
 	if (vars->img)
-		destroy_free_img(vars->img, vars); //this is a placeholder anyway 
+		destroy_free_img(vars->img, vars);
 	free(vars->mlx_ptr);
 	free(vars);
 	exit_msg(msg, exit_code);

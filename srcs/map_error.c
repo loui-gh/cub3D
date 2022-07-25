@@ -6,7 +6,7 @@
 /*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:28:50 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/22 22:13:01 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/07/25 16:01:40 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ void	check_zeros(char **map, int i, int j, t_vars *vars)
 	}
 	else
 		free_vars_exit("Map config error.\n", vars, EXIT_FAILURE);
-
 	check_zeros_normi(map, i, j, vars);
 }
 
