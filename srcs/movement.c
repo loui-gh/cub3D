@@ -6,7 +6,7 @@
 /*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 13:50:21 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/25 23:14:29 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/07/25 23:34:36 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,35 @@
 
 int	go_right(t_vars *vars)
 {
-	vars->player->pos_y += vars->player->dir_x;
+	if (vars->player->pos_y + vars->player->dir_x >= vars->map->height || \
+		vars->player->pos_y + vars->player->dir_x <= 0)
+	{
+		printf("you're a stinky baby!\n");
+		return(-1);
+	}
 	if (vars->player->token == 'N' || vars->player->token == 'S')
-		vars->player->pos_x -= vars->player->dir_y;
+	{
+		if (vars->player->pos_x - vars->player->dir_y <= 0 || \
+			vars->player->pos_x - vars->player->dir_y > vars->map->width)
+		{
+			printf("bop");
+			return (-1);
+		}
+		else
+			vars->player->pos_x -= vars->player->dir_y;
+	}
 	else
-		vars->player->pos_x += vars->player->dir_y;
+	{
+		if (vars->player->pos_x + vars->player->dir_y <= 0 ||\
+			vars->player->pos_x + vars->player->dir_y > vars->map->width)
+		{
+			printf("bop");
+			return (-1);
+		}
+		else
+			vars->player->pos_x += vars->player->dir_y;
+	}
+	vars->player->pos_y += vars->player->dir_x;
 	return (0);
 }
 
