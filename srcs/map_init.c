@@ -6,7 +6,7 @@
 /*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 20:33:43 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/25 16:06:15 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/07/25 23:12:38 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	create_map_array(int fd, t_vars *vars)
 	map->map_arr = ft_split(buff, '\n');
 	close(fd);
 	check_map(map->map_arr, vars);
+	map_width_height(map);
 }
 
 void	map_width_height(t_map *map)

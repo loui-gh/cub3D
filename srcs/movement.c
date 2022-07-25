@@ -6,7 +6,7 @@
 /*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 13:50:21 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/25 22:27:57 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/07/25 23:14:29 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,13 @@ int	go_left(t_vars *vars)
 
 int	go_forward(t_vars *vars)
 {
-	// if (vars->player->pos_x + vars->player->dir_x >= vars->map->width || 
-	// 		vars->player->pos_y + vars->player->dir_x >= vars->map->height)
-	// {
-	// 	printf("edge of the map u silly bean\n");
-	// 	return (-1);
-	// }
+	if (vars->player->pos_x + vars->player->dir_x <= 0 || \
+			vars->player->pos_y + vars->player->dir_y <= 0)
+		return (-1);
+
+	if (vars->player->pos_x + vars->player->dir_x > vars->map->width || \
+			vars->player->pos_y + vars->player->dir_y > vars->map->height)
+		return (-1);
 	vars->player->pos_x += vars->player->dir_x;
 	vars->player->pos_y += vars->player->dir_y;
 	return (0);
@@ -47,12 +48,13 @@ int	go_forward(t_vars *vars)
 
 int	go_backward(t_vars *vars)
 {
-	// if (vars->player->pos_x + vars->player->dir_x >= vars->map->width || 
-	// 		vars->player->pos_y + vars->player->dir_x >= vars->map->height)
-	// {
-	// 	printf("edge of the map u silly bean\n");
-	// 	return (-1);
-	// }
+	if (vars->player->pos_x - vars->player->dir_x <= 0 || \
+			vars->player->pos_y - vars->player->dir_y <= 0)
+		return (-1);
+
+	if (vars->player->pos_x - vars->player->dir_x > vars->map->width || \
+			vars->player->pos_y - vars->player->dir_y > vars->map->height)
+		return (-1);
 	vars->player->pos_x += vars->player->dir_x * -1;
 	vars->player->pos_y += vars->player->dir_y * -1;
 	return (0);

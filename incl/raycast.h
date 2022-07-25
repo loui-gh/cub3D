@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:50:24 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/25 12:35:37 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/25 23:13:17 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,4 +138,6 @@ void			scrub_array(char c, t_vars *ptr);
 void			write_buffer_to_img(t_data *img, int **buffer);
 void			fill_buffer(int x, t_raycast *ray, t_vars *ptr);
 
+/*map*/
+void			map_width_height(t_map *map);
 #endif
