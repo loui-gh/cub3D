@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 13:50:21 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/25 18:36:15 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/25 18:41:05 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@
 
 int	hit_wall(int x, int y, t_vars *vars)
 {
-	if (x <= 0 || x > vars->map->width - 2)
+	if (x <= 2 || x > vars->map->width - 2)
 		return (-1);
 	if (y <= 0 || y > vars->map->height - 2)
 		return (-1);
