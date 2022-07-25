@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:50:24 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/25 12:02:02 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/25 12:35:37 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct s_player
 	int		pos_y;
 	int		dir_x;
 	int		dir_y;
+	int		collide;
 	char	token;
 }	t_player;
 
