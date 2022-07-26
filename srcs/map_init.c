@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 20:33:43 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/25 23:12:38 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/07/26 11:02:22 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	map_width_height(t_map *map)
 			longest = len;
 		i++;
 	}
-	map->width = len;
+	map->width = longest;
 	map->height = i;
 }
 

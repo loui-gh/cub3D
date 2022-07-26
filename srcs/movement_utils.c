@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 17:41:20 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/26 18:34:17 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/07/26 11:14:54 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,24 @@ int	look_right(t_vars *vars)
 int	hit_wall(int x, int y, t_vars *vars)
 {
 	if (!vars->map->map_arr[y][x])
+	{
+		printf("no exist\n");
 		return (-1);
+	}	
 	if (vars->map->map_arr[y][x] == ' ')
+	{
+		printf("hole\n");
 		return (-1);
+	}	
 	if (x <= 0 || x > vars->map->width - 2)
+	{
+		printf("array scope x\n");
 		return (-1);
+	}	
 	if (y <= 0 || y > vars->map->height - 2)
+	{
+		printf("array scope y\n");
 		return (-1);
+	}	
 	return (0);
 }
