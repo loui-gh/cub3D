@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:28:50 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/25 12:01:39 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/26 13:58:34 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,10 @@ void	check_map(char **map, t_vars *vars)
 		{
 			player += ft_is_token(map[i][j], vars);
 			if (player == 1 && !vars->player)
+			{
+				check_zeros(map, i, j, vars);
 				vars->player = init_player(i, j, map[i][j]);
+			}
 			if (map[i][j] == '0')
 				check_zeros(map, i, j, vars);
 			j++;

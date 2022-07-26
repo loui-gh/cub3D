@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 20:33:43 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/26 13:31:45 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/26 13:56:03 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	create_map_array(int fd, t_vars *vars)
 {
-	char	buff[10000];
+	char	*buff;
 	t_map	*map;
-	int		i;
+	int		read_count;
 
-	i = 0;
+	buff = ft_calloc(sizeof(char), 5000);
 	map = (t_map *)ft_calloc(sizeof(t_map), 1);
 	vars->map = map;
 	if (!map)
@@ -26,17 +26,19 @@ void	create_map_array(int fd, t_vars *vars)
 		close(fd);
 		free_vars_exit("Malloc error\n", vars, EXIT_FAILURE);
 	}
-	if (read(fd, buff, 10000) < 0)
+	read_count = read(fd, buff, 5000);
+	if (read_count < 0 || read_count >= 5000)
 	{
 		close(fd);
 		free_vars_exit("Error readind map\n", vars, EXIT_FAILURE);
 	}
-	while (buff[i] == '\n')
-		i++;
-	map->map_arr = ft_split(&buff[i], '\n');
+	map->map_arr = ft_split(buff, '\n');
+	free(buff);
 	close(fd);
 	check_map(map->map_arr, vars);
 	map_width_height(map);
+	if (map->height < 3 || map->width < 3)
+		free_vars_exit("Haha. You tried.\n", vars, EXIT_FAILURE);
 }
 
 void	map_width_height(t_map *map)

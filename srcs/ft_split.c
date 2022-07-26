@@ -25,7 +25,7 @@ static int	ft_count_strings(char const *s, char c)
 			i++;
 		if (s[i])
 			count++;
-		while (s[i] && s[i] != c )
+		while (s[i] && s[i] != c)
 			i++;
 	}
 	return (count);
@@ -69,13 +69,12 @@ char	**ft_split(char const *s, char c)
 	if (s == NULL)
 		return (NULL);
 	string = ft_count_strings(s, c);
-	printf("strings%li\n", string);
 	array = malloc((string + 1) * sizeof(char *));
 	if (!array)
 		return (0);
 	while (i < string)
 	{
-		while (*s != 0 && *s == c )
+		while (*s != 0 && *s == c)
 			s++;
 		array[i] = ft_create_string(s, ft_string_len(s, c));
 		s = s + ft_string_len(s, c);
