@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 20:42:16 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/25 16:00:43 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/07/26 12:35:47 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	free_vars_exit(char *msg, t_vars *vars, int exit_code)
 		free(vars->player);
 	if (vars->img)
 		destroy_free_img(vars->img, vars);
-	free(vars->mlx_ptr);
+	mlx_destroy_display(vars->mlx_ptr);
 	free(vars);
 	exit_msg(msg, exit_code);
 }

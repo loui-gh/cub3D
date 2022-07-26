@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 20:33:43 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/26 11:02:22 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/26 13:31:45 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ void	create_map_array(int fd, t_vars *vars)
 {
 	char	buff[10000];
 	t_map	*map;
+	int		i;
 
-	map = (t_map *)malloc(sizeof(t_map));
+	i = 0;
+	map = (t_map *)ft_calloc(sizeof(t_map), 1);
 	vars->map = map;
 	if (!map)
 	{
@@ -28,8 +30,10 @@ void	create_map_array(int fd, t_vars *vars)
 	{
 		close(fd);
 		free_vars_exit("Error readind map\n", vars, EXIT_FAILURE);
-	}	
-	map->map_arr = ft_split(buff, '\n');
+	}
+	while (buff[i] == '\n')
+		i++;
+	map->map_arr = ft_split(&buff[i], '\n');
 	close(fd);
 	check_map(map->map_arr, vars);
 	map_width_height(map);

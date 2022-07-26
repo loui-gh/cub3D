@@ -6,27 +6,39 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 11:12:18 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/25 12:03:10 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/26 13:17:38 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/raycast.h"
 
-t_data	*assign_tex(t_vars *vars, char *file)
+t_data	*assign_tex(t_vars *vars, char *file, char *holder)
 {
-	t_data	*tex;
+	t_data	*img;
 
 	if (check_file_ext(file, ".xpm") < 0)
+	{
+		free(holder);
 		free_vars_exit("xpm file expected\n", vars, EXIT_FAILURE);
-	tex = (t_data *)ft_calloc(sizeof(t_data), 1);
-	if (!tex)
+	}
+	img = (t_data *)ft_calloc(sizeof(t_data), 1);
+	if (!img)
+	{
+		free(holder);
 		free_vars_exit("Malloc error\n", vars, EXIT_FAILURE);
+	}
 	file = skip_spaces(file);
-	tex->img = mlx_xpm_file_to_image(vars->mlx_ptr, file, &tex->width, \
-		&tex->height);
-	if (tex->width != 64 || tex->height != 64)
+	img->img = mlx_xpm_file_to_image(vars->mlx_ptr, file, &img->width, \
+		&img->height);
+	if (img->width != 64 || img->height != 64)
+	{
+		free(holder);
+		if (img->img != 0x0)
+			mlx_destroy_image(vars->mlx_ptr, img->img);
+		free(img);
 		free_vars_exit("xpm size of 64x64 expected\n", vars, EXIT_FAILURE);
-	return (tex);
+	}
+	return (img);
 }
 
 void	check_textures(t_vars *vars)
@@ -41,13 +53,13 @@ void	check_textures(t_vars *vars)
 void	assign_tex_ptr(t_textures *ptr, char *holder, t_vars *vars)
 {
 	if (ft_strncmp("NO ", holder, 3) == 0)
-		ptr->north = assign_tex(vars, &holder[3]);
+		ptr->north = assign_tex(vars, &holder[3], holder);
 	else if (ft_strncmp("SO ", holder, 3) == 0)
-		ptr->south = assign_tex(vars, &holder[3]);
+		ptr->south = assign_tex(vars, &holder[3], holder);
 	else if (ft_strncmp("WE ", holder, 3) == 0)
-		ptr->west = assign_tex(vars, &holder[3]);
+		ptr->west = assign_tex(vars, &holder[3], holder);
 	else if (ft_strncmp("EA ", holder, 3) == 0)
-		ptr->east = assign_tex(vars, &holder[3]);
+		ptr->east = assign_tex(vars, &holder[3], holder);
 	else if (ft_strncmp("F ", holder, 2) == 0)
 		ptr->floor = to_hex(&holder[2]);
 	else if (ft_strncmp("C ", holder, 2) == 0)

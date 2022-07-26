@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:50:24 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/26 12:24:13 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/26 12:53:46 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ char			*ft_strtrim(char *s1, char *set);
 /*memory*/
 void			free_tex(t_textures *tex, t_vars *vars);
 void			free_vars_exit(char *msg, t_vars *vars, int exit_code);
-t_data			*assign_tex(t_vars *vars, char *file);
+t_data			*assign_tex(t_vars *vars, char *file, char *holder);
 
 /*map build*/
 int				check_file_ext(char *filename, char *file_ext);
