@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_tex.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:12:06 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/26 12:27:24 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/26 23:22:18 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,16 +125,18 @@ void	actual_raycasting_bit(t_raycast *ray, t_vars *vars)
 int	raycast_tex(t_vars *vars)
 {
 	int			m;
-	t_raycast	ray;
+	t_raycast	*ray;
 	t_data		*fl_c;
 
 	m = 0;
 	fl_c = floor_ceiling(vars);
+	ray = (t_raycast *)ft_calloc(sizeof(t_raycast), 1);
 	while (m < 1)
 	{
-		actual_raycasting_bit(&ray, vars);
+		actual_raycasting_bit(ray, vars);
 		m++;
 	}
+	free(ray);
 	write_buffer_to_img(fl_c, vars->big_buff);
 	mlx_put_image_to_window(vars->mlx_ptr, vars->mlx_win, fl_c->img, 0, 0);
 	vars->img = fl_c;

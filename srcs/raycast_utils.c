@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 22:18:37 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/25 10:58:58 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/26 23:44:00 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 
 int	get_pix_colour(t_data *tex, int x, int y)
 {
-	if (x >= 0 && y >= 0 && x <= tex->width && x <= tex->height)
-		return (*(int *)(tex->img + (4 * tex->width * y) + (4 * x)));
-	else
-		return (0);
+	// int i = 1;
+	if (x >= 0 && y >= 0 && x <= tex->width && y <= tex->height)
+	{
+		if (y != 64 && x != 64)
+			return (*(int *)(tex->img + (4 * tex->width * y) + (4 * x)));
+	}
+	return (0);
 }
 
 /*uses the side variable (which calculates if it's a n/s or w/e side
