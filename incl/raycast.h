@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:50:24 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/26 18:34:37 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/07/26 12:24:13 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,5 +146,11 @@ int				look_right(t_vars *vars);
 
 /*movement*/
 int				hit_wall(int x, int y, t_vars *vars);
+int				go_north(t_vars *vars, t_map *map, t_player *player);
+int				go_south(t_vars *vars, t_map *map, t_player *player);
+int				go_east(t_vars *vars, t_map *map, t_player *player);
+int				go_west(t_vars *vars, t_map *map, t_player *player);
+int				ns_move(int keycode, t_vars *vars);
+int				ew_move(int keycode, t_vars *vars);
 
 #endif
