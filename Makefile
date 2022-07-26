@@ -7,7 +7,7 @@ RM			= rm -f
 SRCD		= ./srcs/
 SRC			= 	input_utils.c libft_utils.c map_error.c utils.c tex_utils.c ft_split.c \
 				main.c draw_utils.c free.c testing.c map_init.c textures.c raycast_tex.c \
-				movement.c libft_utils_2.c raycast_utils.c look.c
+				movement.c libft_utils_2.c raycast_utils.c movement_utils.c
 # Command to add the source folder prefix (instead of having it added manually to SRC)
 SRCF		= $(addprefix $(SRCD),$(SRC))
 OBJD		= ./objs/

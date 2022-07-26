@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   look.c                                             :+:      :+:    :+:   */
+/*   movement_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 17:41:20 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/25 17:50:07 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/26 18:34:17 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,18 @@ int	look_right(t_vars *vars)
 	else
 		vars->player->token = dir[0];
 	never_eat_soggy_weetbix(vars->player, vars->player->token);
+	return (0);
+}
+
+int	hit_wall(int x, int y, t_vars *vars)
+{
+	if (!vars->map->map_arr[y][x])
+		return (-1);
+	if (vars->map->map_arr[y][x] == ' ')
+		return (-1);
+	if (x <= 0 || x > vars->map->width - 2)
+		return (-1);
+	if (y <= 0 || y > vars->map->height - 2)
+		return (-1);
 	return (0);
 }
