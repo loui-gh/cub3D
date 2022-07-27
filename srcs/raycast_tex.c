@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_tex.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:12:06 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/27 18:45:14 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/07/27 11:40:39 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	fuck_wish_had_switch(t_raycast *ray, t_vars *vars)
 {
 	if (ray->side == 0)
 		ray->perp_wall_dist = \
-			(ray->map_x - vars->player->pos_x +\
+			(ray->map_x - vars->player->pos_x + \
 			(1 - ray->step_x) / 2) / ray->ray_dir_x;
 	else
 		ray->perp_wall_dist = (ray->map_y - vars->player->pos_y + \
@@ -118,11 +118,11 @@ void	actual_raycasting_bit(t_raycast *ray, t_vars *vars)
 		set_vectors(ray, vars);
 		ray_hit_while(ray, vars);
 		fuck_wish_had_switch(ray, vars);
-		fill_buffer(x, ray, vars);
 		ray->step = 1.0 * vars->tex->north->height / \
-					(HEIGHT / ray->perp_wall_dist);
+				(HEIGHT / ray->perp_wall_dist);
 		ray->tex_pos = (ray->draw_start - HEIGHT / 2 + \
 				(HEIGHT / ray->perp_wall_dist) / 2) * ray->step;
+		fill_buffer(x, ray, vars);
 		x++;
 	}
 }

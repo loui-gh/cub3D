@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 22:18:37 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/26 23:44:00 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/07/27 11:38:48 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	fill_buffer(int x, t_raycast *ray, t_vars *ptr)
 	int	tex_y;
 
 	y = ray->draw_start;
+	//printf("tex %f\n", ray->tex_pos);
 	while (y < ray->draw_end)
 	{
 		tex_y = (int)ray->tex_pos;
