@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 20:33:43 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/26 13:56:03 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/27 18:07:46 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ t_player	*init_player(int i, int j, char token)
 	t_player	*player;
 
 	player = (t_player *)ft_calloc(sizeof(t_player), 1);
-	player->pos_y = i;
-	player->pos_x = j;
+	player->pos_y = i + 0.5;
+	player->pos_x = j + 0.5;
 	player->token = token;
 	never_eat_soggy_weetbix(player, token);
 	return (player);

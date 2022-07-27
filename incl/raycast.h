@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:50:24 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/26 12:53:46 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/27 18:19:35 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ typedef struct s_raycast
 	float	side_dist_x;
 	float	side_dist_y;
 	float	perp_wall_dist;
-	int		map_x;
-	int		map_y;
+	double	map_x;
+	double	map_y;
 	int		hit;
 	int		side;
 	int		draw_start;
@@ -72,12 +72,12 @@ typedef struct s_textures {
 
 typedef struct s_player
 {
-	int		pos_x;
-	int		pos_y;
-	int		dir_x;
-	int		dir_y;
-	int		collide;
-	char	token;
+	double		pos_x;
+	double		pos_y;
+	double		dir_x;
+	double		dir_y;
+	int			collide;
+	char		token;
 }	t_player;
 
 typedef struct s_vars

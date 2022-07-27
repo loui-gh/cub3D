@@ -6,7 +6,7 @@
 /*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:12:06 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/26 23:22:18 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/07/27 18:22:08 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ray_hit_while(t_raycast *ray, t_vars *vars)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (vars->map->map_arr[ray->map_y][ray->map_x] == '1')
+		if (vars->map->map_arr[(int)ray->map_y][(int)ray->map_x] == '1')
 			ray->hit = 1;
 	}
 }
@@ -72,7 +72,7 @@ void	fuck_wish_had_switch(t_raycast *ray, t_vars *vars)
 {
 	if (ray->side == 0)
 		ray->perp_wall_dist = \
-			(ray->map_x - vars->player->pos_x + \
+			(ray->map_x - vars->player->pos_x +\
 			(1 - ray->step_x) / 2) / ray->ray_dir_x;
 	else
 		ray->perp_wall_dist = (ray->map_y - vars->player->pos_y + \
@@ -105,12 +105,13 @@ void	actual_raycasting_bit(t_raycast *ray, t_vars *vars)
 	while (x < WIDTH)
 	{
 		ray->ray_dir_x = vars->player->dir_x + \
-			0.9 * vars->player->dir_y * (2 * x / (float)WIDTH - 1) * -1;
+			0.66 * vars->player->dir_y * (2 * x / (float)WIDTH - 1) * -1;
 		ray->ray_dir_y = vars->player->dir_y + \
-			0.9 * vars->player->dir_x * (2 * x / (float)WIDTH - 1);
+			0.66 * vars->player->dir_x * (2 * x / (float)WIDTH - 1);
 		set_vectors(ray);
-		ray->map_x = vars->player->pos_x;
-		ray->map_y = vars->player->pos_y;
+		ray->map_x = (int)vars->player->pos_x;
+		// printf("wtf is ray mapx %i, playerposX %f\n", ray->map_x, vars->player->pos_x);
+		ray->map_y = (int)vars->player->pos_y;
 		ray_hit_while(ray, vars);
 		fuck_wish_had_switch(ray, vars);
 		fill_buffer(x, ray, vars);
