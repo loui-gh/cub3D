@@ -6,7 +6,7 @@
 /*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:12:06 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/27 18:22:08 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/07/27 18:36:11 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,29 +42,31 @@ void	ray_hit_while(t_raycast *ray, t_vars *vars)
 	}
 }
 
-void	set_vectors(t_raycast *ray)
+void	set_vectors(t_raycast *ray, t_vars *vars)
 {
 	if (ray->ray_dir_x < 0)
 	{
 		ray->step_x = -1;
-		ray->side_dist_x = 0;
+		ray->side_dist_x = ((float)(sqrt(1 + (ray->ray_dir_y * ray->ray_dir_y) / \
+			(ray->ray_dir_x * ray->ray_dir_x)))) * (vars->player->pos_x - ray->map_x);
 	}
 	else
 	{
 		ray->step_x = 1;
-		ray->side_dist_x = (float)(sqrt(1 + (ray->ray_dir_y * ray->ray_dir_y) / \
-			(ray->ray_dir_x * ray->ray_dir_x)));
+		ray->side_dist_x = ((float)(sqrt(1 + (ray->ray_dir_y * ray->ray_dir_y) / \
+			(ray->ray_dir_x * ray->ray_dir_x)))) * (ray->map_x - vars->player->pos_x + 1);
 	}
 	if (ray->ray_dir_y < 0)
 	{
 		ray->step_y = -1;
-		ray->side_dist_y = 0;
+		ray->side_dist_y = ((float)(sqrt(1 + (ray->ray_dir_x * ray->ray_dir_x) / \
+			(ray->ray_dir_y * ray->ray_dir_y)))) * (vars->player->pos_y - ray->map_y);
 	}
 	else
 	{
 		ray->step_y = 1;
-		ray->side_dist_y = (float)(sqrt(1 + (ray->ray_dir_x * ray->ray_dir_x) / \
-			(ray->ray_dir_y * ray->ray_dir_y)));
+		ray->side_dist_y = ((float)(sqrt(1 + (ray->ray_dir_x * ray->ray_dir_x) / \
+			(ray->ray_dir_y * ray->ray_dir_y)))) * (ray->map_y - vars->player->pos_y + 1);
 	}
 }
 
@@ -108,7 +110,7 @@ void	actual_raycasting_bit(t_raycast *ray, t_vars *vars)
 			0.66 * vars->player->dir_y * (2 * x / (float)WIDTH - 1) * -1;
 		ray->ray_dir_y = vars->player->dir_y + \
 			0.66 * vars->player->dir_x * (2 * x / (float)WIDTH - 1);
-		set_vectors(ray);
+		set_vectors(ray, vars);
 		ray->map_x = (int)vars->player->pos_x;
 		// printf("wtf is ray mapx %i, playerposX %f\n", ray->map_x, vars->player->pos_x);
 		ray->map_y = (int)vars->player->pos_y;
