@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 22:18:37 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/27 11:38:48 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/28 12:14:43 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int	get_pix_colour(t_data *tex, int x, int y)
 {
-	// int i = 1;
 	if (x >= 0 && y >= 0 && x <= tex->width && y <= tex->height)
 	{
-		if (y != 64 && x != 64)
-			return (*(int *)(tex->img + (4 * tex->width * y) + (4 * x)));
+		if (x <= 23)
+			y++;
+		return (*(int *)(tex->img + (4 * tex->width * y) + (4 * x)));
 	}
 	return (0);
 }
@@ -33,7 +33,6 @@ void	fill_buffer(int x, t_raycast *ray, t_vars *ptr)
 	int	tex_y;
 
 	y = ray->draw_start;
-	//printf("tex %f\n", ray->tex_pos);
 	while (y < ray->draw_end)
 	{
 		tex_y = (int)ray->tex_pos;

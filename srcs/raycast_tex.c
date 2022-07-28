@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:12:06 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/27 11:40:39 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/28 12:14:55 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ void	actual_raycasting_bit(t_raycast *ray, t_vars *vars)
 		ray->ray_dir_y = vars->player->dir_y + \
 			0.66 * vars->player->dir_x * (2 * x / (float)WIDTH - 1);
 		ray->map_x = (int)vars->player->pos_x;
-		// printf("wtf is ray mapx %i, playerposX %f\n", ray->map_x, vars->player->pos_x);
 		ray->map_y = (int)vars->player->pos_y;
 		set_vectors(ray, vars);
 		ray_hit_while(ray, vars);
