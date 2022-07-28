@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:50:24 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/27 18:19:35 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/07/28 13:22:36 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,16 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
-
 # include <stdio.h>
 
 # define WIDTH 1200
 # define HEIGHT 900
+# define LEFT_KEY 65361
+# define RIGHT_KEY 65363
+# define W_KEY 119
+# define A_KEY 97
+# define S_KEY 115
+# define D_KEY 100
 
 typedef struct s_raycast
 {
@@ -115,36 +120,29 @@ void			init_textures(int fd, t_vars *vars);
 void			create_map_array(int fd, t_vars *vars);
 void			check_map(char **map, t_vars *vars);
 t_player		*init_player(int i, int j, char token);
+int				create_trgb(int t, int r, int g, int b);
+int				to_hex(char *str);
+void			map_width_height(t_map *map);
 
 /*mlx stuff*/
 int				mouse_click(t_vars *vars);
 int				esc(int keycode, t_vars *vars);
-int				raycast(t_vars *vars);
-t_data			*floor_ceiling(t_vars *vars);
-int				create_trgb(int t, int r, int g, int b);
-int				to_hex(char *str);
-void			put_pixel(t_data *data, int x, int y, int color);
-int				player_move(int keycode, t_vars *vars);
-int				go_forward(t_vars *vars);
 
-/*testing*/
-void			print_arr(char **arr);
+/*image*/
+t_data			*floor_ceiling(t_vars *vars);
+void			put_pixel(t_data *data, int x, int y, int color);
+int				get_pix_colour(t_data *tex, int x, int y);
 
 /*raycasting*/
-int				get_pix_colour(t_data *tex, int x, int y);
-int				raycast_tex(t_vars *vars);
+int				render_image(t_vars *vars);
 void			initarray(t_vars *ptr);
 void			scrub_array(char c, t_vars *ptr);
 void			write_buffer_to_img(t_data *img, int **buffer);
 void			fill_buffer(int x, t_raycast *ray, t_vars *ptr);
-
-/*map*/
-void			map_width_height(t_map *map);
-void			never_eat_soggy_weetbix(t_player *player, char token);
-int				look_left(t_vars *vars);
-int				look_right(t_vars *vars);
+void			ray_hit_wall(t_raycast *ray, t_vars *vars);
 
 /*movement*/
+int				player_move(int keycode, t_vars *vars);
 int				hit_wall(int x, int y, t_vars *vars);
 int				go_north(t_vars *vars, t_map *map, t_player *player);
 int				go_south(t_vars *vars, t_map *map, t_player *player);
@@ -152,5 +150,8 @@ int				go_east(t_vars *vars, t_map *map, t_player *player);
 int				go_west(t_vars *vars, t_map *map, t_player *player);
 int				ns_move(int keycode, t_vars *vars);
 int				ew_move(int keycode, t_vars *vars);
+void			never_eat_soggy_weetbix(t_player *player, char token);
+int				look_left(t_vars *vars);
+int				look_right(t_vars *vars);
 
 #endif

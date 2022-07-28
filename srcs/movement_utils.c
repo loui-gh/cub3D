@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 17:41:20 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/26 12:22:56 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/28 13:17:55 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,25 +49,13 @@ int	look_right(t_vars *vars)
 int	hit_wall(int x, int y, t_vars *vars)
 {
 	if (!vars->map->map_arr[y][x])
-	{
-		printf("no exist\n");
 		return (-1);
-	}	
 	if (vars->map->map_arr[y][x] == ' ')
-	{
-		printf("hole\n");
 		return (-1);
-	}	
 	if (x <= 0 || x > vars->map->width - 2)
-	{
-		printf("array scope x\n");
 		return (-1);
-	}	
 	if (y <= 0 || y > vars->map->height - 2)
-	{
-		printf("array scope y\n");
 		return (-1);
-	}	
 	return (0);
 }
 
@@ -75,24 +63,24 @@ int	ns_move(int keycode, t_vars *vars)
 {
 	if (vars->player->token == 'N')
 	{
-		if (keycode == 100)
+		if (keycode == D_KEY)
 			go_east(vars, vars->map, vars->player);
-		if (keycode == 97)
+		if (keycode == A_KEY)
 			go_west(vars, vars->map, vars->player);
-		if (keycode == 115)
+		if (keycode == S_KEY)
 			go_south(vars, vars->map, vars->player);
-		if (keycode == 119)
+		if (keycode == W_KEY)
 			go_north(vars, vars->map, vars->player);
 	}
 	else
 	{
-		if (keycode == 100)
+		if (keycode == D_KEY)
 			go_west(vars, vars->map, vars->player);
-		if (keycode == 97)
+		if (keycode == A_KEY)
 			go_east(vars, vars->map, vars->player);
-		if (keycode == 115)
+		if (keycode == S_KEY)
 			go_north(vars, vars->map, vars->player);
-		if (keycode == 119)
+		if (keycode == W_KEY)
 			go_south(vars, vars->map, vars->player);
 	}
 	return (0);
@@ -102,24 +90,24 @@ int	ew_move(int keycode, t_vars *vars)
 {
 	if (vars->player->token == 'E')
 	{
-		if (keycode == 100)
+		if (keycode == D_KEY)
 			go_south(vars, vars->map, vars->player);
-		if (keycode == 97)
+		if (keycode == A_KEY)
 			go_north(vars, vars->map, vars->player);
-		if (keycode == 115)
+		if (keycode == S_KEY)
 			go_west(vars, vars->map, vars->player);
-		if (keycode == 119)
+		if (keycode == W_KEY)
 			go_east(vars, vars->map, vars->player);
 	}
 	else
 	{
-		if (keycode == 100)
+		if (keycode == D_KEY)
 			go_north(vars, vars->map, vars->player);
-		if (keycode == 97)
+		if (keycode == A_KEY)
 			go_south(vars, vars->map, vars->player);
-		if (keycode == 115)
+		if (keycode == S_KEY)
 			go_east(vars, vars->map, vars->player);
-		if (keycode == 119)
+		if (keycode == W_KEY)
 			go_west(vars, vars->map, vars->player);
 	}
 	return (0);

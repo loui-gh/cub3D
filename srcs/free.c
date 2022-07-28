@@ -69,7 +69,7 @@ void	free_vars_exit(char *msg, t_vars *vars, int exit_code)
 	if (vars->img)
 		destroy_free_img(vars->img, vars);
 	if (vars->big_buff)
-		free_array(vars->big_buff);	
+		free_array(vars->big_buff);
 	mlx_destroy_display(vars->mlx_ptr);
 	free(vars->mlx_ptr);
 	free(vars);

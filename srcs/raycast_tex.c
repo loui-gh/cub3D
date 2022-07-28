@@ -6,73 +6,49 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:12:06 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/28 12:14:55 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/28 12:49:54 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/raycast.h"
 
-/*
-plane_x, y== 0.9
-*/
-
-void	ray_hit_while(t_raycast *ray, t_vars *vars)
+void	set_y_vectors(t_raycast *ray, t_vars *vars)
 {
-	ray->hit = 0;
-	while (ray->hit == 0)
-	{
-		if (ray->side_dist_x < ray->side_dist_y)
-		{
-			ray->side_dist_x += \
-				sqrt(1 + (ray->ray_dir_y * ray->ray_dir_y) / \
-				(ray->ray_dir_x * ray->ray_dir_x));
-			ray->map_x += ray->step_x;
-			ray->side = 0;
-		}
-		else
-		{
-			ray->side_dist_y += sqrt(1 + \
-				(ray->ray_dir_x * ray->ray_dir_x) / \
-				(ray->ray_dir_y * ray->ray_dir_y));
-			ray->map_y += ray->step_y;
-			ray->side = 1;
-		}
-		if (vars->map->map_arr[(int)ray->map_y][(int)ray->map_x] == '1')
-			ray->hit = 1;
-	}
-}
-
-void	set_vectors(t_raycast *ray, t_vars *vars)
-{
-	if (ray->ray_dir_x < 0)
-	{
-		ray->step_x = -1;
-		//ray->side_dist_x = 0;
-		 ray->side_dist_x = ((float)(sqrt(1 + (ray->ray_dir_y * ray->ray_dir_y) / 
-		 	(ray->ray_dir_x * ray->ray_dir_x)))) * (vars->player->pos_x - ray->map_x);
-	}
-	else
-	{
-		ray->step_x = 1;
-		ray->side_dist_x = ((float)(sqrt(1 + (ray->ray_dir_y * ray->ray_dir_y) / 
-			(ray->ray_dir_x * ray->ray_dir_x)))) * (ray->map_x - vars->player->pos_x + 1.0);
-	}
 	if (ray->ray_dir_y < 0)
 	{
 		ray->step_y = -1;
-	//ray->side_dist_y = 0;		
-		ray->side_dist_y = ((float)(sqrt(1 + (ray->ray_dir_x * ray->ray_dir_x) / 
-			(ray->ray_dir_y * ray->ray_dir_y)))) * (vars->player->pos_y - ray->map_y);
+		ray->side_dist_y = ((float)(sqrt(1 + (ray->ray_dir_x * \
+		ray->ray_dir_x) / (ray->ray_dir_y * ray->ray_dir_y)))) * \
+		(vars->player->pos_y - ray->map_y);
 	}
 	else
 	{
 		ray->step_y = 1;
-		ray->side_dist_y = ((float)(sqrt(1 + (ray->ray_dir_x * ray->ray_dir_x) / 
-			(ray->ray_dir_y * ray->ray_dir_y)))) * (ray->map_y - vars->player->pos_y + 1.0);
+		ray->side_dist_y = ((float)(sqrt(1 + (ray->ray_dir_x * \
+		ray->ray_dir_x) / (ray->ray_dir_y * ray->ray_dir_y)))) * \
+		(ray->map_y - vars->player->pos_y + 1.0);
 	}
 }
 
-void	fuck_wish_had_switch(t_raycast *ray, t_vars *vars)
+void	set_x_vectors(t_raycast *ray, t_vars *vars)
+{
+	if (ray->ray_dir_x < 0)
+	{
+		ray->step_x = -1;
+		ray->side_dist_x = ((float)(sqrt(1 + (ray->ray_dir_y * \
+		ray->ray_dir_y) / (ray->ray_dir_x * ray->ray_dir_x)))) * \
+		(vars->player->pos_x - ray->map_x);
+	}
+	else
+	{
+		ray->step_x = 1;
+		ray->side_dist_x = ((float)(sqrt(1 + (ray->ray_dir_y * \
+		ray->ray_dir_y) / (ray->ray_dir_x * ray->ray_dir_x)))) * \
+		(ray->map_x - vars->player->pos_x + 1.0);
+	}
+}
+
+void	find_wall_coord(t_raycast *ray, t_vars *vars)
 {
 	if (ray->side == 0)
 		ray->perp_wall_dist = \
@@ -101,7 +77,7 @@ void	fuck_wish_had_switch(t_raycast *ray, t_vars *vars)
 		ray->tex_x = vars->tex->north->height - ray->tex_x - 1;
 }
 
-void	actual_raycasting_bit(t_raycast *ray, t_vars *vars)
+void	raycast(t_raycast *ray, t_vars *vars)
 {
 	int	x;
 
@@ -114,9 +90,10 @@ void	actual_raycasting_bit(t_raycast *ray, t_vars *vars)
 			0.66 * vars->player->dir_x * (2 * x / (float)WIDTH - 1);
 		ray->map_x = (int)vars->player->pos_x;
 		ray->map_y = (int)vars->player->pos_y;
-		set_vectors(ray, vars);
-		ray_hit_while(ray, vars);
-		fuck_wish_had_switch(ray, vars);
+		set_x_vectors(ray, vars);
+		set_y_vectors(ray, vars);
+		ray_hit_wall(ray, vars);
+		find_wall_coord(ray, vars);
 		ray->step = 1.0 * vars->tex->north->height / \
 				(HEIGHT / ray->perp_wall_dist);
 		ray->tex_pos = (ray->draw_start - HEIGHT / 2 + \
@@ -126,7 +103,7 @@ void	actual_raycasting_bit(t_raycast *ray, t_vars *vars)
 	}
 }
 
-int	raycast_tex(t_vars *vars)
+int	render_image(t_vars *vars)
 {
 	int			m;
 	t_raycast	*ray;
@@ -137,7 +114,7 @@ int	raycast_tex(t_vars *vars)
 	ray = (t_raycast *)ft_calloc(sizeof(t_raycast), 1);
 	while (m < 1)
 	{
-		actual_raycasting_bit(ray, vars);
+		raycast(ray, vars);
 		m++;
 	}
 	free(ray);

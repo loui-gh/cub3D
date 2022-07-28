@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 22:18:37 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/28 12:14:43 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/28 12:48:59 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,31 @@ void	write_buffer_to_img(t_data *img, int **buffer)
 		}
 		x = 0;
 		y++;
+	}
+}
+
+void	ray_hit_wall(t_raycast *ray, t_vars *vars)
+{
+	ray->hit = 0;
+	while (ray->hit == 0)
+	{
+		if (ray->side_dist_x < ray->side_dist_y)
+		{
+			ray->side_dist_x += \
+				sqrt(1 + (ray->ray_dir_y * ray->ray_dir_y) / \
+				(ray->ray_dir_x * ray->ray_dir_x));
+			ray->map_x += ray->step_x;
+			ray->side = 0;
+		}
+		else
+		{
+			ray->side_dist_y += sqrt(1 + \
+				(ray->ray_dir_x * ray->ray_dir_x) / \
+				(ray->ray_dir_y * ray->ray_dir_y));
+			ray->map_y += ray->step_y;
+			ray->side = 1;
+		}
+		if (vars->map->map_arr[(int)ray->map_y][(int)ray->map_x] == '1')
+			ray->hit = 1;
 	}
 }
