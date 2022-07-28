@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 13:50:21 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/28 12:21:47 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/07/28 12:36:04 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	player_move(int keycode, t_vars *vars)
 	if (keycode == 65363)
 		look_right(vars);
 	mlx_destroy_image(vars->mlx_ptr, vars->img->img);
+	free(vars->img);
 	raycast_tex(vars);
 	return (0);
 }

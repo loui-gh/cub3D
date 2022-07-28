@@ -1,16 +1,28 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/07 20:42:16 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/26 12:35:47 by jpfannku         ###   ########.fr       */
-/*                                                                            */
+/*																			*/
+/*														:::	  ::::::::   */
+/*   free.c											 :+:	  :+:	:+:   */
+/*													+:+ +:+		 +:+	 */
+/*   By: jpfannku <jpfannku@student.42wolfsburg.	+#+  +:+	   +#+		*/
+/*												+#+#+#+#+#+   +#+		   */
+/*   Created: 2022/07/07 20:42:16 by jpfannku		  #+#	#+#			 */
+/*   Updated: 2022/07/28 12:31:20 by jpfannku		 ###   ########.fr	   */
+/*																			*/
 /* ************************************************************************** */
 
 #include "../incl/raycast.h"
+
+void	free_array(int **array)
+{
+	int	i;
+
+	i = 0;
+	if (!array)
+		return ;
+	while (array[i])
+		free(array[i++]);
+	free(array);
+}
 
 void	destroy_free_img(t_data *img, t_vars *vars)
 {
@@ -56,7 +68,10 @@ void	free_vars_exit(char *msg, t_vars *vars, int exit_code)
 		free(vars->player);
 	if (vars->img)
 		destroy_free_img(vars->img, vars);
+	if (vars->big_buff)
+		free_array(vars->big_buff);	
 	mlx_destroy_display(vars->mlx_ptr);
+	free(vars->mlx_ptr);
 	free(vars);
 	exit_msg(msg, exit_code);
 }
