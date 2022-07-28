@@ -1,9 +1,9 @@
-NO ./img/north.xpm
-SO ./img/south.xpm
-WE ./img/east.xpm
-EA ./img/west.xpm
-F 15,225,173
-C 237,173,45
+NO ./img/wall_1.xpm
+SO ./img/wall_2.xpm
+WE ./img/wall_3.xpm
+EA ./img/wall_4.xpm
+F 50, 168, 82
+C 240, 117, 193
 
 
 
