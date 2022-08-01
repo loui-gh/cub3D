@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:12:06 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/28 12:49:54 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/08/01 19:31:56 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	find_wall_coord(t_raycast *ray, t_vars *vars)
 		ray->wall_x = vars->player->pos_y + \
 			ray->perp_wall_dist * ray->ray_dir_x;
 	ray->wall_x -= floor(ray->wall_x);
-	ray->tex_x = ray->wall_x * vars->tex->north->height;
+	ray->tex_x = (int)(ray->wall_x * (double)vars->tex->north->height);
 	if (ray->side == 0 && ray->ray_dir_x < 0)
 		ray->tex_x = vars->tex->north->height - ray->tex_x - 1;
 	if (ray->side == 1 && ray->ray_dir_y > 0)

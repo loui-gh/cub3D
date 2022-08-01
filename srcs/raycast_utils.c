@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 22:18:37 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/28 12:48:59 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/08/01 19:16:12 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 int	get_pix_colour(t_data *tex, int x, int y)
 {
+	unsigned int	*addr;
+	int				colour;
+
+	addr = (unsigned int *)tex->addr;
+	colour = 0;
 	if (x >= 0 && y >= 0 && x <= tex->width && y <= tex->height)
-	{
-		if (x <= 23)
-			y++;
-		return (*(int *)(tex->img + (4 * tex->width * y) + (4 * x)));
-	}
-	return (0);
+		colour = ((unsigned int *)addr)[64 * y + x];
+	return (colour);
 }
 
 /*uses the side variable (which calculates if it's a n/s or w/e side
