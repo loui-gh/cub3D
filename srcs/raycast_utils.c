@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 22:18:37 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/08/01 19:16:12 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/08/02 19:08:25 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	fill_buffer(int x, t_raycast *ray, t_vars *ptr)
 	y = ray->draw_start;
 	while (y < ray->draw_end)
 	{
-		tex_y = (int)ray->tex_pos;
+		tex_y = (int)ray->tex_pos &(64 - 1);
 		ray->tex_pos += ray->step;
 		if (ray->side == 0 && ptr->player->pos_x < ray->map_x)
 			ptr->big_buff[y][x] = \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_tex.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 15:12:06 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/08/01 19:31:56 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/08/02 19:17:54 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,16 +64,16 @@ void	find_wall_coord(t_raycast *ray, t_vars *vars)
 	if (ray->draw_end >= HEIGHT)
 		ray->draw_end = HEIGHT - 1;
 	if (ray->side == 0)
-		ray->wall_x = vars->player->pos_x + \
+		ray->wall_x = vars->player->pos_y + \
 			ray->perp_wall_dist * ray->ray_dir_y;
 	else
-		ray->wall_x = vars->player->pos_y + \
+		ray->wall_x = vars->player->pos_x + \
 			ray->perp_wall_dist * ray->ray_dir_x;
 	ray->wall_x -= floor(ray->wall_x);
 	ray->tex_x = (int)(ray->wall_x * (double)vars->tex->north->height);
-	if (ray->side == 0 && ray->ray_dir_x < 0)
+	if (ray->side == 0 && ray->ray_dir_x > 0)
 		ray->tex_x = vars->tex->north->height - ray->tex_x - 1;
-	if (ray->side == 1 && ray->ray_dir_y > 0)
+	if (ray->side == 1 && ray->ray_dir_y < 0)
 		ray->tex_x = vars->tex->north->height - ray->tex_x - 1;
 }
 
@@ -95,9 +95,8 @@ void	raycast(t_raycast *ray, t_vars *vars)
 		ray_hit_wall(ray, vars);
 		find_wall_coord(ray, vars);
 		ray->step = 1.0 * vars->tex->north->height / \
-				(HEIGHT / ray->perp_wall_dist);
-		ray->tex_pos = (ray->draw_start - HEIGHT / 2 + \
-				(HEIGHT / ray->perp_wall_dist) / 2) * ray->step;
+				(int)(HEIGHT / ray->perp_wall_dist);
+		ray->tex_pos = 0;
 		fill_buffer(x, ray, vars);
 		x++;
 	}
