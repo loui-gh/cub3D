@@ -3,53 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 15:07:34 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/25 17:57:23 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/08/03 23:06:48 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/raycast.h"
-
-/* initialises a dbl-ptr int array using vars struct */
-
-void	initarray(t_vars *ptr)
-{
-	int	i;
-
-	i = 0;
-	ptr->big_buff = (int **)malloc(sizeof(int *) * HEIGHT);
-	if (!ptr->big_buff)
-		free_vars_exit("Malloc fail", ptr, EXIT_FAILURE);
-	while (i < HEIGHT)
-	{
-		ptr->big_buff[i] = (int *)malloc(WIDTH * sizeof(int));
-		if (!ptr->big_buff[i])
-			free_vars_exit("Malloc fail", ptr, EXIT_FAILURE);
-		i++;
-	}
-	scrub_array(-1, ptr);
-}
-
-void	scrub_array(char c, t_vars *ptr)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	y = 0;
-	while (y < HEIGHT)
-	{
-		x = 0;
-		while (x < WIDTH)
-		{
-			ptr->big_buff[y][x] = c;
-			x++;
-		}
-		y++;
-	}
-}
 
 /*Assigns the main variable struct, which contains the mlx pointers and 
 pointers to all other structs. Also calls init functions for the 
@@ -90,7 +51,7 @@ int	main(int argc, char **argv)
 		exit_msg("Cannot read from file\n", EXIT_FAILURE);
 	vars = init_game(fd);
 	vars->mlx_win = mlx_new_window(vars->mlx_ptr, WIDTH, HEIGHT, "Cub3D");
-	raycast_tex(vars);
+	render_image(vars);
 	mlx_key_hook(vars->mlx_win, player_move, vars);
 	mlx_hook(vars->mlx_win, 2, 27, esc, vars);
 	mlx_hook(vars->mlx_win, 17, (1L << 17), mouse_click, vars);

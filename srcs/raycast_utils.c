@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 22:18:37 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/26 23:44:00 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/08/02 14:21:12 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 int	get_pix_colour(t_data *tex, int x, int y)
 {
-	// int i = 1;
+	unsigned int	*addr;
+	int				colour;
+
+	addr = (unsigned int *)tex->addr;
+	colour = 0;
 	if (x >= 0 && y >= 0 && x <= tex->width && y <= tex->height)
-	{
-		if (y != 64 && x != 64)
-			return (*(int *)(tex->img + (4 * tex->width * y) + (4 * x)));
-	}
-	return (0);
+		colour = ((unsigned int *)addr)[64 * y + x];
+	return (colour);
 }
 
 /*uses the side variable (which calculates if it's a n/s or w/e side
@@ -35,7 +36,7 @@ void	fill_buffer(int x, t_raycast *ray, t_vars *ptr)
 	y = ray->draw_start;
 	while (y < ray->draw_end)
 	{
-		tex_y = (int)ray->tex_pos;
+		tex_y = (int)ray->tex_pos &(64 - 1);
 		ray->tex_pos += ray->step;
 		if (ray->side == 0 && ptr->player->pos_x < ray->map_x)
 			ptr->big_buff[y][x] = \
@@ -70,5 +71,31 @@ void	write_buffer_to_img(t_data *img, int **buffer)
 		}
 		x = 0;
 		y++;
+	}
+}
+
+void	ray_hit_wall(t_raycast *ray, t_vars *vars)
+{
+	ray->hit = 0;
+	while (ray->hit == 0)
+	{
+		if (ray->side_dist_x < ray->side_dist_y)
+		{
+			ray->side_dist_x += \
+				sqrt(1 + (ray->ray_dir_y * ray->ray_dir_y) / \
+				(ray->ray_dir_x * ray->ray_dir_x));
+			ray->map_x += ray->step_x;
+			ray->side = 0;
+		}
+		else
+		{
+			ray->side_dist_y += sqrt(1 + \
+				(ray->ray_dir_x * ray->ray_dir_x) / \
+				(ray->ray_dir_y * ray->ray_dir_y));
+			ray->map_y += ray->step_y;
+			ray->side = 1;
+		}
+		if (vars->map->map_arr[(int)ray->map_y][(int)ray->map_x] == '1')
+			ray->hit = 1;
 	}
 }

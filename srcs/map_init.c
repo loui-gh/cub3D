@@ -6,7 +6,7 @@
 /*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 20:33:43 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/27 18:07:46 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/08/03 23:30:55 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ t_player	*init_player(int i, int j, char token)
 	player = (t_player *)ft_calloc(sizeof(t_player), 1);
 	player->pos_y = i + 0.5;
 	player->pos_x = j + 0.5;
+	player->plane_x = 0.66;
+	player->plane_y = 0.66;
 	player->token = token;
 	never_eat_soggy_weetbix(player, token);
 	return (player);
