@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 22:18:37 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/08/02 14:21:12 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/08/04 19:31:43 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,11 @@ void	write_buffer_to_img(t_data *img, int **buffer)
 	}
 }
 
+// void	ray_hit_wall(t_raycast *ray, t_vars *vars)
+// {
+// 	ray->hit = 0;
+// 	if 
+// }
 void	ray_hit_wall(t_raycast *ray, t_vars *vars)
 {
 	ray->hit = 0;
@@ -81,17 +86,14 @@ void	ray_hit_wall(t_raycast *ray, t_vars *vars)
 	{
 		if (ray->side_dist_x < ray->side_dist_y)
 		{
-			ray->side_dist_x += \
-				sqrt(1 + (ray->ray_dir_y * ray->ray_dir_y) / \
-				(ray->ray_dir_x * ray->ray_dir_x));
+			ray->side_dist_x += 
+				sqrt(1 + (ray->dir_y * ray->dir_y) / (ray->dir_x * ray->dir_x));
 			ray->map_x += ray->step_x;
 			ray->side = 0;
 		}
 		else
 		{
-			ray->side_dist_y += sqrt(1 + \
-				(ray->ray_dir_x * ray->ray_dir_x) / \
-				(ray->ray_dir_y * ray->ray_dir_y));
+			ray->side_dist_y += sqrt(1 + (ray->dir_x * ray->dir_x) / (ray->dir_y * ray->dir_y));
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
