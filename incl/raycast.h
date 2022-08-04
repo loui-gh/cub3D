@@ -6,7 +6,7 @@
 /*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:50:24 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/08/04 14:30:42 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/08/04 14:50:56 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,13 @@ typedef struct s_raycast
 	double	ray_dir_x;
 	double	ray_dir_y;
 	double	camera_x;
-	float	side_dist_x;
-	float	side_dist_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
 	float	perp_wall_dist;
-	double	map_x;
-	double	map_y;
+	int		map_x;
+	int		map_y;
 	int		hit;
 	int		side;
 	int		draw_start;

@@ -90,12 +90,23 @@ void	raycast(t_raycast *ray, t_vars *vars)
 			vars->player->plane_x * ray->camera_x;
 		ray->ray_dir_y = vars->player->dir_y + \
 			vars->player->plane_y * ray->camera_x;
-		
+		//changed map_x and y to ints in header file
 		ray->map_x = (int)vars->player->pos_x;
 		ray->map_y = (int)vars->player->pos_y;
+
+		if (ray->ray_dir_x == 0)
+			ray->delta_dist_x = 1e30;
+		else
+			ray->delta_dist_x = fabs(1 / ray->ray_dir_x);
+		if (ray->ray_dir_y == 0)
+			ray->delta_dist_y = 1e30;
+		else
+			ray->delta_dist_y = fabs(1 / ray->ray_dir_y);
+		
 		set_x_vectors(ray, vars);
 		set_y_vectors(ray, vars);
 		ray_hit_wall(ray, vars);
+		//don't know how wall_coord works
 		find_wall_coord(ray, vars);
 		ray->step = 1.0 * vars->tex->north->height / \
 				(int)(HEIGHT / ray->perp_wall_dist);
