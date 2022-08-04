@@ -84,11 +84,13 @@ void	raycast(t_raycast *ray, t_vars *vars)
 	x = 0;
 	while (x < WIDTH)
 	{
-		//the plane_x and y could be mixed up. Relevant for rotating left and right
+		//CHANGED
+		ray->camera_x = 2 * x / (double)WIDTH - 1;
 		ray->ray_dir_x = vars->player->dir_x + \
-			vars->player->plane_x * vars->player->dir_y * (2 * x / (float)WIDTH - 1) * -1;
+			vars->player->plane_x * ray->camera_x;
 		ray->ray_dir_y = vars->player->dir_y + \
-			vars->player->plane_y * vars->player->dir_x * (2 * x / (float)WIDTH - 1);
+			vars->player->plane_y * ray->camera_x;
+		
 		ray->map_x = (int)vars->player->pos_x;
 		ray->map_y = (int)vars->player->pos_y;
 		set_x_vectors(ray, vars);

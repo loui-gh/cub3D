@@ -6,7 +6,7 @@
 /*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:50:24 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/08/03 23:48:06 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/08/04 14:30:42 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,9 @@
 
 typedef struct s_raycast
 {
-	float	ray_dir_x;
-	float	ray_dir_y;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	double	camera_x;
 	float	side_dist_x;
 	float	side_dist_y;
 	float	perp_wall_dist;
@@ -170,6 +171,6 @@ int				ns_move(int keycode, t_vars *vars);
 int				ew_move(int keycode, t_vars *vars);
 void			never_eat_soggy_weetbix(t_player *player, char token);
 void			look_left(t_vars *vars);
-int				look_right(t_vars *vars);
+void			look_right(t_vars *vars);
 
 #endif
