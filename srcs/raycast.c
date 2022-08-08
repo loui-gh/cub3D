@@ -268,7 +268,7 @@ int	render_image(t_vars *vars)
 	ray = (t_raycast *)ft_calloc(sizeof(t_raycast), 1);
 	// while (m < 1)
 	// {
-		raycast(ray, vars); 
+	raycast(ray, vars); 
 	// 	m++;
 	// }
 	free(ray);
