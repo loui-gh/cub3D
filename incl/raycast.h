@@ -6,7 +6,7 @@
 /*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:50:24 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/08/04 19:12:33 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/08/04 22:44:55 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 
 # define WIDTH 1200
 # define HEIGHT 900
+# define tex_width 64
+# define tex_height 64
 # if __linux__
 #  define ESC_KEY 65307
 #  define LEFT_KEY 65361
@@ -76,6 +78,7 @@ typedef struct s_data {
 	int		endian;
 	int		width;
 	int		height;
+	//arent ^^width and height always 64??
 }				t_data;
 
 typedef struct s_map {

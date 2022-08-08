@@ -6,7 +6,7 @@ UNAME 		:= $(shell uname)
 
 SRCD		= ./srcs/
 SRC			= 	input_utils.c libft_utils.c map_error.c utils.c tex_utils.c ft_split.c \
-				main.c draw_utils.c free.c map_init.c textures.c raycast.c more_utils.c \
+				main.c draw_floor_ceiling.c free.c map_init.c textures.c raycast.c more_utils.c \
 				movement.c libft_utils_2.c raycast_utils.c movement_utils.c
 
 SRCF		= $(addprefix $(SRCD),$(SRC))
