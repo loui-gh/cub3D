@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:50:24 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/08/08 12:37:03 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/08/08 13:56:48 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,12 +168,6 @@ void			ray_hit_wall(t_raycast *ray, t_vars *vars);
 /*movement*/
 int				player_move(int keycode, t_vars *vars);
 int				hit_wall(int x, int y, t_vars *vars);
-int				go_north(t_vars *vars, t_map *map, t_player *player);
-int				go_south(t_vars *vars, t_map *map, t_player *player);
-int				go_east(t_vars *vars, t_map *map, t_player *player);
-int				go_west(t_vars *vars, t_map *map, t_player *player);
-int				ns_move(int keycode, t_vars *vars);
-int				ew_move(int keycode, t_vars *vars);
 void			never_eat_soggy_weetbix(t_player *player, char token);
 void			look_left(t_vars *vars);
 void			look_right(t_vars *vars);
