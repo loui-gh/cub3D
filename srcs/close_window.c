@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 12:15:59 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/08/08 12:16:01 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/08/08 14:13:15 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,3 +30,23 @@ int	esc(int keycode, t_vars *vars)
 	}
 	return (0);
 }
+
+#if __linux__
+
+void	kill_disp(t_vars *vars)
+{
+	if (vars->mlx_ptr)
+	{
+		mlx_destroy_display(vars->mlx_ptr);
+		free(vars->mlx_ptr);
+	}
+}
+
+#else
+
+void	kill_disp(t_vars *vars)
+{
+	(void) vars;
+}
+
+#endif

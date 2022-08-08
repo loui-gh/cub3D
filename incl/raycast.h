@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:50:24 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/08/08 13:56:48 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/08/08 14:16:20 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,11 +112,11 @@ typedef struct s_vars
 {
 	void		*mlx_ptr;
 	void		*mlx_win;
-	int			**big_buff;
 	t_textures	*tex;
 	t_map		*map;
 	t_player	*player;
 	t_data		*img;
+	t_raycast	*ray;
 }	t_vars;
 
 /*utils*/
@@ -159,10 +159,7 @@ int				get_pix_colour(t_data *tex, int x, int y);
 
 /*raycasting*/
 int				render_image(t_vars *vars);
-void			initarray(t_vars *ptr);
-void			scrub_array(char c, t_vars *ptr);
-void			write_buffer_to_img(t_data *img, int **buffer);
-void			fill_buffer(int x, t_raycast *ray, t_vars *ptr);
+void			draw_image(int x, t_raycast *ray, t_vars *ptr);
 void			ray_hit_wall(t_raycast *ray, t_vars *vars);
 
 /*movement*/

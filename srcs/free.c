@@ -12,23 +12,6 @@
 
 #include "../incl/raycast.h"
 
-void	free_array(int **array)
-{
-	int	i;
-
-	i = 0;
-	if (!array)
-		return ;
-	while (i < HEIGHT)
-	{
-		if (array[i])
-			free(array[i]);
-		i++;
-	}
-	if (array)
-		free(array);
-}
-
 void	destroy_free_img(t_data *img, t_vars *vars)
 {
 	if (img->img != 0x0)
@@ -73,8 +56,8 @@ void	free_vars_exit(char *msg, t_vars *vars, int exit_code)
 		free(vars->player);
 	if (vars->img)
 		destroy_free_img(vars->img, vars);
-	if (vars->big_buff)
-		free_array(vars->big_buff);
+	if (vars->ray)
+		free(vars->ray);
 	kill_disp(vars);
 	free(vars);
 	exit_msg(msg, exit_code);

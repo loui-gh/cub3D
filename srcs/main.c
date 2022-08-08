@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 15:07:34 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/08/08 12:08:06 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/08/08 14:12:52 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ t_vars	*init_game(int fd)
 	}
 	init_textures(fd, vars);
 	create_map_array(fd, vars);
-	initarray(vars);
 	init_img(vars);
+	vars->ray = (t_raycast *)ft_calloc(sizeof(t_raycast), 1);
 	return (vars);
 }
 

@@ -97,23 +97,18 @@ void	raycast(t_raycast *ray, t_vars *vars)
 		ray->step = 1.0 * vars->tex->north->height / \
 				(int)(HEIGHT / ray->perp_wall_dist);
 		ray->tex_pos = 0;
-		fill_buffer(x, ray, vars);
+		draw_image(x, ray, vars);
 		x++;
 	}
 }
 
 int	render_image(t_vars *vars)
 {
-	t_raycast	*ray;
 	t_data		*image;
 
 	image = floor_ceiling(vars);
-	ray = (t_raycast *)ft_calloc(sizeof(t_raycast), 1);
-	raycast(ray, vars);
-	free(ray);
-	write_buffer_to_img(image, vars->big_buff);
+	raycast(vars->ray, vars);
 	mlx_put_image_to_window(vars->mlx_ptr, vars->mlx_win, image->img, 0, 0);
 	vars->img = image;
-	scrub_array(-1, vars);
 	return (0);
 }
