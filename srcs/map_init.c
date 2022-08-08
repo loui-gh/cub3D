@@ -6,7 +6,7 @@
 /*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 20:33:43 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/08/04 14:08:55 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/08/08 21:47:21 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,23 +65,23 @@ void	never_eat_soggy_weetbix(t_player *player, char token)
 {
 	if (token == 'N')
 	{
-		player->dir_x = 0;
+		player->plane_x = 0.66;
 		player->dir_y = -1;
 	}
 	if (token == 'S')
 	{
-		player->dir_x = 0;
+		player->plane_x = -0.66;
 		player->dir_y = 1;
 	}
 	if (token == 'E')
 	{
 		player->dir_x = 1;
-		player->dir_y = 0;
+		player->plane_y = 0.66;
 	}
 	if (token == 'W')
 	{
 		player->dir_x = -1;
-		player->dir_y = 0;
+		player->plane_y = -0.66;
 	}
 }
 
@@ -92,8 +92,8 @@ t_player	*init_player(int i, int j, char token)
 	player = (t_player *)ft_calloc(sizeof(t_player), 1);
 	player->pos_y = i + 0.5;
 	player->pos_x = j + 0.5;
-	player->plane_x = 0.66;
-	player->plane_y = 0.66;
+	// player->plane_x = 0;
+	// player->plane_y = 0.66;
 	player->token = token;
 	never_eat_soggy_weetbix(player, token);
 	return (player);
