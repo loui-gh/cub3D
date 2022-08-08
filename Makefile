@@ -49,16 +49,21 @@ mlx:
 			$(MAKE) -C $(MLX)
 
 clean:
-			$(MAKE) -C $(MLX) clean
 			${RM} ${OBJF}
 
+cleanminilib:
+			$(MAKE) -C $(MLX) clean
+
 fclean:		clean
-			${RM} ${MLX}/libmlx.a
 			${RM} ${NAME}
 
+fcleanall: 	fclean cleanminilib
+			${RM} ${MLX}/libmlx.a
 os:
 			@echo $(UNAME)
 
 re:			fclean all
 
-.PHONY:		all clean fclean re os
+reall: 		fcleanall all
+
+.PHONY:		all clean fclean re os 

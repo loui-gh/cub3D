@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 15:07:34 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/08/03 23:06:48 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/08/08 10:57:13 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ int	main(int argc, char **argv)
 		exit_msg("Cannot read from file\n", EXIT_FAILURE);
 	vars = init_game(fd);
 	vars->mlx_win = mlx_new_window(vars->mlx_ptr, WIDTH, HEIGHT, "Cub3D");
-	render_image(vars);
+	//render_image(vars);
+	mlx_loop_hook(vars->mlx_ptr, render_image, vars);
 	mlx_key_hook(vars->mlx_win, player_move, vars);
 	mlx_hook(vars->mlx_win, 2, 27, esc, vars);
 	mlx_hook(vars->mlx_win, 17, (1L << 17), mouse_click, vars);
