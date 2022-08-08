@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:50:24 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/08/08 11:15:24 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/08/08 12:37:03 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@
 
 typedef struct s_raycast
 {
-	double	dir_x;
-	double	dir_y;
+	double	ray_dir_x;
+	double	ray_dir_y;
 	double	camera_x;
 	double	side_dist_x;
 	double	side_dist_y;
