@@ -1,11 +1,11 @@
 CC			= gcc 
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -ggdb
 
 NAME		= cub3D
 UNAME 		:= $(shell uname)
 
 SRCD		= ./srcs/
-SRC			= 	input_utils.c libft_utils.c map_error.c utils.c tex_utils.c ft_split.c \
+SRC			= 	close_window.c libft_utils.c map_error.c utils.c tex_utils.c ft_split.c \
 				main.c draw_floor_ceiling.c free.c map_init.c textures.c raycast.c more_utils.c \
 				movement.c libft_utils_2.c raycast_utils.c movement_utils.c
 
@@ -15,7 +15,7 @@ OBJD		= ./objs/
 HEADD		= ./incl/
 HEADF		= raycast.h
 
-INCL_LINUX	= -lm -Lminilibx-linux -lmlx -lX11 -lXext
+INCL_LINUX	= -lm -Lminilibx-linux -lmlx -lX11 -lXext -ggdb
 INCL_MACOS	= -lm -Lminilibx -lmlx -framework OpenGL -framework AppKit
 
 MLX_LINUX	= mlx_linux

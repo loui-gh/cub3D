@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 15:07:34 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/08/08 10:57:13 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/08/08 12:08:06 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,16 @@
 /*Assigns the main variable struct, which contains the mlx pointers and 
 pointers to all other structs. Also calls init functions for the 
 map and textures.*/
+
+void	init_img(t_vars *vars)
+{
+	vars->img = (t_data *)malloc(sizeof(t_data));
+	vars->img->img = mlx_new_image(vars->mlx_ptr, WIDTH, HEIGHT);
+	vars->img->addr = mlx_get_data_addr(vars->img->img, \
+					&vars->img->bits_per_pixel, \
+					&vars->img->line_length, &vars->img->endian);
+}
+
 t_vars	*init_game(int fd)
 {
 	t_vars	*vars;
@@ -34,6 +44,7 @@ t_vars	*init_game(int fd)
 	init_textures(fd, vars);
 	create_map_array(fd, vars);
 	initarray(vars);
+	init_img(vars);
 	return (vars);
 }
 
@@ -51,8 +62,7 @@ int	main(int argc, char **argv)
 		exit_msg("Cannot read from file\n", EXIT_FAILURE);
 	vars = init_game(fd);
 	vars->mlx_win = mlx_new_window(vars->mlx_ptr, WIDTH, HEIGHT, "Cub3D");
-	//render_image(vars);
-	mlx_loop_hook(vars->mlx_ptr, render_image, vars);
+	mlx_loop_hook(vars->mlx_ptr, &render_image, vars);
 	mlx_key_hook(vars->mlx_win, player_move, vars);
 	mlx_hook(vars->mlx_win, 2, 27, esc, vars);
 	mlx_hook(vars->mlx_win, 17, (1L << 17), mouse_click, vars);

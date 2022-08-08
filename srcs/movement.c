@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 13:50:21 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/08/03 23:48:37 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/08/08 11:11:46 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ int	player_move(int keycode, t_vars *vars)
 		look_left(vars);
 	// if (keycode == RIGHT_KEY)
 	// 	look_right(vars);
-	mlx_destroy_image(vars->mlx_ptr, vars->img->img);
-	free(vars->img);
-	render_image(vars);
+	//free(vars->img);
 	return (0);
 }

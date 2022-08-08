@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_utils.c                                       :+:      :+:    :+:   */
+/*   draw_floor_ceiling.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 20:30:31 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/25 15:59:44 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/08/08 11:54:34 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,6 @@ t_data	*floor_ceiling(t_vars *vars)
 
 	w = WIDTH;
 	h = HEIGHT;
-	vars->img = (t_data *)malloc(sizeof(t_data));
-	vars->img->img = mlx_new_image(vars->mlx_ptr, w, h);
-	vars->img->addr = mlx_get_data_addr(vars->img->img, \
-						&vars->img->bits_per_pixel, \
-						&vars->img->line_length, &vars->img->endian);
 	draw_ceiling(vars, 0, h / 2, w);
 	draw_floor(vars, h / 2, h, w);
 	return (vars->img);

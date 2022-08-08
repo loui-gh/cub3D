@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:50:24 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/08/08 10:54:39 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/08/08 11:15:24 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,6 @@ typedef struct s_vars
 	t_map		*map;
 	t_player	*player;
 	t_data		*img;
-	int			finished;
 }	t_vars;
 
 /*utils*/

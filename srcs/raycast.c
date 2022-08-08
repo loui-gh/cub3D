@@ -260,15 +260,18 @@ void	raycast(t_raycast *ray, t_vars *vars)
 int	render_image(t_vars *vars)
 {
 	t_raycast	*ray;
-	t_data		*fl_c;
+	t_data		*temp;
+	//t_data		*real;
 
-	fl_c = floor_ceiling(vars);
+	temp = floor_ceiling(vars);
 	ray = (t_raycast *)ft_calloc(sizeof(t_raycast), 1);
-	raycast(ray, vars); 
+	raycast(ray, vars);
 	free(ray);
-	write_buffer_to_img(fl_c, vars->big_buff);
-	mlx_put_image_to_window(vars->mlx_ptr, vars->mlx_win, fl_c->img, 0, 0);
-	vars->img = fl_c;
+	write_buffer_to_img(temp, vars->big_buff);
+	mlx_put_image_to_window(vars->mlx_ptr, vars->mlx_win, temp->img, 0, 0);
+	vars->img = temp;
+	//mlx_destroy_image(vars->mlx_ptr, vars->img);
+	//free(vars->img);
 	scrub_array(-1, vars);
 	return (0);
 }
