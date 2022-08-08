@@ -96,7 +96,8 @@ void	raycast(t_raycast *ray, t_vars *vars)
 		find_wall_coord(ray, vars);
 		ray->step = 1.0 * vars->tex->north->height / \
 				(int)(HEIGHT / ray->perp_wall_dist);
-		ray->tex_pos = 0;
+		ray->tex_pos = (ray->draw_start - HEIGHT / 2 + \
+				(int)(HEIGHT / ray->perp_wall_dist) / 2) * ray->step;
 		draw_image(x, ray, vars);
 		x++;
 	}
