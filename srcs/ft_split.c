@@ -12,25 +12,6 @@
 
 #include "../incl/raycast.h"
 
-static int	ft_count_strings(char const *s, char c)
-{
-	int	count;
-	int	i;
-
-	i = 0;
-	count = 0;
-	while (s[i])
-	{
-		while (s[i] == c)
-			i++;
-		if (s[i])
-			count++;
-		while (s[i] && s[i] != c)
-			i++;
-	}
-	return (count);
-}
-
 static int	ft_string_len(char const *s, char c)
 {
 	int	len;
@@ -59,20 +40,39 @@ static char	*ft_create_string(const char *s, size_t n)
 	return (dest);
 }
 
+static int	ft_count_strings(char const *s, char c)
+{
+	int	count;
+	int	i;
+
+	i = 0;
+	count = 0;
+	while (s[i])
+	{
+		while (s[i] == c)
+			i++;
+		if (s[i])
+			count++;
+		while (s[i] && s[i] != c)
+			i++;
+	}
+	return (count);
+}
+
 char	**ft_split(char const *s, char c)
 {
 	char	**array;
 	size_t	i;
-	size_t	string;
+	size_t	nr_strings;
 
 	i = 0;
 	if (s == NULL)
 		return (NULL);
-	string = ft_count_strings(s, c);
-	array = malloc((string + 1) * sizeof(char *));
+	nr_strings = ft_count_strings(s, c);
+	array = malloc((nr_strings + 1) * sizeof(char *));
 	if (!array)
 		return (0);
-	while (i < string)
+	while (i < nr_strings)
 	{
 		while (*s != 0 && *s == c)
 			s++;

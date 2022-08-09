@@ -97,3 +97,9 @@ char	*ft_strtrim(char *s1, char *set)
 	new = ft_substr(s1, start, end - start);
 	return (new);
 }
+
+void	exit_msg(char *msg, int exit_code)
+{
+	ft_putstr(msg);
+	exit(exit_code);
+}

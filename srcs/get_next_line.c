@@ -1,22 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:38:56 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/22 12:17:24 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/08/09 21:30:44 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/raycast.h"
-
-void	exit_msg(char *msg, int exit_code)
-{
-	ft_putstr(msg);
-	exit(exit_code);
-}
 
 char	*get_next_line(int fd)
 {
