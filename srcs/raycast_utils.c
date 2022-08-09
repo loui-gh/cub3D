@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 22:18:37 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/08/09 10:53:12 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/08/09 19:43:07 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ void	ray_hit_wall(t_raycast *ray, t_vars *vars)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		//printf("arr: %c\n", vars->map->map_arr[(int)ray->map_y][(int)ray->map_x]);
 		if (vars->map->map_arr[(int)ray->map_y][(int)ray->map_x] \
 			&& vars->map->map_arr[(int)ray->map_y][(int)ray->map_x] == '1')
 			ray->hit = 1;
