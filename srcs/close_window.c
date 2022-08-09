@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   close_window.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 12:15:59 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/08/08 14:13:15 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/08/09 20:11:26 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	mouse_click(t_vars *vars)
 {
-	mlx_loop_end(vars->mlx_ptr);
 	mlx_destroy_window(vars->mlx_ptr, vars->mlx_win);
 	free_vars_exit("See you next time :)\n", vars, EXIT_SUCCESS);
 	return (0);
@@ -24,7 +23,6 @@ int	esc(int keycode, t_vars *vars)
 {
 	if (keycode == ESC_KEY)
 	{
-		mlx_loop_end(vars->mlx_ptr);
 		mlx_destroy_window(vars->mlx_ptr, vars->mlx_win);
 		free_vars_exit("See you next time :)\n", vars, EXIT_SUCCESS);
 	}
@@ -37,6 +35,7 @@ void	kill_disp(t_vars *vars)
 {
 	if (vars->mlx_ptr)
 	{
+		mlx_loop_end(vars->mlx_ptr);
 		mlx_destroy_display(vars->mlx_ptr);
 		free(vars->mlx_ptr);
 	}
