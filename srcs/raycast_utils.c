@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 22:18:37 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/08/08 14:27:48 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/08/09 10:53:12 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,9 @@ void	ray_hit_wall(t_raycast *ray, t_vars *vars)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (vars->map->map_arr[(int)ray->map_y][(int)ray->map_x] == '1')
+		//printf("arr: %c\n", vars->map->map_arr[(int)ray->map_y][(int)ray->map_x]);
+		if (vars->map->map_arr[(int)ray->map_y][(int)ray->map_x] \
+			&& vars->map->map_arr[(int)ray->map_y][(int)ray->map_x] == '1')
 			ray->hit = 1;
 	}
 }

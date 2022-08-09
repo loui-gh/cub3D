@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 13:53:50 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/08/08 13:55:46 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/08/09 11:12:52 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,41 +14,41 @@
 
 void	move_backward(t_vars *vars)
 {
-	if (vars->map->map_arr[(int)(vars->player->pos_x - \
-		vars->player->dir_x * 0.2)][(int)vars->player->pos_y] == '0')
+	if (vars->map->map_arr[(int)vars->player->pos_y][(int) \
+		(vars->player->pos_x - vars->player->dir_x * 0.2)] != '1')
 		vars->player->pos_x -= vars->player->dir_x * 0.2;
-	if (vars->map->map_arr[(int)(vars->player->pos_x)] \
-		[(int)(vars->player->pos_y - vars->player->dir_y * 0.2)] == '0')
+	if (vars->map->map_arr[(int)(vars->player->pos_y - vars->player->dir_y \
+		* 0.2)][(int)(vars->player->pos_x)] != '1')
 		vars->player->pos_y -= vars->player->dir_y * 0.2;
 }
 
 void	move_forward(t_vars *vars)
 {
-	if (vars->map->map_arr[(int)(vars->player->pos_x + \
-		vars->player->dir_x * 0.2)][(int)vars->player->pos_y] == '0')
+	if (vars->map->map_arr[(int)vars->player->pos_y][(int) \
+		(vars->player->pos_x + vars->player->dir_x * 0.2)] != '1')
 		vars->player->pos_x += vars->player->dir_x * 0.2;
-	if (vars->map->map_arr[(int)(vars->player->pos_x)] \
-		[(int)(vars->player->pos_y + vars->player->dir_y * 0.2)] == '0')
+	if (vars->map->map_arr[(int)(vars->player->pos_y + vars->player->dir_y \
+		* 0.2)][(int)(vars->player->pos_x)] != '1')
 		vars->player->pos_y += vars->player->dir_y * 0.2;
 }
 
 void	move_left(t_vars *vars)
 {
-	if (vars->map->map_arr[(int)(vars->player->pos_x - \
-		vars->player->plane_x * 0.2)][(int)vars->player->pos_y] == '0')
+	if (vars->map->map_arr[(int)vars->player->pos_y][(int) \
+		(vars->player->pos_x - vars->player->plane_x * 0.2)] != '1')
 		vars->player->pos_x -= vars->player->plane_x * 0.2;
-	if (vars->map->map_arr[(int)(vars->player->pos_x)] \
-		[(int)(vars->player->pos_y - vars->player->plane_y * 0.2)] == '0')
+	if (vars->map->map_arr[(int)(vars->player->pos_y - \
+		vars->player->plane_y * 0.2)][(int)(vars->player->pos_x)] != '1')
 		vars->player->pos_y -= vars->player->plane_y * 0.2;
 }
 
 void	move_right(t_vars *vars)
 {
-	if (vars->map->map_arr[(int)(vars->player->pos_x + \
-		vars->player->plane_x * 0.2)][(int)vars->player->pos_y] == '0')
+	if (vars->map->map_arr[(int)vars->player->pos_y][(int) \
+		(vars->player->pos_x + vars->player->plane_x * 0.2)] != '1')
 		vars->player->pos_x += vars->player->plane_x * 0.2;
-	if (vars->map->map_arr[(int)(vars->player->pos_x)] \
-	[(int)(vars->player->pos_y + vars->player->plane_y * 0.2)] == '0')
+	if (vars->map->map_arr[(int)(vars->player->pos_y + \
+		vars->player->plane_y * 0.2)][(int)(vars->player->pos_x)] != '1')
 		vars->player->pos_y += vars->player->plane_y * 0.2;
 }
 
