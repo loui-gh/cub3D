@@ -6,7 +6,7 @@
 /*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 20:33:43 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/08/09 23:14:45 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/08/10 19:28:04 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,27 +19,56 @@
 ** but it is internally converted back to char
 */
 
-char	*ft_strrchr(const char *string, int c)
+int	ft_strrchr_mod(char *string, char c)
 {
-	char	*ptr;
+	int	i;
 
-	ptr = (char *)string + ft_strlen(string);
-	c = (char)c;
-	while (ptr >= string)
+	i = ft_strlen(string);
+	while (i > 0)
 	{
-		if (*ptr == c)
-			return (ptr);
-		ptr--;
+		if (string[i] == c)
+			return (i);
+		i--;
+	}
+	return (-1);
+}
+
+int	ft_strnstr_mod(char *haystack, const char *needle, int n)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	if (needle[i] == '\0')
+		return (-1);
+	while (haystack[i] != '\0' && i < n)
+	{
+		j = 0;
+		while (haystack[i + j] == needle[j] && i + j < n)
+		{
+			if (needle[j + 1] == '\0')
+				return (-1);
+			j++;
+		}
+		i++;
 	}
 	return (0);
 }
 
-int	complex_str_search_ft()
+void	gap_check(char *buffer, t_vars *vars)
 {
-	//use strrchr ^^ to find pointer to last occurance of 1
-	//work back from there using ptr--
-	//if \n\n at all in string, fault found in map
-	//while loop condition ...
+	int	i;
+
+	i = ft_strrchr_mod(buffer, '1');
+	if (ft_strnstr_mod(buffer, "\n\n", i) == -1)
+	{
+		write(1, "1\n",2);
+		free(buffer);
+		//exit(EXIT_FAILURE);
+		write(1, "2\n",2);
+		free_vars_exit("Haha. You tried.\n", vars, EXIT_FAILURE);
+		write(1, "3\n",2);
+	}
 }
 
 void	create_map_array(int fd, t_vars *vars)
@@ -63,11 +92,10 @@ void	create_map_array(int fd, t_vars *vars)
 		free(buff);
 		free_vars_exit("Error reading map\n", vars, EXIT_FAILURE);
 	}
-	map->map_arr = ft_split(buff, '\n');
-	// if (needle_in_haystack(buff, "\n\n", read_count) == -1)
-	// 	printf("poop\n");
-	free(buff);
 	close(fd);
+	gap_check(buff, vars);
+	map->map_arr = ft_split(buff, '\n');
+	free(buff);
 	check_map(map->map_arr, vars);
 	map_width_height(map);
 	if (map->height < 3 || map->width < 3)

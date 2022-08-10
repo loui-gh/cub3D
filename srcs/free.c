@@ -48,6 +48,7 @@ void	free_map(t_map *map)
 
 void	free_vars_exit(char *msg, t_vars *vars, int exit_code)
 {
+	write(1, "*\n", 2);
 	if (vars->tex)
 		free_tex(vars->tex, vars);
 	if (vars->map)
@@ -58,7 +59,9 @@ void	free_vars_exit(char *msg, t_vars *vars, int exit_code)
 		destroy_free_img(vars->img, vars);
 	if (vars->ray)
 		free(vars->ray);
+	write(1, "*\n", 2);
 	kill_disp(vars);
+	write(1, "*1\n", 3);
 	free(vars);
 	exit_msg(msg, exit_code);
 }
