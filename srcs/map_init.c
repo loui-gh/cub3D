@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 20:33:43 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/08/10 11:37:19 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/08/10 19:57:37 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,19 @@ int	ft_strnstr_mod(char *haystack, const char *needle, int n)
 
 void	gap_check(char *buffer, t_vars *vars)
 {
-	int	i;
+	int		i;
+	char	*skinny_and_buff;
 
-	i = ft_strrchr_mod(buffer, '1');
-	if (ft_strnstr_mod(buffer, "\n\n", i) == -1)
+	skinny_and_buff = ft_strtrim(buffer, "\n");
+	i = ft_strrchr_mod(skinny_and_buff, '1');
+	if (ft_strnstr_mod(skinny_and_buff, "\n\n", i) == -1)
 	{
 		free(buffer);
+		free(skinny_and_buff);
 		free_vars_exit("Haha. You tried.\n", vars, EXIT_FAILURE);
 	}
+	else
+		free(skinny_and_buff);
 }
 
 void	create_map_array(int fd, t_vars *vars)
