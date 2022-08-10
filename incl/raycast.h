@@ -6,7 +6,7 @@
 /*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:50:24 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/08/09 19:43:19 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/08/10 20:30:29 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ char			*ft_strtrim(char *s1, char *set);
 /*memory*/
 void			free_tex(t_textures *tex, t_vars *vars);
 void			free_vars_exit(char *msg, t_vars *vars, int exit_code);
+void			free_array(int **array);
 t_data			*assign_tex(t_vars *vars, char *file, char *holder);
 
 /*map build*/

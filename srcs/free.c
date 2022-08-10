@@ -12,6 +12,21 @@
 
 #include "../incl/raycast.h"
 
+void	free_array(int **array)
+{
+	int	i;
+
+	i = 0;
+	if (!array)
+		return ;
+	while (array[i])
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
+}
+
 void	destroy_free_img(t_data *img, t_vars *vars)
 {
 	if (img->img != 0x0)

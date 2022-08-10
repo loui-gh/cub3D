@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tex_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 19:06:47 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/07/22 12:32:23 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/08/10 20:31:40 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,21 @@ char	*skip_spaces(char *line)
 
 int	check_rgb_string(char *str)
 {
-	int	i;
+	int		i;
+	int		j;
+	char	**numbers;
+
+	numbers = ft_split(str, ',');
+	i = 0;
+	while (numbers[i] != NULL)
+		i++;
+	if (i != 2)
+	{
+		free_array(numbers);
+		return (-1);
+	}
+	i = 0;
+	j = 0;
 
 	i = 0;
 	while (str[i])
