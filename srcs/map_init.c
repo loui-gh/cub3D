@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 20:33:43 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/08/10 19:28:04 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/08/10 11:37:19 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,8 @@ void	gap_check(char *buffer, t_vars *vars)
 	i = ft_strrchr_mod(buffer, '1');
 	if (ft_strnstr_mod(buffer, "\n\n", i) == -1)
 	{
-		write(1, "1\n",2);
 		free(buffer);
-		//exit(EXIT_FAILURE);
-		write(1, "2\n",2);
 		free_vars_exit("Haha. You tried.\n", vars, EXIT_FAILURE);
-		write(1, "3\n",2);
 	}
 }
 
@@ -78,22 +74,18 @@ void	create_map_array(int fd, t_vars *vars)
 	int		read_count;
 
 	buff = ft_calloc(sizeof(char), 5000);
-	map = (t_map *)ft_calloc(sizeof(t_map), 1);
-	vars->map = map;
-	if (!map)
-	{
-		close(fd);
-		free_vars_exit("Malloc error\n", vars, EXIT_FAILURE);
-	}
 	read_count = read(fd, buff, 5000);
+	close(fd);
 	if (read_count < 0 || read_count >= 5000)
 	{
-		close(fd);
 		free(buff);
 		free_vars_exit("Error reading map\n", vars, EXIT_FAILURE);
 	}
-	close(fd);
 	gap_check(buff, vars);
+	map = (t_map *)ft_calloc(sizeof(t_map), 1);
+	if (!map)
+		free_vars_exit("Malloc error\n", vars, EXIT_FAILURE);
+	vars->map = map;
 	map->map_arr = ft_split(buff, '\n');
 	free(buff);
 	check_map(map->map_arr, vars);

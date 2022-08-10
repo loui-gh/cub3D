@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 15:07:34 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/08/10 19:26:57 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/08/10 11:37:07 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ void	init_img(t_vars *vars)
 t_vars	*init_game(int fd)
 {
 	t_vars	*vars;
-
-	
 
 	vars = (t_vars *)ft_calloc(sizeof(t_vars), 1);
 	if (!vars)
