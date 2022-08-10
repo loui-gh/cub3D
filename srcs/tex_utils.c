@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tex_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 19:06:47 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/08/10 21:40:59 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/08/10 14:00:18 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,50 +27,46 @@ char	*skip_spaces(char *line)
 	return (&line[x]);
 }
 
+int	check_num(char *num)
+{
+	int	i;
+
+	i = 0;
+	printf("num: %s\n", num);
+	while (num[i] != '\0' && (num[i] == ' ' || num[i] == '	' || num[i] == '+'))
+		i++;
+	if (num[i] == '\0')
+		return (-1);
+	while (num[i] != '\0' && (num[i] >= '0' || num[i] <= '9'))
+		i++;
+	while (num[i] != '\0' && (num[i] == ' ' || num[i] == '	'))
+		i++;
+	if (num[i] != '\0')
+		return (-1);
+	return (1);
+}
+
 int	check_rgb_string(char *str)
 {
 	int		i;
 	char	**numbers;
 
 	i = 0;
-
-	while (str[i] != '\0')
-	{
-		if ((str[i] >= '0' && str[i] <= '9') || str[i] == ' ' || str[i] == '	')
-			i++;
-		else
-		{
-			printf("sup!\n");
-			return (-1);
-		}
-	}
 	numbers = ft_split(str, ',');
 	i = 0;
 	while (numbers[i] != NULL)
 		i++;
 	if (i != 3)
+	{
+		free_array(numbers);
 		return (-1);
-	free_array(numbers);
-	// while (numbers[i])
-	// {
-	// 	j = 0;
-	// 	while (numbers[i][j] != '\0')
-	// 	{
-	// 		{
-	// 			free_array(numbers);
-	// 			return (-1);
-	// 		}
-	// 		if (numbers[i][j] == ' ' && (numbers[i][j] >= '0' || 
-	// 			numbers[i][j] <= '9'))
-	// 		{
-	// 			write(1, "5\n", 2);
-	// 			free_array(numbers);
-	// 			return (-1);
-	// 		}
-	// 		j++;
-	// 	}
-	// 	i++;
-	// }
+	}
+	if (check_num(numbers[0]) < 1 || check_num(numbers[1]) < 1 || \
+		check_num(numbers[2]) < 1)
+	{
+		free_array(numbers);
+		return (-1);
+	}
 	return (0);
 }
 
@@ -91,7 +87,6 @@ int	to_hex(char *str, t_vars *vars)
 		free_vars_exit("rgb error\n", vars, EXIT_FAILURE);
 		return (-1);
 	}
-		
 	str = skip_spaces(str);
 	i = 0;
 	r = ft_atoi(str);
