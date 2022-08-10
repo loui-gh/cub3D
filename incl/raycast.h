@@ -6,7 +6,7 @@
 /*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:50:24 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/08/10 20:30:29 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/08/10 21:33:50 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ char			*ft_strtrim(char *s1, char *set);
 /*memory*/
 void			free_tex(t_textures *tex, t_vars *vars);
 void			free_vars_exit(char *msg, t_vars *vars, int exit_code);
-void			free_array(int **array);
+void			free_array(char **array);
 t_data			*assign_tex(t_vars *vars, char *file, char *holder);
 
 /*map build*/
@@ -143,7 +143,7 @@ void			create_map_array(int fd, t_vars *vars);
 void			check_map(char **map, t_vars *vars);
 t_player		*init_player(int i, int j, char token);
 int				create_trgb(int t, int r, int g, int b);
-int				to_hex(char *str);
+int				to_hex(char *str, t_vars *vars);
 void			map_width_height(t_map *map);
 
 /*mlx stuff*/

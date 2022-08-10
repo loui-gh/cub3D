@@ -6,7 +6,7 @@
 /*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 11:12:18 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/08/04 19:29:58 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/08/10 21:34:49 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,13 @@ void	assign_tex_ptr(t_textures *ptr, char *holder, t_vars *vars)
 	else if (ft_strncmp("EA ", holder, 3) == 0)
 		ptr->east = assign_tex(vars, &holder[3], holder);
 	else if (ft_strncmp("F ", holder, 2) == 0)
-		ptr->floor = to_hex(&holder[2]);
+		ptr->floor = to_hex(&holder[2], vars);
 	else if (ft_strncmp("C ", holder, 2) == 0)
-		ptr->ceiling = to_hex(&holder[2]);
+	{
+		ptr->ceiling = to_hex(&holder[2], vars);
+		printf("ceiling ptr = %d\n", ptr->ceiling);
+	}
+		
 	else
 	{
 		free(holder);

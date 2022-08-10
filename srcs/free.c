@@ -12,7 +12,7 @@
 
 #include "../incl/raycast.h"
 
-void	free_array(int **array)
+void	free_array(char **array)
 {
 	int	i;
 
