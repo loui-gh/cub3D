@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 17:26:33 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/07/22 12:20:46 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/08/11 20:46:43 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,28 +66,4 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 		i++;
 	}
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-}
-
-/* DESCRIPTION: The strdup() function returns a pointer
-* to a new string which is a duplicate of the string s.
-* Memory for the new string is obtained with malloc(3),
-* and can be freed with free(3). 
-* RETURN VALUE: a pointer to the duplicated string,
-* or NULL if insufficient memory was available*/
-char	*ft_strdup(char *s)
-{
-	char	*dst_ptr;
-	int		i;
-
-	i = 0;
-	dst_ptr = (char *)malloc(ft_strlen(s) + 1);
-	if (dst_ptr == NULL)
-		return (NULL);
-	while (s[i] != '\0')
-	{
-		dst_ptr[i] = s[i];
-		i++;
-	}
-	dst_ptr[i] = '\0';
-	return (dst_ptr);
 }

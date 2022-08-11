@@ -6,12 +6,11 @@
 /*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 12:33:58 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/08/11 12:34:36 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/08/11 20:41:13 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/raycast.h"
-
 
 static int	create_trgb(int t, int r, int g, int b)
 {

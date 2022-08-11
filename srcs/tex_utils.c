@@ -6,7 +6,7 @@
 /*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 19:06:47 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/08/11 12:36:50 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/08/11 20:37:03 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ static int	check_numbers(char *str)
 		}
 		i++;
 	}
+	if (i != 3)
+		return (kill_it(numbers));
 	free_array(numbers);
 	return (0);
 }
@@ -70,7 +72,6 @@ int	check_rgb_string(char *str)
 {
 	int		i;
 	int		j;
-
 
 	i = 0;
 	j = 0;

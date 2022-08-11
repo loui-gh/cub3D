@@ -6,97 +6,39 @@
 /*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 20:33:43 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/08/11 13:36:21 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/08/11 20:49:36 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/raycast.h"
 
-/* DESCRIPTION: searches for the LAST occurrence of the character c
-* (an unsigned char) in the string pointed to by the argument str.
-** RETURNS: last occurance + rest of string OR NULL if c not found in string
-** *NOTE* c − is the character to be located. It is passed as its int promotion,
-** but it is internally converted back to char
-*/
-
-int	ft_strrchr_mod(char *string, char c)
+void	gap_check(char *buf, t_vars *vars)
 {
-	int	i;
-
-	i = ft_strlen(string);
-	while (i > 0)
-	{
-		if (string[i] == c)
-			return (i);
-		i--;
-	}
-	return (-1);
-}
-
-int	ft_strnstr_mod(char *haystack, const char *needle, int n)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	if (needle[i] == '\0')
-		return (-1);
-	while (haystack[i] != '\0' && i < n)
-	{
-		j = 0;
-		while (haystack[i + j] == needle[j] && i + j < n)
-		{
-			if (needle[j + 1] == '\0')
-				return (-1);
-			j++;
-		}
-		i++;
-	}
-	return (0);
-}
-
-void	gap_check(char *buffer, t_vars *vars)
-{
-	int	i;
-	int	start_map;
+	int	start;
 	int	end_map;
-	// char	*skinny_and_buff;
 
-	i = 0;
-	while (buffer[i] != '1' && buffer[i] != '\0')
+	start = 0;
+	while (buf[start] != '1' && buf[start] != '\0')
 	{
-		if (buffer[i] == ' ' || buffer[i] == '	' || buffer[i] == '\n')
-			i++;
+		if (buf[start] == ' ' || buf[start] == '	' || buf[start] == '\n')
+			start++;
 		else
 		{
-			printf("poop!\n");
-			free (buffer);
-			free_vars_exit("unexpected char on road to map :)\n", vars, EXIT_FAILURE);
+			free (buf);
+			free_vars_exit("unexpected char on road to map :)\n", \
+				vars, EXIT_FAILURE);
 		}
 	}
-	start_map = i;
-	end_map = ft_strrchr_mod(&buffer[start_map], '1');
-	while (start_map < end_map)
+	end_map = ft_strrchr_mod(&buf[start], '1');
+	while (start < end_map)
 	{
-		if (buffer[start_map] == '\n' && buffer[start_map + 1] == '\n')
+		if (buf[start] == '\n' && buf[start + 1] == '\n')
 		{
-			free (buffer);
+			free (buf);
 			free_vars_exit("Space...so much space\n", vars, EXIT_FAILURE);
 		}
-		start_map++;
+		start++;
 	}
-	
-	// skinny_and_buff = ft_strtrim(buffer, "\n");
-	// printf("|%s|", skinny_and_buff);
-	// i = ft_strrchr_mod(skinny_and_buff, '1');
-	// if (ft_strnstr_mod(skinny_and_buff, "\n\n", i) == -1)
-	// {
-	// 	free(buffer);
-	// 	free(skinny_and_buff);
-	// 	free_vars_exit("1 Haha. You tried.\n", vars, EXIT_FAILURE);
-	// }
-	// else
-	// 	free(skinny_and_buff);
 }
 
 void	create_map_array(int fd, t_vars *vars)
@@ -123,7 +65,7 @@ void	create_map_array(int fd, t_vars *vars)
 	check_map(map->map_arr, vars);
 	map_width_height(map);
 	if (map->height < 3 || map->width < 3)
-		free_vars_exit("2 Haha. You tried.\n", vars, EXIT_FAILURE);
+		free_vars_exit("Haha. You tried.\n", vars, EXIT_FAILURE);
 }
 
 void	map_width_height(t_map *map)

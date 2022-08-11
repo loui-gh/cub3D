@@ -6,7 +6,7 @@
 /*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:50:24 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/08/11 13:51:40 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/08/11 20:55:26 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,11 +124,11 @@ void			exit_msg(char *msg, int exit_code);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 char			*get_next_line(int fd);
 char			**ft_split(char const *s, char c);
-char			*ft_strdup(char *s);
 int				ft_atoi(const char *str);
 void			*ft_calloc(size_t n, size_t size);
 char			*skip_spaces(char *line);
 char			*ft_strtrim(char *s1, char *set);
+int				ft_strrchr_mod(char *string, char c);
 
 /*memory*/
 void			free_tex(t_textures *tex, t_vars *vars);
