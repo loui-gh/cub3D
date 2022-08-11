@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/05 19:06:47 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/08/11 20:37:03 by Loui :)          ###   ########.fr       */
+/*   Created: 2022/08/11 21:14:29 by Loui :)           #+#    #+#             */
+/*   Updated: 2022/08/11 21:15:37 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,25 +22,33 @@ char	*skip_spaces(char *line)
 	return (&line[x]);
 }
 
-static int	ft_isdigit(int c)
-{
-	if (c >= 48 && c <= 57)
-		return (1);
-	else
-		return (0);
-}
-
 int	kill_it(char **array)
 {
 	free_array(array);
 	return (-1);
 }
 
+int	numbers_normi(int i, char **numbers)
+{
+	int		j;
+
+	j = 0;
+	while ((numbers[i][j] == ' ' || numbers[i][j] == '	') \
+		&& numbers[i][j] != '\0')
+		j++;
+	while (ft_isdigit(numbers[i][j]) && numbers[i][j] != '\0')
+		j++;
+	while ((numbers[i][j] == ' ' || numbers[i][j] == '	') \
+		&& numbers[i][j] != '\0')
+		j++;
+	return (j);
+}
+
 static int	check_numbers(char *str)
 {
 	char	**numbers;
-	int		j;
 	int		i;
+	int		j;
 
 	numbers = ft_split(str, ',');
 	i = 0;
@@ -49,14 +57,7 @@ static int	check_numbers(char *str)
 		j = 0;
 		while (numbers[i][j] != '\0')
 		{
-			while ((numbers[i][j] == ' ' || numbers[i][j] == '	') \
-				&& numbers[i][j] != '\0')
-				j++;
-			while (ft_isdigit(numbers[i][j]) && numbers[i][j] != '\0')
-				j++;
-			while ((numbers[i][j] == ' ' || numbers[i][j] == '	') \
-				&& numbers[i][j] != '\0')
-				j++;
+			j = numbers_normi(i, numbers);
 			if (ft_isdigit(numbers[i][j]))
 				return (kill_it(numbers));
 		}

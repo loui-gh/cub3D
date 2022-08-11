@@ -6,7 +6,7 @@
 /*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:50:24 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/08/11 20:55:26 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/08/11 21:17:22 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,21 +129,26 @@ void			*ft_calloc(size_t n, size_t size);
 char			*skip_spaces(char *line);
 char			*ft_strtrim(char *s1, char *set);
 int				ft_strrchr_mod(char *string, char c);
+int				ft_isdigit(int c);
 
 /*memory*/
 void			free_tex(t_textures *tex, t_vars *vars);
 void			free_vars_exit(char *msg, t_vars *vars, int exit_code);
 void			free_array(char **array);
+
+/*textures and colours*/
+void			init_textures(int fd, t_vars *vars);
+int				check_rgb_string(char *str);
 t_data			*assign_tex(t_vars *vars, char *file, char *holder);
+void			check_textures(t_vars *vars);
+int				to_hex(char *str);
+void			assign_tex_ptr(t_textures *ptr, char *holder, t_vars *vars);
 
 /*map build*/
 int				check_file_ext(char *filename, char *file_ext);
-void			init_textures(int fd, t_vars *vars);
 void			create_map_array(int fd, t_vars *vars);
 void			check_map(char **map, t_vars *vars);
 t_player		*init_player(int i, int j, char token);
-int				check_rgb_string(char *str);
-int				to_hex(char *str);
 void			map_width_height(t_map *map);
 
 /*mlx stuff*/
