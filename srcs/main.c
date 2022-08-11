@@ -6,7 +6,7 @@
 /*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 15:07:34 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/08/11 20:40:53 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/08/11 21:22:28 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	main(int argc, char **argv)
 	int			fd;
 
 	if (argc != 2)
-		exit_msg("enter cmd like this --> ./cub3D *.cub\n", EXIT_FAILURE);
+		exit_msg("enter cmd like this --> ./cub3D maps/*.cub\n", EXIT_FAILURE);
 	if (check_file_ext(argv[1], ".cub") < 0)
 		exit_msg("Wrong file extention mate ;) \n", EXIT_FAILURE);
 	fd = open(argv[1], O_RDONLY);

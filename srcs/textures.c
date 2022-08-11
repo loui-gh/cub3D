@@ -6,7 +6,7 @@
 /*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 11:12:18 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/08/11 21:08:02 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/08/11 21:20:57 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	check_textures(t_vars *vars)
 {
 	if (!vars->tex->north->img || !vars->tex->south->img \
 		|| !vars->tex->east->img || !vars->tex->west->img)
-		free_vars_exit("1 Error: Invalid texture\n", vars, EXIT_FAILURE);
+		free_vars_exit("Error: Invalid texture\n", vars, EXIT_FAILURE);
 	if (vars->tex->floor < 0 || vars->tex->ceiling < 0)
 		free_vars_exit("Error: Invalid rgb colour\n", vars, EXIT_FAILURE);
 }
