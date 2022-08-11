@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 11:12:18 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/08/11 14:32:03 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/08/11 10:41:50 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ t_data	*assign_tex(t_vars *vars, char *file, char *holder)
 {
 	t_data	*img;
 	
-	if (check_file_ext(file, ".xpm") < 0)
-	{
-		//this ft ^^ no longer works
-		free_norm(holder, vars, "xpm file expected\n");
-	}
+	// if (check_file_ext(file, ".xpm") < 0)
+	// {
+	// 	//this ft ^^ no longer works
+	// 	free_norm(holder, vars, "xpm file expected\n");
+	// }
 		
 	img = (t_data *)ft_calloc(sizeof(t_data), 1);
 	if (!img)

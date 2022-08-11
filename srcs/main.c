@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 15:07:34 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/08/11 14:00:25 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/08/11 11:22:26 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,17 @@ void	init_img(t_vars *vars)
 t_vars	*init_game(int fd)
 {
 	t_vars	*vars;
+	t_init	*init;
 
+	init = (t_init *)ft_calloc(sizeof(t_init), 1);
 	vars = (t_vars *)ft_calloc(sizeof(t_vars), 1);
-	if (!vars)
+	if (!vars || !init)
 	{
 		close(fd);
 		exit_msg("Error: Malloc error\n", EXIT_FAILURE);
 	}
+	init->vars = vars;
+	init->fd = fd;
 	vars->mlx_ptr = mlx_init();
 	if (vars->mlx_ptr == NULL)
 	{
