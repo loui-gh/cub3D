@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_error.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:28:50 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/08/11 14:31:36 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/08/11 12:05:24 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 
 int	check_file_ext(char *filename, char *file_ext)
 {
-	//work out what is wrong here. probs the same ith all file ext
-	int cmp = ft_strncmp(file_ext, &filename[ft_strlen(filename) \
-		- ft_strlen(file_ext)], ft_strlen(file_ext));
-	printf("return on cmp = %d\n", cmp);
 	if (ft_strncmp(file_ext, &filename[ft_strlen(filename) \
 		- ft_strlen(file_ext)], ft_strlen(file_ext)) != 0)
 		return (-1);

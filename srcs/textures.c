@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 11:12:18 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/08/11 14:32:03 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/08/11 12:01:34 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,15 @@ void	check_textures(t_vars *vars)
 
 void	assign_tex_ptr(t_textures *ptr, char *holder, t_vars *vars)
 {
-	if (ft_strncmp("NO ", holder, 3) == 0)
+	if (ptr->north == 0 && ft_strncmp("NO ", holder, 3) == 0)
 		ptr->north = assign_tex(vars, &holder[3], holder);
-	else if (ft_strncmp("SO ", holder, 3) == 0)
+	else if (ptr->south == 0 && ft_strncmp("SO ", holder, 3) == 0)
 		ptr->south = assign_tex(vars, &holder[3], holder);
-	else if (ft_strncmp("WE ", holder, 3) == 0)
+	else if (ptr->west == 0 && ft_strncmp("WE ", holder, 3) == 0)
 		ptr->west = assign_tex(vars, &holder[3], holder);
-	else if (ft_strncmp("EA ", holder, 3) == 0)
+	else if (ptr->east == 0 && ft_strncmp("EA ", holder, 3) == 0)
 		ptr->east = assign_tex(vars, &holder[3], holder);
-	else if (ft_strncmp("F ", holder, 2) == 0)
+	else if (ptr->floor == 0 && ft_strncmp("F ", holder, 2) == 0)
 	{
 		if (check_rgb_string(&holder[2]) < 0)
 		{
@@ -78,7 +78,7 @@ void	assign_tex_ptr(t_textures *ptr, char *holder, t_vars *vars)
 		else
 			ptr->floor = to_hex(&holder[2]);
 	}
-	else if (ft_strncmp("C ", holder, 2) == 0)
+	else if (ptr->ceiling == 0 && ft_strncmp("C ", holder, 2) == 0)
 	{
 		if (check_rgb_string(&holder[2]) < 0)
 		{
