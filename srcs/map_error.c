@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_error.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:28:50 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/08/11 12:05:24 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/08/11 21:24:19 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ void	check_zeros_normi(char **map, int i, int j, t_vars *vars)
 	if (i != 0 && map[i - 1][j])
 	{
 		if (map[i - 1][j] == ' ')
-			free_vars_exit("2 Map config error.\n", vars, EXIT_FAILURE);
+			free_vars_exit("Map config error.\n", vars, EXIT_FAILURE);
 	}
 	else
-		free_vars_exit("3 Map config error.\n", vars, EXIT_FAILURE);
+		free_vars_exit("Map config error.\n", vars, EXIT_FAILURE);
 }
 
 void	check_zeros(char **map, int i, int j, t_vars *vars)
@@ -50,22 +50,22 @@ void	check_zeros(char **map, int i, int j, t_vars *vars)
 	if (map[i][j + 1])
 	{
 		if (map[i][j + 1] == ' ' || map[i][j + 1] == '\n')
-			free_vars_exit("4 Map config error.\n", vars, EXIT_FAILURE);
+			free_vars_exit("Map config error.\n", vars, EXIT_FAILURE);
 	}
 	else
-		free_vars_exit("5 Holy wall.\n", vars, EXIT_FAILURE);
+		free_vars_exit("Holy wall.\n", vars, EXIT_FAILURE);
 	if (map[i][j - 1])
 	{
 		if (map[i][j - 1] == ' ')
-			free_vars_exit("6 Map config error.\n", vars, EXIT_FAILURE);
+			free_vars_exit("Map config error.\n", vars, EXIT_FAILURE);
 	}
 	if (map[i + 1][j])
 	{
 		if (map[i + 1][j] == ' ')
-			free_vars_exit("7 Map config error.\n", vars, EXIT_FAILURE);
+			free_vars_exit("Map config error.\n", vars, EXIT_FAILURE);
 	}
 	else
-		free_vars_exit("8 Map config error.\n", vars, EXIT_FAILURE);
+		free_vars_exit("Map config error.\n", vars, EXIT_FAILURE);
 	check_zeros_normi(map, i, j, vars);
 }
 

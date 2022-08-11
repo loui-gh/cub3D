@@ -6,7 +6,7 @@
 /*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 21:06:23 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/08/11 21:16:38 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/08/11 21:21:55 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,6 @@ void	assign_tex_ptr(t_textures *ptr, char *holder, t_vars *vars)
 	else
 	{
 		free(holder);
-		free_vars_exit("2 Error: Invalid texture\n", vars, EXIT_FAILURE);
+		free_vars_exit("Error: Invalid texture\n", vars, EXIT_FAILURE);
 	}
 }
