@@ -7,7 +7,7 @@ UNAME 		:= $(shell uname)
 SRCD		= ./srcs/
 SRC			= 	close_window.c libft_utils.c map_error.c get_next_line.c tex_utils.c ft_split.c \
 				main.c draw_floor_ceiling.c free.c map_init.c textures.c raycast.c \
-				movement.c libft_utils_2.c raycast_utils.c rotation.c
+				movement.c libft_utils_2.c raycast_utils.c rotation.c colours.c
 
 SRCF		= $(addprefix $(SRCD),$(SRC))
 OBJD		= ./objs/

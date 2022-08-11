@@ -6,7 +6,7 @@
 /*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 20:33:43 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/08/10 19:57:37 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/08/11 13:36:21 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,19 +57,46 @@ int	ft_strnstr_mod(char *haystack, const char *needle, int n)
 
 void	gap_check(char *buffer, t_vars *vars)
 {
-	int		i;
-	char	*skinny_and_buff;
+	int	i;
+	int	start_map;
+	int	end_map;
+	// char	*skinny_and_buff;
 
-	skinny_and_buff = ft_strtrim(buffer, "\n");
-	i = ft_strrchr_mod(skinny_and_buff, '1');
-	if (ft_strnstr_mod(skinny_and_buff, "\n\n", i) == -1)
+	i = 0;
+	while (buffer[i] != '1' && buffer[i] != '\0')
 	{
-		free(buffer);
-		free(skinny_and_buff);
-		free_vars_exit("Haha. You tried.\n", vars, EXIT_FAILURE);
+		if (buffer[i] == ' ' || buffer[i] == '	' || buffer[i] == '\n')
+			i++;
+		else
+		{
+			printf("poop!\n");
+			free (buffer);
+			free_vars_exit("unexpected char on road to map :)\n", vars, EXIT_FAILURE);
+		}
 	}
-	else
-		free(skinny_and_buff);
+	start_map = i;
+	end_map = ft_strrchr_mod(&buffer[start_map], '1');
+	while (start_map < end_map)
+	{
+		if (buffer[start_map] == '\n' && buffer[start_map + 1] == '\n')
+		{
+			free (buffer);
+			free_vars_exit("Space...so much space\n", vars, EXIT_FAILURE);
+		}
+		start_map++;
+	}
+	
+	// skinny_and_buff = ft_strtrim(buffer, "\n");
+	// printf("|%s|", skinny_and_buff);
+	// i = ft_strrchr_mod(skinny_and_buff, '1');
+	// if (ft_strnstr_mod(skinny_and_buff, "\n\n", i) == -1)
+	// {
+	// 	free(buffer);
+	// 	free(skinny_and_buff);
+	// 	free_vars_exit("1 Haha. You tried.\n", vars, EXIT_FAILURE);
+	// }
+	// else
+	// 	free(skinny_and_buff);
 }
 
 void	create_map_array(int fd, t_vars *vars)
@@ -96,7 +123,7 @@ void	create_map_array(int fd, t_vars *vars)
 	check_map(map->map_arr, vars);
 	map_width_height(map);
 	if (map->height < 3 || map->width < 3)
-		free_vars_exit("Haha. You tried.\n", vars, EXIT_FAILURE);
+		free_vars_exit("2 Haha. You tried.\n", vars, EXIT_FAILURE);
 }
 
 void	map_width_height(t_map *map)

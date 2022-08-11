@@ -6,7 +6,7 @@
 /*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:50:24 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/08/10 21:33:50 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/08/11 13:51:40 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,8 +142,8 @@ void			init_textures(int fd, t_vars *vars);
 void			create_map_array(int fd, t_vars *vars);
 void			check_map(char **map, t_vars *vars);
 t_player		*init_player(int i, int j, char token);
-int				create_trgb(int t, int r, int g, int b);
-int				to_hex(char *str, t_vars *vars);
+int				check_rgb_string(char *str);
+int				to_hex(char *str);
 void			map_width_height(t_map *map);
 
 /*mlx stuff*/

@@ -60,40 +60,44 @@ int	ft_atoi(const char *str)
 	return (val * neg);
 }
 
-static int	ft_char_equals_set(char c, const char *set)
+
+static int
+	ft_char_in_set(char c, char const *set)
 {
-	while (*set)
-		if (c == *set++ || c == '\n')
-			return (0);
-	return (1);
+	size_t	i;
+
+	i = 0;
+	while (set[i])
+	{
+		if (set[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
 }
 
-char	*ft_strtrim(char *s1, char *set)
+char
+	*ft_strtrim(char *s1, char *set)
 {
-	int		start;
-	int		end;
-	char	*new;
+	char	*str;
+	size_t	i;
+	size_t	start;
+	size_t	end;
 
-	if (!s1)
-		return (0);
-	if (!set)
-		return (ft_strdup(s1));
 	start = 0;
-	end = ft_strlen(s1);
-	while (ft_char_equals_set(s1[start], set) == 0)
+	while (s1[start] && ft_char_in_set(s1[start], set))
 		start++;
-	if (start == ft_strlen(s1))
-	{
-		new = ft_strdup("");
-		if (!new)
-			return (0);
-		else
-			return (new);
-	}
-	while (ft_char_equals_set(s1[end - 1], set) == 0)
+	end = ft_strlen(s1);
+	while (end > start && ft_char_in_set(s1[end - 1], set))
 		end--;
-	new = ft_substr(s1, start, end - start);
-	return (new);
+	str = (char*)malloc(sizeof(*s1) * (end - start + 1));
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (start < end)
+		str[i++] = s1[start++];
+	str[i] = 0;
+	return (str);
 }
 
 void	exit_msg(char *msg, int exit_code)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 15:07:34 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/08/10 11:37:07 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/08/11 14:00:25 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ t_vars	*init_game(int fd)
 	}
 	init_textures(fd, vars);
 	create_map_array(fd, vars);
+	//close(fd);
 	init_img(vars);
 	vars->ray = (t_raycast *)ft_calloc(sizeof(t_raycast), 1);
 	return (vars);
@@ -61,6 +62,7 @@ int	main(int argc, char **argv)
 	if (fd < 0)
 		exit_msg("Cannot read from file\n", EXIT_FAILURE);
 	vars = init_game(fd);
+	//close(fd);
 	vars->mlx_win = mlx_new_window(vars->mlx_ptr, WIDTH, HEIGHT, "Cub3D");
 	mlx_loop_hook(vars->mlx_ptr, &render_image, vars);
 	mlx_key_hook(vars->mlx_win, player_move, vars);

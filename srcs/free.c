@@ -44,6 +44,10 @@ void	free_tex(t_textures *tex, t_vars *vars)
 		destroy_free_img(tex->east, vars);
 	if (tex->west)
 		destroy_free_img(tex->west, vars);
+	// if (tex->floor)
+	// 	free(&tex->floor);
+	// if (tex->ceiling)
+	// 	free(&tex->ceiling);
 	free(tex);
 }
 

@@ -6,7 +6,7 @@
 /*   By: Loui :) <loflavel@students.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:28:50 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/08/09 21:31:13 by Loui :)          ###   ########.fr       */
+/*   Updated: 2022/08/11 14:31:36 by Loui :)          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 int	check_file_ext(char *filename, char *file_ext)
 {
+	//work out what is wrong here. probs the same ith all file ext
+	int cmp = ft_strncmp(file_ext, &filename[ft_strlen(filename) \
+		- ft_strlen(file_ext)], ft_strlen(file_ext));
+	printf("return on cmp = %d\n", cmp);
 	if (ft_strncmp(file_ext, &filename[ft_strlen(filename) \
 		- ft_strlen(file_ext)], ft_strlen(file_ext)) != 0)
 		return (-1);
@@ -24,7 +28,7 @@ int	ft_is_token(int c, t_vars *vars)
 {
 	if (c != '1' && c != '0' && c != ' ' && c != 'N' \
 			&& c != 'S' && c != 'W' && c != 'E')
-		free_vars_exit("Map config error.\n", vars, EXIT_FAILURE);
+		free_vars_exit("1 Map config error.\n", vars, EXIT_FAILURE);
 	if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
 		return (1);
 	else
@@ -39,10 +43,10 @@ void	check_zeros_normi(char **map, int i, int j, t_vars *vars)
 	if (i != 0 && map[i - 1][j])
 	{
 		if (map[i - 1][j] == ' ')
-			free_vars_exit("Map config error.\n", vars, EXIT_FAILURE);
+			free_vars_exit("2 Map config error.\n", vars, EXIT_FAILURE);
 	}
 	else
-		free_vars_exit("Map config error.\n", vars, EXIT_FAILURE);
+		free_vars_exit("3 Map config error.\n", vars, EXIT_FAILURE);
 }
 
 void	check_zeros(char **map, int i, int j, t_vars *vars)
@@ -50,22 +54,22 @@ void	check_zeros(char **map, int i, int j, t_vars *vars)
 	if (map[i][j + 1])
 	{
 		if (map[i][j + 1] == ' ' || map[i][j + 1] == '\n')
-			free_vars_exit("Map config error.\n", vars, EXIT_FAILURE);
+			free_vars_exit("4 Map config error.\n", vars, EXIT_FAILURE);
 	}
 	else
-		free_vars_exit("Holy wall.\n", vars, EXIT_FAILURE);
+		free_vars_exit("5 Holy wall.\n", vars, EXIT_FAILURE);
 	if (map[i][j - 1])
 	{
 		if (map[i][j - 1] == ' ')
-			free_vars_exit("Map config error.\n", vars, EXIT_FAILURE);
+			free_vars_exit("6 Map config error.\n", vars, EXIT_FAILURE);
 	}
 	if (map[i + 1][j])
 	{
 		if (map[i + 1][j] == ' ')
-			free_vars_exit("Map config error.\n", vars, EXIT_FAILURE);
+			free_vars_exit("7 Map config error.\n", vars, EXIT_FAILURE);
 	}
 	else
-		free_vars_exit("Map config error.\n", vars, EXIT_FAILURE);
+		free_vars_exit("8 Map config error.\n", vars, EXIT_FAILURE);
 	check_zeros_normi(map, i, j, vars);
 }
 
