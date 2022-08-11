@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 15:07:34 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/08/11 11:22:26 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/08/11 11:36:24 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_vars	*init_game(int fd)
 		close(fd);
 		exit_msg("Error: Failed to init MLX\n", EXIT_FAILURE);
 	}
-	init_textures(fd, vars);
+	init_textures_new(init);
 	create_map_array(fd, vars);
 	//close(fd);
 	init_img(vars);

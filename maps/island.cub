@@ -2,9 +2,7 @@ NO ./img/beach_1.xpm
 SO ./img/beach_2.xpm
 WE ./img/beach_3.xpm
 EA ./img/beach_4.xpm
-
-
-F 255,69,0
+F 255,69,2
 C 255,218,266
 
 111111111111111111111111

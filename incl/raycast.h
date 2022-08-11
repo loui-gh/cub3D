@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:50:24 by Loui :)           #+#    #+#             */
-/*   Updated: 2022/08/11 11:27:22 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/08/11 11:34:25 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,21 +106,6 @@ typedef struct s_player
 	char		token;
 }	t_player;
 
-typedef struct s_init
-{
-	t_vars	*vars;
-	char	*f;
-	char	*c;
-	char	*no;
-	char	*so;
-	char	*ea;
-	char	*we;
-	int		r;
-	int		g;
-	int		b;
-	int		fd;
-}	t_init;
-
 typedef struct s_vars
 {
 	void		*mlx_ptr;
@@ -131,6 +116,18 @@ typedef struct s_vars
 	t_data		*img;
 	t_raycast	*ray;
 }	t_vars;
+
+typedef struct s_init
+{
+	t_vars	*vars;
+	char	*f;
+	char	*c;
+	char	*no;
+	char	*so;
+	char	*ea;
+	char	*we;
+	int		fd;
+}	t_init;
 
 /*utils*/
 void			ft_putstr(char *s);
@@ -186,5 +183,6 @@ void			look_right(t_vars *vars);
 /*new_tex*/
 void			init_textures_new(t_init *init);
 void			free_init(t_init *init, char *msg, int exit);
+int				to_hex_new(char *str, t_init *init);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jpfannku <jpfannku@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 10:51:25 by jpfannku          #+#    #+#             */
-/*   Updated: 2022/08/11 11:21:46 by jpfannku         ###   ########.fr       */
+/*   Updated: 2022/08/11 11:53:11 by jpfannku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,30 +63,33 @@ t_data	*assign_tex_new(t_init *init, char *file)
 void	assign_tex_ptr_new(t_init *init)
 {
 	init->vars->tex = (t_textures *)ft_calloc(sizeof(t_textures), 1);
-	init->vars->tex->north = assign_tex_new(init, init->no);
-	init->vars->tex->south = assign_tex_new(init, init->so);
-	init->vars->tex->east = assign_tex_new(init, init->ea);
-	init->vars->tex->west = assign_tex_new(init, init->we);
-	//init->vars->tex->floor = assign_tex_new(init, init->f); //check rgb
-	//init->vars->tex->ceiling = assign_tex_new(init, init->c);
+	init->vars->tex->north = assign_tex_new(init, &init->no[3]);
+	init->vars->tex->south = assign_tex_new(init, &init->so[3]);
+	init->vars->tex->east = assign_tex_new(init, &init->ea[3]);
+	init->vars->tex->west = assign_tex_new(init, &init->we[3]);
+	init->vars->tex->floor = to_hex_new(&init->f[2], init);
+	init->vars->tex->ceiling = to_hex_new(&init->c[2], init);
 }
 
 void	tex_char(char *holder, t_init *init)
 {
-	if (ft_strncmp("NO ", holder, 3) == 0 && init->no != 0)
+	if (init->no == 0 && ft_strncmp("NO ", holder, 3) == 0)
 		init->no = holder;
-	else if (ft_strncmp("SO ", holder, 3) == 0 && init->so != 0)
+	else if (init->so == 0 && ft_strncmp("SO ", holder, 3) == 0)
 		init->so = holder;
-	else if (ft_strncmp("WE ", holder, 3) == 0 && init->we != 0)
+	else if (init->we == 0 && ft_strncmp("WE ", holder, 3) == 0)
 		init->we = holder;
-	else if (ft_strncmp("EA ", holder, 3) == 0 && init->ea != 0)
+	else if (init->ea == 0 && ft_strncmp("EA ", holder, 3) == 0)
 		init->ea = holder;
-	else if (ft_strncmp("F ", holder, 2) == 0 && init->f != 0)
+	else if (init->f == 0 && ft_strncmp("F ", holder, 2) == 0)
 		init->f = holder;
-	else if (strncmp("C ", holder, 2) == 0 && init->c != 0)
+	else if (init->c == 0 && ft_strncmp("C ", holder, 2) == 0)
 		init->c = holder;
-	else 
+	else
+	{
+		free(holder);
 		free_init(init, "Texture format error\n", 1);
+	}
 }
 
 void	init_textures_new(t_init *init)
@@ -103,7 +106,6 @@ void	init_textures_new(t_init *init)
 		tex_char(holder, init);
 		i++;
 	}
-	//check if there are more lines after the initial 6?
 	assign_tex_ptr_new(init);
 	free_init(init, "", 0);
 }
